@@ -48,7 +48,31 @@ angular.module('starter.controllers', [])
     { title: 'Dubstep', id: 3 },
     { title: 'Indie', id: 4 },
     { title: 'Rap', id: 5 },
-    { title: 'Cowbell', id: 6 }
+    { title: 'Cowbell', id: 6 },
+    { title: 'Reggae', id: 7 },
+    { title: 'Chill', id: 8 },
+    { title: 'Dubstep', id: 9 },
+    { title: 'Indie', id: 10 },
+    { title: 'Rap', id: 11 },
+    { title: 'Cowbell', id: 12 },
+    { title: 'Reggae', id: 13 },
+    { title: 'Chill', id: 14 },
+    { title: 'Dubstep', id: 15 },
+    { title: 'Indie', id: 16 },
+    { title: 'Rap', id: 17 },
+    { title: 'Cowbell', id: 18 },
+    { title: 'Reggae', id: 19 },
+    { title: 'Chill', id: 20 },
+    { title: 'Dubstep', id: 21 },
+    { title: 'Indie', id: 22},
+    { title: 'Rap', id: 23 },
+    { title: 'Cowbell', id: 24 },
+    { title: 'Reggae', id: 25 },
+    { title: 'Chill', id: 26 },
+    { title: 'Dubstep', id: 27 },
+    { title: 'Indie', id: 28 },
+    { title: 'Rap', id: 29 },
+    { title: 'Cowbell', id: 30 }
   ];
 })
 
