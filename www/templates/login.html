@@ -1,25 +1,97 @@
 <ion-modal-view>
-  <ion-header-bar>
-    <h1 class="title">Login</h1>
-    <div class="buttons">
-      <button class="button button-clear" ng-click="closeLogin()">Close</button>
-    </div>
-  </ion-header-bar>
-  <ion-content>
-    <form ng-submit="doLogin()">
-      <div class="list">
-        <label class="item item-input">
-          <span class="input-label">Username</span>
-          <input type="text" ng-model="loginData.username">
-        </label>
-        <label class="item item-input">
-          <span class="input-label">Password</span>
-          <input type="password" ng-model="loginData.password">
-        </label>
-        <label class="item">
-          <button class="button button-block button-positive" type="submit">Log in</button>
-        </label>
-      </div>
-    </form>
-  </ion-content>
+ 
+    <ion-pane ng-show="showLogin">
+        <ion-header-bar class="bar-balanced">
+            <div class="title">Login</div>
+            <div class="buttons">
+                <button class="button button-clear" ng-click="closeLogin()">Close</button>
+            </div>
+        </ion-header-bar>
+        <ion-content class="location">
+            <div class="row">
+                <div class="col wrapper-logo">
+                    <img ng-src="img/logo-dark.png" alt="">
+                </div>
+            </div>
+            <form class="margin30">
+                <div class="list">
+                    <label class="item item-input item-floating-label">
+                        <span class="input-label color-white">Email</span>
+                        <input type="email" class="color-white" placeholder="Enter you email">
+                    </label>
+                    <label class="item item-input item-floating-label">
+                        <span class="input-label color-white">Password</span>
+                        <input type="password" class="color-white" placeholder="Enter you password">
+                    </label>
+                    <button class="button button-small mt25 button-block button-balanced">
+                        Login
+                    </button>
+                </div>
+            </form>
+            <div class="wrapper-login-offer">
+                <div class="row login-pad ">
+                    <div class="col">
+                        <a class=" color-white " ng-click="registerOpen()">
+                        Create Account
+                    </a>
+                    </div>
+                    <div class="col txt-right">
+                        <a class="color-white " ng-click="resetPwd()">
+                        Forgot Password? 
+                    </a>
+                    </div>
+                </div>
+            </div>
+            <div class="txt-center color-white">OR</div>
+            <div class="list list-inset location-btn-wrap">
+                <button class="button button-small button-full facebook-background button-balanced">LOG IN WITH FACEBOOK</button>
+            </div>
+        </ion-content>
+    </ion-pane>
+    <!-- Register   -->
+    <ion-pane ng-hide="showLogin">
+        <ion-header-bar class="bar-balanced">
+            <div class="title">Register</div>
+            <div class="buttons">
+                <button class="button button-clear" ng-click="registerToggle()">Close</button>
+            </div>
+        </ion-header-bar>
+        <ion-content class="location">
+            <form class="margin30">
+                <div class="list">
+                    <label class="item item-input item-floating-label">
+                        <span class="input-label color-white">First Name</span>
+                        <input type="text" class="color-white" placeholder="Enter your First Name">
+                    </label>
+                    <label class="item item-input item-floating-label">
+                        <span class="input-label color-white">Last Name</span>
+                        <input type="text" class="color-white" placeholder="Enter your Last Name">
+                    </label>
+                    <label class="item item-input item-floating-label">
+                        <span class="input-label color-white">Email</span>
+                        <input type="email" class="color-white" placeholder="Enter you Email">
+                    </label>
+                    <label class="item item-input item-floating-label">
+                        <span class="input-label color-white">Contact Number</span>
+                        <input type="tel" class="color-white" placeholder="Enter you Contact Number">
+                    </label>
+                    <label class="item item-input item-floating-label">
+                        <span class="input-label color-white">Password</span>
+                        <input type="password" class="color-white" placeholder="Enter you password">
+                    </label>
+                    <label class="item item-input item-floating-label">
+                        <span class="input-label color-white">Confirm Password</span>
+                        <input type="password" class="color-white" placeholder="Enter you password again">
+                    </label>
+   
+                 
+ 
+ 
+                    <button class="button button-small mt25 button-block button-balanced">
+                        Create Account
+                    </button>
+                </div>
+            </form>
+        </ion-content>
+    </ion-pane>
 </ion-modal-view>
