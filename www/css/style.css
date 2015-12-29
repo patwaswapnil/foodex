@@ -86,3 +86,17 @@ input.ion-autocomplete[readonly] {
 .popup-buttons button, .fs12  {
   font-size: 12px !important;
 }
+.menu .bar.bar-header.expanded {
+     
+        background-size: cover !important;
+}
+.menu.menu-left * {
+    font-weight: bold;
+}
+.overlay{
+      position: absolute;
+    background: black;
+    opacity: 0.5;
+    height: 100%;
+    width: 100%;
+}

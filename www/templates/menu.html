@@ -13,23 +13,20 @@
   </ion-side-menu-content>
 
   <ion-side-menu side="left">
-  <!--   <ion-header-bar class="bar-balanced">
-      <h1 class="title">Left</h1>
-    </ion-header-bar> -->
-    <ion-content>
+<ion-header-bar class="expanded bar bar-header disable-user-behavior"  style="background-image: url('img/side-menu-bg.jpg');">
+<div class="overlay"></div>
+            <img ng-src="img/icon.png" class="avatar motion spin fade" style="background-color:#eee">
+            <div class="menu-bottom">
+               Hi, Guest
+            </div>
+        </ion-header-bar>
+
+    <ion-content class="stable-bg has-header has-expanded-header">
       <ion-list>
         <ion-item menu-close ng-click="login()">
           Login
         </ion-item>
-        <ion-item menu-close href="#/app/search">
-          Search
-        </ion-item>
-        <ion-item menu-close href="#/app/browse">
-          Browse
-        </ion-item>
-        <ion-item menu-close href="#/app/playlists">
-          Playlists
-        </ion-item>
+      
       </ion-list>
     </ion-content>
   </ion-side-menu>

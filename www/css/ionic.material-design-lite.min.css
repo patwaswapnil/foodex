@@ -561,7 +561,7 @@
   white-space: nowrap;
   text-align: center;
   text-transform: uppercase;
-  /*font-weight: 500;*/
+  font-weight: 500;
   font-style: inherit;
   font-variant: inherit;
   font-size: inherit;
@@ -1995,12 +1995,12 @@ a {
   padding: 0; }
 
 .bar .button {
- /* min-height: 44px;
+  min-height: 44px;
   min-width: 44px;
   max-width: 48px;
   margin-bottom: 0;
   max-height: 44px;
-  width: 48px; */}
+  width: 48px; }
 
 .bar .title + .buttons.buttons-right {
   right: 0;
@@ -2008,7 +2008,13 @@ a {
 
 /* Title Overrides
 ==================================*/
- 
+.title-left,
+.title.title-left {
+  left: 48px; }
+
+.title-right,
+.title.title-right {
+  left: 48px; }
 
 /* Background Colors
 ==================================*/
