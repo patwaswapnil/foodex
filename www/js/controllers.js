@@ -90,6 +90,6 @@ app.controller('LocationCtrl', function($scope ) {
     }
 
 });
-app.controller('HomeCtrl', function($scope ) {
+app.controller('HomeCtrl', function($scope, $ionicSlideBoxDelegate ) {
  
 });

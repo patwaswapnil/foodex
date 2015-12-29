@@ -100,3 +100,7 @@ input.ion-autocomplete[readonly] {
     height: 100%;
     width: 100%;
 }
+.header-badge{
+  top: -7px !important;
+  left: -11px !important;
+}
