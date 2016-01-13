@@ -919,13 +919,13 @@
 .item-avatar, .item-avatar .item-content, .item-avatar-left, .item-avatar-left .item-content {
   min-height: 80px; }
 
-/* List: Thumbnails
+/* 106px List: Thumbnails
 ==================================*/
 .item-thumbnail-left, .card > .item.item-thumbnail-left, .item-thumbnail-left .item-content {
-  padding-left: 106px; }
+  padding-left: 126px; }
 
 .item-thumbnail-right, .card > .item.item-thumbnail-right, .item-thumbnail-right .item-content {
-  padding-right: 106px; }
+  padding-right: 126px; }
 
 /* List: Avatar
 ==================================*/

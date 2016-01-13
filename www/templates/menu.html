@@ -5,37 +5,139 @@
       </ion-nav-back-button>
 
       <ion-nav-buttons side="left">
-        <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+        <button class="button button-icon button-clear ion-navicon-round" menu-toggle="left">
         </button>
       </ion-nav-buttons>
        <ion-nav-buttons side="right">
                 <!-- <button ng-show="isAuthenticated" class="button button-icon button-clear ion-unlocked" ng-click="logout()">
                 </button> -->
-                 
-                <button class="button button-icon button-clear ion-android-cart" >
-               <!--  <span class="badge badge-assertive header-badge">5</span> -->
+                  <button class="button button-icon button-clear ion-search" >
+             
         </button>
+                <button class="button button-icon button-clear ion-android-cart" ui-sref="app.cart">
+             
+                 </button>
+
             </ion-nav-buttons>
     </ion-nav-bar>
     <ion-nav-view name="menuContent"></ion-nav-view>
   </ion-side-menu-content>
 
   <ion-side-menu side="left">
-<ion-header-bar class="expanded bar bar-header disable-user-behavior"  style="background-image: url('img/side-menu-bg.jpg');">
+<ion-header-bar class="expanded bar bar-header disable-user-behavior bg-css"  style="background-image: url('img/side-menu-bg.jpg');">
 <div class="overlay"></div>
-            <img ng-src="img/icon.png" class="avatar motion spin fade" style="background-color:#eee">
+
+            <div   class="avatar motion spin fade"  style="background-color:#eee; background-image:url({{user.picture}}); background-size:cover" ng-if="user.picture"></div>
+            <div   class="avatar motion spin fade" style="background-color:#eee; background-image:url('img/icon.png'); background-size:cover" ng-if="!user.picture"></div>
+            
             <div class="menu-bottom">
-               Hi, Guest
+               Hi, {{user.name || 'Guest'}}
             </div>
         </ion-header-bar>
 
-    <ion-content class="stable-bg has-header has-expanded-header">
-      <ion-list>
-        <ion-item menu-close ng-click="login()">
+    <ion-content class="stable-bg has-header has-expanded-header menu-content">
+      <ion-list class="menu-list">
+      
+       <a ui-sref="app.home" class="no-blue">
+       <ion-item class="menu-item"  menu-close  >
+       
+          Home
+        </ion-item>
+        </a>
+        <a href='' class="no-blue">
+       <ion-item class="menu-item"  menu-close  >
+       
+          Offers
+        </ion-item>
+        </a>
+    <a href='' ng-click="login()" class="no-blue" ng-if="!user.name">
+        <ion-item class="menu-item"  menu-close>
           Login
         </ion-item>
-      
+        </a>
+    <a href='' ng-click="showLogOutMenu()" class="no-blue" ng-if="user.name">
+
+        <ion-item class="menu-item"  menu-close >
+          Logout
+        </ion-item>
+      </a>
       </ion-list>
+<ion-list class="menu-list">
+      
+         <div class="item item-divider menu-divider">
+    Shop By
+  </div>
+    <a ui-sref="app.shops" class="no-blue" >
+
+        <ion-item class="menu-item"  menu-close >
+          All
+        </ion-item>
+      </a>
+        <a ui-sref="app.shops" class="no-blue" >
+
+        <ion-item class="menu-item"  menu-close >
+          Featured Shop
+        </ion-item>
+      </a>
+        <a ui-sref="app.shops" class="no-blue" >
+
+        <ion-item class="menu-item"  menu-close >
+          Shop Listing
+        </ion-item>
+      </a>
+      </ion-list>
+
+      <ion-list class="menu-list">
+      
+         <div class="item item-divider menu-divider">
+    Category
+  </div>
+    <a href='' class="no-blue" >
+
+        <ion-item class="menu-item"  menu-close >
+           Sweet and Farsan
+        </ion-item>
+      </a>
+        <a href='' class="no-blue" >
+
+        <ion-item class="menu-item"  menu-close >
+         Sweet Only
+        </ion-item>
+      </a>
+        <a href='' class="no-blue" >
+
+        <ion-item class="menu-item"  menu-close >
+          Farsan Only
+        </ion-item>
+      </a>
+        <a href='' class="no-blue" >
+
+        <ion-item class="menu-item"  menu-close >
+         Homemade Item
+        </ion-item>
+      </a>
+      </ion-list>
+      <ion-list class="menu-list">
+      <div class="item item-divider menu-divider">
+    Sub Category
+  </div>
+   <ion-list class="menu-list">
+        <div ng-repeat="group in groups">
+          <ion-item  class=" "
+                    ng-click="toggleGroup(group)"
+                    ng-class="{active: isGroupShown(group)}">
+              
+            {{::group.name}} <i class="icon pull-right" ng-class="isGroupShown(group) ? 'ion-minus' : 'ion-plus'"></i>
+            &nbsp;
+          </ion-item>
+          <a href="" menu-close class="no-blue"><ion-item  class="item-accordion"
+                    ng-repeat="item in group.items"
+                    ng-show="isGroupShown(group)">
+            {{::item}}
+          </ion-item></a>
+        </div>
+      </ion-list>
+        </ion-list>
     </ion-content>
   </ion-side-menu>
 </ion-side-menus>

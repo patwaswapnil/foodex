@@ -1,0 +1,41 @@
+<ion-view title="{{::navTitle}}" hide-back-button="false">
+    <ion-content class="main-bg bg-css">
+        <!-- <div class="row">
+            <div class="col">
+                <h4 class="color-white">Shop Listing</h4>
+            </div>
+        </div> -->
+        <div class="listing-wrap">
+            <div class="list">
+                <div ng-repeat="shop in shops">
+                    <a href="#/app/shop/{{::shop.id}}" class="item item-thumbnail-left shop-listing no-blue shop-icon-wrap" >
+                      <img ng-src="img/shop/{{::shop.image}}"> 
+                        <h2 class="shop-title">{{::shop.name}} </h2> 
+                        <p> <span ng-repeat="item in shop.items">{{::item}} &nbsp;</span> </p>
+                        <div class="rating row ">
+                            <div class="stars" >
+                               <i  style="width:{{::shop.rating}}%"></i>
+                            </div>
+                         <div  class="rating-count">{{::shop.ratingCount}} Ratings</div>
+                        </div>
+                        <div class="row padding0">
+                            <div class="col padding0">
+                                <p>Delivery:
+                                    <br/>Rs. {{::shop.deliveryCharge}} / {{::shop.deliveryTime}} min</p>
+                            </div>
+                            <div class="col padding0">
+                                <p>Min Order:
+                                    <br/>Rs. {{::shop.minOrder}} </p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>
+<style>
+.main-bg {
+    background-image: url('img/content_bg.png');
+}
+</style>

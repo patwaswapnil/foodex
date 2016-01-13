@@ -1,9 +1,10 @@
-angular.module('foodex', ['ionic', 'foodex.controllers', 'foodex.services', 'ion-autocomplete'])
+angular.module('foodex', ['ionic', 'ngCordova', 'foodex.controllers', 'foodex.services', 'ion-autocomplete'])
 
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform, $cordovaStatusbar) {
     $ionicPlatform.ready(function() {
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
         // for form inputs)
+    $cordovaStatusbar.overlaysWebView(true)
         if (window.cordova && window.cordova.plugins.Keyboard) {
             cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
             cordova.plugins.Keyboard.disableScroll(true);
@@ -13,6 +14,7 @@ angular.module('foodex', ['ionic', 'foodex.controllers', 'foodex.services', 'ion
             // org.apache.cordova.statusbar required
             StatusBar.styleDefault();
         }
+        $cordovaStatusbar.styleHex('#28A54C');
     });
 })
 
@@ -27,7 +29,6 @@ angular.module('foodex', ['ionic', 'foodex.controllers', 'foodex.services', 'ion
         })
         .state('app.location', {
             url: '/location',
-
             views: {
                 'menuContent': {
                     templateUrl: 'templates/location.html',
@@ -37,7 +38,6 @@ angular.module('foodex', ['ionic', 'foodex.controllers', 'foodex.services', 'ion
         })
         .state('app.home', {
             url: '/home',
-
             views: {
                 'menuContent': {
                     templateUrl: 'templates/home.html',
@@ -45,7 +45,34 @@ angular.module('foodex', ['ionic', 'foodex.controllers', 'foodex.services', 'ion
                 }
             }
         })
+        .state('app.shops', {
+            url: '/shops',
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/shops-listing.html',
+                    controller: 'ShopListingCtrl'
+                }
+            }
+        })
+        .state('app.shop', {
+            url: '/shop/:shopId',
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/shop-detail.html',
+                    controller: 'ShopDetailCtrl'
+                }
+            }
+        })
+        .state('app.cart', {
+            url: '/cart',
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/cart.html',
+                    controller: 'CartCtrl'
+                }
+            }
+        })
 
     // if none of the above states are matched, use this as the fallback
-    $urlRouterProvider.otherwise('/app/location');
+    $urlRouterProvider.otherwise('/app/home');
 });

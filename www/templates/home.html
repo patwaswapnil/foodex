@@ -1,16 +1,76 @@
-<ion-view title="Vidyavihar West"   hide-back-button="true">
- 
-  <ion-content>
-   <ion-slide-box on-slide-changed="slideChanged(index)">
-          <ion-slide>
-        1
-          </ion-slide>
-          <ion-slide>
-           2
-          </ion-slide>
-          <ion-slide>
-           3
-          </ion-slide>
-        </ion-slide-box>
-  </ion-content>
+<ion-view title="{{::navTitle}}"  hide-menu-button="true">
+    <ion-content class="main-bg">
+        <div class="banner-wrapper">
+            <ion-slide-box auto-play="true" does-continue="true" on-slide-changed="slideChanged(index)" style="text-align:center;">
+                <ion-slide>
+                    <img ng-src="img/banner/banner1.png" class="img">
+                </ion-slide>
+                <ion-slide>
+                    <img ng-src="img/banner/banner2.png" class="img">
+                </ion-slide>
+                <ion-slide>
+                    <img ng-src="img/banner/banner3.png" class="img">
+                </ion-slide>
+            </ion-slide-box>
+        </div>
+        <div class="wrapper-content">
+            <div class="row">
+                <div class="col">
+                    <h4 class="color-white">Featured Shop</h4>
+
+                </div>
+                <div class="col"><a ui-sref="app.shops" class="no-blue"><h6 class=" pull-right  color-white"> View All </h6></a></div>
+            </div>
+            <div class="row  reponsive-lg" style="flex-wrap: wrap;">
+                <div class="col col-50 txt-center mb20">
+                    <a href="" class="no-blue">
+                        <div class="featured-wrap-img">
+                            <img ng-src="img/1.png" class="img">
+                        </div>
+                        <div class="featured-name color-white">
+                            Haldiram
+                        </div>
+                    </a>
+                </div>
+                <div class="col col-50 txt-center mb20">
+                    <a href="" class="no-blue">
+                        <div class="featured-wrap-img">
+                            <img ng-src="img/2.png" class="img">
+                        </div>
+                        <div class="featured-name color-white">
+                            Brijwasi
+                        </div>
+                    </a>
+                </div>
+                <div class="col col-50 txt-center mb20">
+                    <a href="" class="no-blue">
+                        <div class="featured-wrap-img">
+                            <img ng-src="img/3.png" class="img">
+                        </div>
+                        <div class="featured-name color-white">
+                            Adarsh Sweets
+                        </div>
+                    </a>
+                </div>
+                <div class="col col-50 txt-center mb20">
+                    <a href="" class="no-blue">
+                        <div class="featured-wrap-img">
+                            <img ng-src="img/1.png" class="img">
+                        </div>
+                        <div class="featured-name color-white">
+                            Anupam Sweets
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </ion-content>
 </ion-view>
+<style>
+.main-bg {
+    background-image: url('img/content_bg.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+</style>
