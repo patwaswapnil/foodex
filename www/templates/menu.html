@@ -1,6 +1,6 @@
-<ion-side-menus enable-menu-with-back-views="false">
+<ion-side-menus enable-menu-with-back-views="true">
   <ion-side-menu-content>
-    <ion-nav-bar class="bar-balanced">
+    <ion-nav-bar class="bar-balanced foodex-primary">
       <ion-nav-back-button>
       </ion-nav-back-button>
 
@@ -11,11 +11,14 @@
        <ion-nav-buttons side="right">
                 <!-- <button ng-show="isAuthenticated" class="button button-icon button-clear ion-unlocked" ng-click="logout()">
                 </button> -->
-                  <button class="button button-icon button-clear ion-search" >
+                  <button class="button button-icon button-clear ion-android-create" ui-sref="app.location">
+             
+        </button>
+         <button class="button button-icon button-clear ion-search" >
              
         </button>
                 <button class="button button-icon button-clear ion-android-cart" ui-sref="app.cart">
-             
+             <span class="badge custom-badge" ng-if="cartCount">{{cartCount}}</span>
                  </button>
 
             </ion-nav-buttons>

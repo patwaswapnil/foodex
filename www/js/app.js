@@ -4,7 +4,7 @@ angular.module('foodex', ['ionic', 'ngCordova', 'foodex.controllers', 'foodex.se
     $ionicPlatform.ready(function() {
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
         // for form inputs)
-    $cordovaStatusbar.overlaysWebView(true)
+        $cordovaStatusbar.overlaysWebView(true)
         if (window.cordova && window.cordova.plugins.Keyboard) {
             cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
             cordova.plugins.Keyboard.disableScroll(true);
@@ -14,7 +14,7 @@ angular.module('foodex', ['ionic', 'ngCordova', 'foodex.controllers', 'foodex.se
             // org.apache.cordova.statusbar required
             StatusBar.styleDefault();
         }
-        $cordovaStatusbar.styleHex('#28A54C');
+        $cordovaStatusbar.styleHex('#027158');
     });
 })
 
@@ -72,7 +72,41 @@ angular.module('foodex', ['ionic', 'ngCordova', 'foodex.controllers', 'foodex.se
                 }
             }
         })
+        .state('app.delivery', {
+            url: '/delivery',
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/delivery.html'
+                }
+            }
+        })
+        .state('app.payment', {
+            url: '/payment',
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/payment.html'
+                }
+            }
+        })
+        .state('app.shop-info', {
+            url: '/shop-info/:id',
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/shop-info.html'
+                }
+            }
+        })
+        .state('app.orders', {
+            url: '/orders',
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/orders.html',
+                    controller: 'OrdersCtrl'
+
+                }
+            }
+        })
 
     // if none of the above states are matched, use this as the fallback
-    $urlRouterProvider.otherwise('/app/home');
+    $urlRouterProvider.otherwise('/app/location');
 });

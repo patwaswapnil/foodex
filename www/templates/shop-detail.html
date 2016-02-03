@@ -1,97 +1,52 @@
 <ion-view title="{{::shop.name}}" hide-back-button="false">
     <ion-content class="main-bg bg-css">
         <div class="listing-wrap">
-            <div class="list">
+            <div class="list mb0">
                 <div>
-                    <span class="item item-thumbnail-left shop-detail shop-icon-wrap">
-                        <img ng-src="img/shop/{{::shop.image}}"> 
-                        <h2 class="shop-title">{{::shop.name}} </h2> 
-                        <p> <span ng-repeat="item in shop.items">{{::item}} &nbsp;</span> </p>
+                    <span class="item item-thumbnail-left shop-detail shop-icon-wrap pt16">
+                      <img ng-src="img/shop/{{::shop.image}}"> 
+                        <h2 class="">{{::shop.name}} </h2> 
+                        <p class="fz12"> <span ng-repeat="item in shop.items">{{::item}} &nbsp;</span> </p>
                     <div class="rating row ">
                         <div class="stars">
                             <i style="width:{{::shop.rating}}%"></i>
                         </div>
-                        <div class="rating-count">{{::shop.ratingCount}} Ratings</div>
+                        <!-- <div  class="rating-count fz12">{{::shop.ratingCount}} Ratings</div> -->
                     </div>
                     <div class="row padding0">
                         <div class="col padding0">
-                            <p>Delivery:
-                                <br/>Rs. {{::shop.deliveryCharge}} / {{::shop.deliveryTime}} min</p>
-                        </div>
-                        <div class="col padding0">
-                            <p>Min Order:
-                                <br/>Rs. {{::shop.minOrder}} </p>
+                            <p class="fz12">Delivery: Rs. {{::shop.deliveryCharge}} / {{::shop.deliveryTime}} min</p>
+                            <p class="fz12">Free Delivery: Rs. {{::shop.minOrder}} </p>
                         </div>
                     </div>
                     </span>
                 </div>
             </div>
-      
-        <div class=" ">
-            <div class="list">
-                <div>
-                    <span class="item shop-detail shop-icon-wrap  flex-container item-border">
-                    	<div class="row">
-                         <div class="col-80 flex-item">
-                        <h2> Motichoor Ladoos </h2> 
-                        <p> Rs. 500/kg</p>
-                     
-                        <div class=" padding0">
-                            <div class="col padding0">
-                                <p>Qty:<span counter value="quantity" min="1" max="100" step="1" class="ml20" editable></span>    
-                                    </p>
-                            </div>
-                           </div>
-                          </div>
-                            <div class="col padding0 flex-item txt-center">
-                                  <button class="button cart-btn  button-small  button-balanced ">Add  </button> 
-                            </div>
-                        </div>
-                    </span>
-                     <span class="item shop-detail shop-icon-wrap  flex-container item-border">
-                        <div class="row">
-                         <div class="col-80 flex-item">
-                        <h2>Haldiram Sev </h2> 
-                        <p> Rs. 300/kg</p>
-                     
-                        <div class=" padding0">
-                            <div class="col padding0">
-                                <p>Qty:<span counter value="quantity" ng-modal="value" min="1" max="100" step="1" class="ml20" editable></span>    
-                                    </p>
-                            </div>
-                           </div>
-                          </div>
-                            <div class="col padding0 flex-item txt-center">
-                                  <button class="button cart-btn  button-small  button-balanced ">Add  </button> 
-                            </div>
-                        </div>
-                    </span>
-                       <span class="item shop-detail shop-icon-wrap  flex-container item-border">
-                        <div class="row">
-                         <div class="col-80 flex-item">
-                        <h2>Soan Papdi(Special Ghee) </h2> 
-                        <p> Rs. 258/kg</p>
-                     
-                        <div class=" padding0">
-                            <div class="col padding0">
-                                <p>Qty:<span counter value="quantity" ng-modal="value" min="1" max="100" step="1" class="ml20" editable></span>    
-                                    </p>
-                            </div>
-                           </div>
-                          </div>
-                            <div class="col padding0 flex-item txt-center">
-                                  <button class="button cart-btn  button-small  button-balanced ">Add  </button> 
-                            </div>
-                        </div>
-                    </span>
-                </div>
+            <div class="banner-wrapper plr15">
+                <a class="button button-full button-balanced foodex-primary w100" href="#/app/shop-info/2">
+                    More Info
+                </a>
             </div>
+            <div class="list">
+                <span class="item shop-detail shop-icon-wrap  flex-container item-border" ng-repeat="item in shopList">
+                      <div class="row">
+                         <div class="col-80 flex-item">
+                        <h2> {{::item.name}} </h2> 
+                        <p class="fz12"> Rs. {{::item.price}}/{{::item.unit}}</p>
+                     
+                        <div class=" padding0">
+                            <div class="col qty-warp">
+                                <p class="fz12">Qty:<span counter value="item.qty" min="1" max="100" step="1" class="ml5" ></span>
+                </p>
+            </div>
+        </div>
+        </div>
+        <div class="col padding0 flex-item txt-center">
+            <button class="button  button-small  button-balanced foodex-primary add-to-cart" ng-click="addToCart(item)">Add </button>
+        </div>
+        </div>
+        </span>
         </div>
         </div>
     </ion-content>
 </ion-view>
-<style>
-.main-bg {
-    background-image: url('img/content_bg.png');
-}
-</style>

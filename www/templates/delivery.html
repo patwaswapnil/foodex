@@ -1,0 +1,31 @@
+<ion-view title="Delivery" hide-back-button="false">
+    <ion-nav-bar class="bar-balanced foodex-primary">
+      <ion-nav-back-button>
+      </ion-nav-back-button>
+
+      <ion-nav-buttons side="left">
+        <button class="button button-icon button-clear ion-navicon-round" menu-toggle="left">
+        </button>
+      </ion-nav-buttons>
+       <ion-nav-buttons side="right"> 
+                   
+                <button class="button button-icon button-clear ion-plus-round" >
+             
+                 </button>
+
+            </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-content class="main-bg bg-css">
+    <div class="row">
+            <div class="col">
+                <h4 class="color-white">Select Delivery Address</h4>
+            </div>
+        </div>
+         <ion-radio ng-model="choice" ng-value="'A'"><span class="radio-opt">511, Poonam Nagar, Andheri East, Mumbai 440058</span></ion-radio>
+         <ion-radio ng-model="choice" ng-value="'B'"><span class="radio-opt">504, Neelkanth Business Park, Vidyavihar West, Mumbai 440058</span></ion-radio>
+             
+    </ion-content>
+    <ion-footer-bar align-title="center" class="bar-balanced foodex-primary">
+        <a href="" ui-sref="app.payment"><h1 class="title">Deliver Here</h1></a>
+    </ion-footer-bar>
+</ion-view>

@@ -1,11 +1,91 @@
-<ion-view title="{{::shop.name}}" hide-back-button="false">
+<ion-view title="Cart" hide-back-button="false">
     <ion-content class="main-bg bg-css">
-         
-         
+        <div class="row">
+            <div class="col">
+                <h4 class="color-white">Order from MM Mithaiwala</h4>
+            </div>
+        </div>
+        <div class="listing-wrap">
+            <div class=" ">
+                <div class="list cart-page">
+                    <div>
+                        <span class="item shop-detail shop-icon-wrap cart-padding  flex-container item-border" ng-show="cartItems.length" ng-repeat="cartItem in cartItems track by $index">
+                      <div class="row">
+                         <div class="col-60 flex-item">
+                        <h2> {{cartItem.name}} </h2> 
+                         <div class=" padding0">
+                            <div class="col qty-warp">
+                                <p class="fz12"> <span counter value="cartItem.qty" min="1" max="100" step="1"> </span> <i class="icon ion-close-round"></i> <span>  Rs. {{::cartItem.price}}/{{::cartItem.unit}}</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-20 padding0 flex-item txt-center">
+                <p class="fz12">Rs. {{cartItem.price * cartItem.qty}}</p>
+            </div>
+            <div class="col-20 padding0 flex-item txt-right ml2">
+                <button class="button button-icon button-clear ion-trash-a trash-btn" ng-click="removeFromCart($index)"></button>
+            </div>
+        </div>
+        </span>
+        <span  class="item shop-detail shop-icon-wrap cart-padding   item-border"  ng-show="!cartItems.length">
+          <div class="row">
+            <p>Cart is empty.</p>
+          </div>
+        </span>
+        <span class="item shop-detail shop-icon-wrap cart-padding   item-border" ng-show="cartItems.length">
+            
+               
+                  <div class="row flex-item">
+                  <div class="title-cart col-80">
+                    <p class="fz12">Subtotal: </p>
+                  </div>
+                  <div class="amt-cart col-20">
+                    <p class="fz12">Rs. 650</p>
+                  </div>
+                  </div>
+               
+              
+                
+                  <div class="row flex-item">
+                  <div class="title-cart col-80">
+                    <p class="fz12">Delivery Charge: </p>
+                  </div>
+                  <div class="amt-cart col-20">
+                    <p class="fz12">Rs. 50</p>
+                  </div>
+                  </div>
+                   
+              
+                
+                  <div class="row flex-item">
+                  <div class="title-cart col-80">
+                    <p class="fz12">Discount: </p>
+                  </div>
+                  <div class="amt-cart col-20">
+                    <p class="fz12">Rs. 100</p>
+                  </div>
+                  </div>
+                 
+                
+                  <div class="row flex-item mt10">
+                  <div class="title-cart col-80">
+                    <h2>Total: </h2>
+                  </div>
+                  <div class="amt-cart col-20">
+                    <h2 >Rs. 600</h2>
+                  </div>
+                  </div>
+                   
+                
+             
+        </span>
+        </div>
+        </div>
+        </div>
+        </div>
     </ion-content>
+    <ion-footer-bar align-title="center" class="bar-balanced foodex-primary" ng-if="cartItems.length">
+        <a ui-sref="app.delivery"><h1 class="title">Proceed to Checkout</h1></a>
+    </ion-footer-bar>
 </ion-view>
-<style>
-.main-bg {
-    background-image: url('img/content_bg.png');
-}
-</style>

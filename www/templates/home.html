@@ -1,4 +1,4 @@
-<ion-view title="{{::navTitle}}"  hide-menu-button="true">
+<ion-view title="{{::navTitle}}" hide-menu-button="true">
     <ion-content class="main-bg">
         <div class="banner-wrapper">
             <ion-slide-box auto-play="true" does-continue="true" on-slide-changed="slideChanged(index)" style="text-align:center;">
@@ -13,64 +13,39 @@
                 </ion-slide>
             </ion-slide-box>
         </div>
-        <div class="wrapper-content">
+        <div class="wrapper-listing">
             <div class="row">
-                <div class="col">
-                    <h4 class="color-white">Featured Shop</h4>
-
+                <div class="col-80">
+                    <h4 class=" ">Shops in Vidyavihar(W)</h4>
                 </div>
-                <div class="col"><a ui-sref="app.shops" class="no-blue"><h6 class=" pull-right  color-white"> View All </h6></a></div>
+                   <div class="col-20">
+                <button class="button button-icon pull-right button-clear ion-funnel filter-icon pr0">
+                </button>
+            </div>  
             </div>
-            <div class="row  reponsive-lg" style="flex-wrap: wrap;">
-                <div class="col col-50 txt-center mb20">
-                    <a href="" class="no-blue">
-                        <div class="featured-wrap-img">
-                            <img ng-src="img/1.png" class="img">
-                        </div>
-                        <div class="featured-name color-white">
-                            Haldiram
-                        </div>
-                    </a>
-                </div>
-                <div class="col col-50 txt-center mb20">
-                    <a href="" class="no-blue">
-                        <div class="featured-wrap-img">
-                            <img ng-src="img/2.png" class="img">
-                        </div>
-                        <div class="featured-name color-white">
-                            Brijwasi
-                        </div>
-                    </a>
-                </div>
-                <div class="col col-50 txt-center mb20">
-                    <a href="" class="no-blue">
-                        <div class="featured-wrap-img">
-                            <img ng-src="img/3.png" class="img">
-                        </div>
-                        <div class="featured-name color-white">
-                            Adarsh Sweets
-                        </div>
-                    </a>
-                </div>
-                <div class="col col-50 txt-center mb20">
-                    <a href="" class="no-blue">
-                        <div class="featured-wrap-img">
-                            <img ng-src="img/1.png" class="img">
-                        </div>
-                        <div class="featured-name color-white">
-                            Anupam Sweets
-                        </div>
-                    </a>
+            <div class="listing-wrap">
+                <div class="list">
+                    <div ng-repeat="shop in shops">
+                        <a href="#/app/shop/{{::shop.id}}" class=" card item-thumbnail-left shop-listing no-blue shop-icon-wrap">
+                            <img ng-src="img/shop/{{::shop.image}}">
+                            <h2 class="">{{::shop.name}} </h2>
+                            <p class="fz12"> <span ng-repeat="item in shop.items">{{::item}} &nbsp;</span> </p>
+                            <div class="rating row ">
+                                <div class="stars">
+                                    <i style="width:{{::shop.rating}}%"></i>
+                                </div>
+                                <!-- <div  class="rating-count fz12">{{::shop.ratingCount}} Ratings</div> -->
+                            </div>
+                            <div class="row padding0">
+                                <div class="col padding0">
+                                    <p class="fz12">Delivery: Rs. {{::shop.deliveryCharge}} / {{::shop.deliveryTime}} min</p>
+                                    <p class="fz12">Free Delivery: Rs. {{::shop.minOrder}} </p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
     </ion-content>
 </ion-view>
-<style>
-.main-bg {
-    background-image: url('img/content_bg.png');
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-</style>

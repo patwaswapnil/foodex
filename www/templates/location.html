@@ -1,5 +1,5 @@
 <ion-view view-title="Home" hide-nav-bar="true">
-    <ion-content class="location">
+    <ion-content class="main-bg">
  
         <div class="row">
             <div class="col wrapper-logo">
@@ -13,22 +13,29 @@
                     <input ion-autocomplete type="text" name="location" readonly="readonly" class="ion-autocomplete" autocomplete="off" ng-model="model" item-value-key="name" item-view-value-key="view" items-method="getTestItems(query)" items-method-value-key="items" placeholder="Enter your location..." max-selected-items="1" required/>
                 </label>
             </div>
-            <div class="list list-inset location-btn-wrap">
-               <a ui-sref="app.home"> <button class="button button-small  button-block button-balanced"   >
+            <div class="list list-inset location-btn-wrap mb0">
+               <a ui-sref="app.home"> <button class="button button-small  button-block button-balanced foodex-primary"   >
                     Continue
                 </button></a>
+            </div>
+         
+                <div class="custom-padding-loc">
+<a class="button icon-left ion-location button-clear button-dark loc-anchor"  ng-click="gpsLocation()">Use my current location</a>
+                
+  
+</a> 
             </div>
             <div class="seprator"></div>
         </form>
         <div class="wrapper-login-offer">
             <div class="row location-pad">
                 <div class="col">
-                    <button class="button button-small  button-full button-balanced" ng-click="login()">
+                    <button class="button button-small  button-full button-balanced foodex-primary" ng-click="login()">
                         Login
                     </button>
                 </div>
                 <div class="col">
-                    <button class="button button-small  button-full button-balanced" ng-click="registerShow()">
+                    <button class="button button-small  button-full button-balanced foodex-primary" ng-click="registerShow()">
                         Register
                     </button>
 
@@ -38,12 +45,8 @@
         </div>
         <div class="txt-center color-white">OR</div>
         <div class="list list-inset location-btn-wrap">
-            <button class="button button-small button-full facebook-background button-balanced facebook-sign-in" ng-click="facebookSignIn()">LOG IN WITH FACEBOOK</button>
+            <button class="button button-small button-full facebook-background button-balanced   facebook-sign-in" ng-click="facebookSignIn()">LOG IN WITH FACEBOOK</button>
         </div>
     </ion-content>
 </ion-view>
-<style>
-.location {
-    background-image: url('img/content_bg.png');
-}
-</style>
+ 
