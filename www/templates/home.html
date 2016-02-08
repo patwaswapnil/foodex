@@ -14,12 +14,12 @@
             </ion-slide-box>
         </div>
         <div class="wrapper-listing">
-            <div class="row">
+            <div class="row home-title">
                 <div class="col-80">
-                    <h4 class=" ">Shops in Vidyavihar(W)</h4>
+                    <h4 class=" ">Shops in {{navTitle}}</h4>
                 </div>
                    <div class="col-20">
-                <button class="button button-icon pull-right button-clear ion-funnel filter-icon pr0">
+                <button class="button button-icon pull-right button-clear pb8 ion-funnel filter-icon pr0" ng-click="popover.show($event)">
                 </button>
             </div>  
             </div>
@@ -39,7 +39,7 @@
                             <div class="row padding0">
                                 <div class="col padding0">
                                     <p class="fz12">Delivery: Rs. {{::shop.deliveryCharge}} / {{::shop.deliveryTime}} min</p>
-                                    <p class="fz12">Free Delivery: Rs. {{::shop.minOrder}} </p>
+                                    <p class="fz12">Free Delivery above Rs. {{::shop.minOrder}} </p>
                                 </div>
                             </div>
                         </a>
@@ -49,3 +49,23 @@
         </div>
     </ion-content>
 </ion-view>
+<script id="templates/popover.html" type="text/ng-template">
+      <ion-popover-view>
+
+        <ion-content>
+        <span class="filter-head">
+           <h5>Filters</h5>
+          
+ <ion-list>
+
+  <ion-checkbox  class="checkbox-cover">User Rating</ion-checkbox>
+  <ion-checkbox  class="checkbox-cover">Bengoli Sweets</ion-checkbox>
+  <ion-checkbox  class="checkbox-cover">Farsan</ion-checkbox>
+    <ion-checkbox  class="checkbox-cover">Besan Sweets</ion-checkbox>
+  <ion-checkbox  class="checkbox-cover">Shrikhand</ion-checkbox>
+  <ion-checkbox  class="checkbox-cover">Ladoos</ion-checkbox>
+
+</ion-list> </span>
+        </ion-content>
+      </ion-popover-view>
+    </script>

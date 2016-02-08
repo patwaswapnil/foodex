@@ -44,16 +44,7 @@ angular.module('foodex', ['ionic', 'ngCordova', 'foodex.controllers', 'foodex.se
                     controller: 'HomeCtrl'
                 }
             }
-        })
-        .state('app.shops', {
-            url: '/shops',
-            views: {
-                'menuContent': {
-                    templateUrl: 'templates/shops-listing.html',
-                    controller: 'ShopListingCtrl'
-                }
-            }
-        })
+        }) 
         .state('app.shop', {
             url: '/shop/:shopId',
             views: {

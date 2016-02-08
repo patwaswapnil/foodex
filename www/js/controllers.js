@@ -191,7 +191,10 @@ app.controller('AppCtrl', ['$scope', '$rootScope', '$ionicModal', '$timeout', '$
         };
     }
 ]);
-app.controller('LocationCtrl', ['$scope', '$cordovaGeolocation', '$http', function($scope, $cordovaGeolocation, $http) {
+app.controller('LocationCtrl', ['$scope','$state', '$cordovaGeolocation', '$http', '$ionicHistory','LSFactory', function($scope, $state, $cordovaGeolocation, $http,  $ionicHistory, LSFactory) {
+      $ionicHistory.nextViewOptions({
+    disableBack: true
+  });
     $scope.model = "";
     $scope.getTestItems = function(query) {
         if (query) {
@@ -217,15 +220,23 @@ app.controller('LocationCtrl', ['$scope', '$cordovaGeolocation', '$http', functi
             var longi = position.coords.longitude;
             $http.get('http://maps.googleapis.com/maps/api/geocode/json?latlng=' + lat + ',' + longi + '&sensor=false').then(function(response) {
                 alert(response.data.results[0].formatted_address);
+                LSFactory.set('location',  response.data.results[3].address_components[3].short_name);
+                $state.go('app.home');
             })
         }, function(err) {
             // error
-            alert('failed');
+            alert('Make sure device location is enabled');
         });
     }
 }]);
-app.controller('HomeCtrl', ['$scope', '$state', '$timeout', 'Loader', 'LSFactory', function($scope, $state, $timeout, Loader, LSFactory) {
-    $scope.navTitle = '<i class="icon-left location-icon ion-location"></i>Vidhyavihar West';
+app.controller('HomeCtrl', ['$scope', '$state', '$timeout', 'Loader', 'LSFactory', '$ionicHistory', '$ionicPopover', function($scope, $state, $timeout, Loader, LSFactory, $ionicHistory, $ionicPopover) {
+  
+    $scope.navTitle = LSFactory.get('location');
+    $ionicPopover.fromTemplateUrl('templates/popover.html', {
+    scope: $scope,
+  }).then(function(popover) {
+    $scope.popover = popover;
+  });
     $scope.shops = [{
         id: 1,
         name: 'Haldiram',
@@ -351,164 +362,18 @@ app.controller('HomeCtrl', ['$scope', '$state', '$timeout', 'Loader', 'LSFactory
         LSFactory.set('Shops', $scope.shops);
     }
 }]);
-app.controller('ShopListingCtrl', ['$scope', '$state', 'LSFactory', '$http', function($scope, $state, LSFactory, $http) {
-    $scope.shops = [{
-        id: 1,
-        name: 'Haldiram',
-        image: 'shop2.jpg',
-        rating: 80,
-        deliveryCharge: 100,
-        deliveryTime: 40,
-        minOrder: 200,
-        ratingCount: 22,
-        items: ['Sweets', 'Farsaan']
-    }, {
-        id: 2,
-        name: 'MM Mithaiwala',
-        image: 'shop3.jpg',
-        rating: 70,
-        deliveryCharge: 50,
-        deliveryTime: 60,
-        minOrder: 200,
-        ratingCount: 22,
-        items: ['Sweets']
-    }, {
-        id: 3,
-        name: 'Suleman',
-        image: 'shop4.jpg',
-        rating: 50,
-        deliveryCharge: 100,
-        deliveryTime: 90,
-        minOrder: 200,
-        ratingCount: 22,
-        items: ['Farsan']
-    }, {
-        id: 4,
-        name: 'Adarsh Sweets',
-        image: 'shop5.jpg',
-        rating: 90,
-        deliveryCharge: 40,
-        deliveryTime: 90,
-        minOrder: 200,
-        ratingCount: 22,
-        items: ['Farsan']
-    }, {
-        id: 5,
-        name: 'Haldiram',
-        image: 'shop2.jpg',
-        rating: 80,
-        deliveryCharge: 60,
-        deliveryTime: 40,
-        minOrder: 200,
-        ratingCount: 22,
-        items: ['Sweets', 'Farsaan']
-    }, {
-        id: 6,
-        name: 'MM Mithaiwala',
-        image: 'shop3.jpg',
-        rating: 70,
-        deliveryCharge: 80,
-        deliveryTime: 60,
-        minOrder: 200,
-        ratingCount: 22,
-        items: ['Sweets']
-    }, {
-        id: 7,
-        name: 'Suleman',
-        image: 'shop4.jpg',
-        rating: 50,
-        deliveryCharge: 50,
-        deliveryTime: 90,
-        minOrder: 200,
-        ratingCount: 22,
-        items: ['Farsan']
-    }, {
-        id: 8,
-        name: 'Adarsh Sweets',
-        image: 'shop5.jpg',
-        rating: 90,
-        deliveryCharge: 100,
-        deliveryTime: 90,
-        minOrder: 200,
-        ratingCount: 22,
-        items: ['Farsan']
-    }, {
-        id: 9,
-        name: 'Haldiram',
-        image: 'shop2.jpg',
-        rating: 80,
-        deliveryCharge: 0,
-        deliveryTime: 40,
-        minOrder: 200,
-        ratingCount: 22,
-        items: ['Sweets', 'Farsaan']
-    }, {
-        id: 10,
-        name: 'MM Mithaiwala',
-        image: 'shop3.jpg',
-        rating: 25,
-        deliveryCharge: 90,
-        deliveryTime: 60,
-        minOrder: 200,
-        ratingCount: 22,
-        items: ['Sweets']
-    }, {
-        id: 11,
-        name: 'Suleman',
-        image: 'shop4.jpg',
-        rating: 68,
-        deliveryCharge: 100,
-        deliveryTime: 90,
-        minOrder: 200,
-        ratingCount: 22,
-        items: ['Farsan']
-    }, {
-        id: 12,
-        name: 'Adarsh Sweets',
-        image: 'shop5.jpg',
-        rating: 54,
-        deliveryCharge: 100,
-        deliveryTime: 90,
-        minOrder: 200,
-        ratingCount: 22,
-        items: ['Farsan']
-    }];
-    if (!LSFactory.get('Shops')) {
-        LSFactory.set('Shops', $scope.shops);
-    }
-}]);
-app.controller('ShopDetailCtrl', ['$scope', '$state', '$stateParams', 'LSFactory', '$rootScope', function($scope, $state, $stateParams, LSFactory, $rootScope) {
-    $scope.shopList = [{
-        id: 1,
-        name: 'Motichoor Ladoos',
-        qty: 1,
-        price: 500,
-        unit: 'Kg'
-    }, {
-        id: 2,
-        name: 'Haldiram Sev',
-        qty: 1,
-        price: 400,
-        unit: 'Kg'
-    }, {
-        id: 3,
-        name: 'Son Papdi',
-        qty: 1,
-        price: 200,
-        unit: 'Gram'
-    }, {
-        id: 4,
-        name: 'Kaju Katli',
-        qty: 1,
-        price: 700,
-        unit: 'Kg'
-    }, {
-        id: 5,
-        name: 'Rasgulla',
-        qty: 1,
-        price: 250,
-        unit: 'Kg'
-    }]
+
+app.controller('ShopDetailCtrl', ['$scope', '$state', '$timeout', '$stateParams', 'LSFactory', '$rootScope', 'ShopService', 'Loader', function($scope, $state, $timeout, $stateParams, LSFactory, $rootScope, ShopService, Loader) {
+    Loader.showLoading('Fetching Data');
+    $timeout(function() {
+    Loader.hideLoading();
+       
+    }, 2000);
+
+    $scope.shopList = ShopService.getItems();
+
+         $scope.selectedCat = 'Kaju Sweets';
+ 
     angular.forEach(LSFactory.get('Shops'), function(value, key) {
         if ($stateParams.shopId == value.id) {
             $scope.shop = value;
@@ -527,7 +392,8 @@ app.controller('ShopDetailCtrl', ['$scope', '$state', '$stateParams', 'LSFactory
     }
 }]);
 app.controller('CartCtrl', ['$scope', '$rootScope', '$state', '$stateParams', 'LSFactory', function($scope, $rootScope, $state, $stateParams, LSFactory) {
-    $scope.navTitle = 'Cart';
+    $scope.navTitle = LSFactory.get('location');
+     
     $scope.cartItems = LSFactory.get('cart');
     $scope.removeFromCart = function(index) {
         $scope.cartItems.splice(index, 1);
@@ -674,4 +540,10 @@ app.directive('counter', function() {
             };
         }
     }
-});
+})
+app.filter('capitalize', function() {
+    return function(input, all) {
+      var reg = (all) ? /([^\W_]+[^\s-]*) */g : /([^\W_]+[^\s-]*)/;
+      return (!!input) ? input.replace(reg, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();}) : '';
+    }
+  });

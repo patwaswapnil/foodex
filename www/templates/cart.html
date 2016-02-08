@@ -1,8 +1,8 @@
 <ion-view title="Cart" hide-back-button="false">
-    <ion-content class="main-bg bg-css">
+    <ion-content class="main-bg bg-css " ng-class="cartItems.length > 0 ? 'has-footer' : ''">
         <div class="row">
             <div class="col">
-                <h4 class="color-white">Order from MM Mithaiwala</h4>
+                <h4 class="">Order from MM Mithaiwala</h4>
             </div>
         </div>
         <div class="listing-wrap">
@@ -12,15 +12,15 @@
                         <span class="item shop-detail shop-icon-wrap cart-padding  flex-container item-border" ng-show="cartItems.length" ng-repeat="cartItem in cartItems track by $index">
                       <div class="row">
                          <div class="col-60 flex-item">
-                        <h2> {{cartItem.name}} </h2> 
+                        <h2> {{cartItem.name | capitalize:true}} </h2> 
                          <div class=" padding0">
                             <div class="col qty-warp">
-                                <p class="fz12"> <span counter value="cartItem.qty" min="1" max="100" step="1"> </span> <i class="icon ion-close-round"></i> <span>  Rs. {{::cartItem.price}}/{{::cartItem.unit}}</span>
+                                <p class="fz12"> <span counter value="cartItem.qty" min="1" max="100" step="1"> </span> <i class="icon ion-close-round"></i> <span>  Rs. {{::cartItem.price}}/{{::cartItem.unit}} =</span>
                         </p>
                     </div>
                 </div>
             </div>
-            <div class="col-20 padding0 flex-item txt-center">
+            <div class="col-20 padding0 flex-item txt-center mt25">
                 <p class="fz12">Rs. {{cartItem.price * cartItem.qty}}</p>
             </div>
             <div class="col-20 padding0 flex-item txt-right ml2">
@@ -34,7 +34,15 @@
           </div>
         </span>
         <span class="item shop-detail shop-icon-wrap cart-padding   item-border" ng-show="cartItems.length">
-            
+           
+            <div class="bar bar-header item-input-inset coupon-bar">
+  <label class="item-input-wrapper"> 
+    <input type="search" placeholder="Enter Coupon Code">
+  </label>
+  <button class="button button-clear foodex-primary">
+    Apply
+  </button>
+</div>
                
                   <div class="row flex-item">
                   <div class="title-cart col-80">

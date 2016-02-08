@@ -1,10 +1,9 @@
- 
 <ion-view title="{{::shop.name}}" hide-back-button="false">
-    <ion-content class="main-bg bg-css shop-detail" ng-class="cartCount > 0 ? 'has-footer' : ''">
+    <ion-content class="main-bg bg-css">
         <div class="listing-wrap">
             <div class="list mb0">
                 <div>
-                    <span class="item item-thumbnail-left shop-detail shop-icon-wrap pt22">
+                    <span class="item item-thumbnail-left shop-detail shop-icon-wrap pt16">
                       <img ng-src="img/shop/{{::shop.image}}"> 
                         <h2 class="">{{::shop.name}} </h2> 
                         <p class="fz12"> <span ng-repeat="item in shop.items">{{::item}} &nbsp;</span> </p>
@@ -17,34 +16,22 @@
                     <div class="row padding0">
                         <div class="col padding0">
                             <p class="fz12">Delivery: Rs. {{::shop.deliveryCharge}} / {{::shop.deliveryTime}} min</p>
-                            <p class="fz12">Free Delivery above Rs. {{::shop.minOrder}} </p>
+                            <p class="fz12">Free Delivery: Rs. {{::shop.minOrder}} </p>
                         </div>
                     </div>
                     </span>
                 </div>
             </div>
-        <div class="banner-wrapper plr15">
+            <div class="banner-wrapper plr15">
                 <a class="button button-full button-balanced foodex-primary w100" href="#/app/shop-info/2">
                     More Info
                 </a>
-            </div>  
-
-
+            </div>
             <div class="list">
-                    <div class="banner-wrapper plr15">
- <select name="" id="" class="w100 listing-cat-filter" ng-model="selectedCat"   >
- 
-    <option ng-value="value.category" ng-repeat="(key, value) in shopList.results">{{value.category}}</option>
- 
-</select>
-</div>
-<span  >
-    <span  ng-if="listing.category === selectedCat "  ng-repeat="listing in shopList.results"><span  >
-              
-                <span class="item   shop-detail shop-icon-wrap  flex-container item-border" ng-repeat="item in listing.data">
+                <span class="item shop-detail shop-icon-wrap  flex-container item-border" ng-repeat="item in shopList">
                       <div class="row">
                          <div class="col-80 flex-item">
-                        <h2> {{::item.name | capitalize:true}} </h2> 
+                        <h2> {{::item.name}} </h2> 
                         <p class="fz12"> Rs. {{::item.price}}/{{::item.unit}}</p>
                      
                         <div class=" padding0">
@@ -55,21 +42,11 @@
         </div>
         </div>
         <div class="col padding0 flex-item txt-center">
-            <button class="button  button-small  button-balanced foodex-primary add-to-cart" ng-click="addToCart(item, shopId)">Add </button>
+            <button class="button  button-small  button-balanced foodex-primary add-to-cart" ng-click="addToCart(item)">Add </button>
         </div>
         </div>
         </span>
-        </span></span>
-   
-</span>
-</div>
- 
         </div>
         </div>
     </ion-content>
-        <ion-footer-bar align-title="center" ng-if="cartCount > 0"  class="bar-balanced foodex-primary" >
-        <a  ui-sref="app.cart"> <button class="button button-icon button-clear ion-android-cart">
-             <span class="badge custom-badge" >{{cartCount}}</span>
-                 </button><h1 class="title">Proceed to Cart</h1></a>
-    </ion-footer-bar>
 </ion-view>
