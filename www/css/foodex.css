@@ -320,6 +320,9 @@ a.item.item-thumbnail-left.shop-listing {
 .ml20 {
     margin-left: 20px;
 }
+.ml25 {
+    margin-left: 25px;
+}
 
 .ml5 {
     margin-left: 5px;
@@ -522,6 +525,10 @@ a.item.item-thumbnail-left.shop-listing {
     background-color: #06A07D !important;
     border: none;
 }
+.foodex-danger {
+    background-color: #D6AD62 !important;
+    border: none;
+}
 
 .card h2 {
     margin: 10px 0 0px 0;
@@ -640,11 +647,101 @@ a.item.item-thumbnail-left.shop-listing {
 }
 .login-bg{
     background-image: url('../img/login-bg.jpg');
-         background-repeat: no-repeat !important;
+    background-repeat: no-repeat !important;
     background-position: center !important;
     background-size: cover;
     -webkit-background-size: cover; 
 }
 .capitalize{
     text-transform: capitalize !important;
+}
+.fff{
+    color: #fff !important;
+}
+.fff:hover{
+    color: #fff;
+}
+.information-msg{
+    font-size: 12px;
+    padding: 4px 10px;
+    border-radius: 2px;
+        margin-bottom: 8px;
+}
+.fwbold{
+    font-weight: bold;
+}
+.icon-info{
+    font-size: 17px;
+    margin-right: 11px;
+    position: absolute;
+}
+.foodex-error{
+            background-color: #D85C53 !important;
+}
+.cart-page .cart-btn{
+        margin: 0px 3px 0px 3px !important;
+}
+.empty-cart-wrap{
+        text-align: center !important;
+    height: 100%;
+    width: 100%;
+    margin-top: 10%;
+    position: relative;
+}
+.icon-container{
+        font-size: 289px;
+    color: rgba(0, 0, 0, 0.38);
+}
+
+
+/* CORE */
+.item-expand {
+  position: relative;
+  width: 100%;
+       max-height: 105px;
+  transition: max-height 0.1s ease-out;
+  overflow: hidden;
+}
+
+.item-expand.inactive:after {
+  content: "";
+  position: absolute;
+  bottom: 0px;
+  left: 0;
+  height: 15px;
+  width: 100%;
+  display: block; 
+}
+
+.item-expand.active {
+  max-height: 1200px;
+  transition: max-height 0.3s ease-out;
+}
+
+
+/* DEMO */
+.item-expand-footer {
+  color: #06A07D;
+    text-align: right;
+    padding-right: 15px;
+    padding-bottom: 5px;
+}
+
+.item-expand-footer i {
+  margin-right: 10px;
+}
+.cart-icon-wrap > img:first-child {
+    border-radius: 0px !important;
+    height: 95px;
+    width: 95px !important;
+    max-width: 95px !important;
+    max-height: 95px;
+    top: 10px;
+    position: absolute;
+    left: 10px;
+    border: 1px solid #ddd;
+    box-shadow: none;
+}
+.display-none{
+    display: none !important;
 }

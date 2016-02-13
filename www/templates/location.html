@@ -1,4 +1,4 @@
-<ion-view view-title="Home" hide-nav-bar="true">
+<ion-view view-title="Home" hide-nav-bar="true" cache-view="false">
     <ion-content class="main-bg location login-bg">
  
         <div class="row">
@@ -10,7 +10,7 @@
             <div class="list list-inset">
                 <label class="item item-input">
                     <i class="icon ion-search placeholder-icon"></i>
-                    <input ion-autocomplete type="text" name="location" readonly="readonly" class="ion-autocomplete" autocomplete="off" ng-model="model" item-value-key="name" item-view-value-key="view" items-method="getTestItems(query)" items-method-value-key="items" placeholder="Enter your location manually" max-selected-items="1" required/>
+                    <input ion-autocomplete type="text" name="location" readonly="readonly" class="ion-autocomplete" autocomplete="on" ng-model="model" item-value-key="location" item-view-value-key="location" items-method="getTestItems(query)" items-method-value-key="items" items-clicked-method="clickedMethod(callback)" placeholder="Enter your location manually" max-selected-items="1" required/>
                 </label>
             </div>
             <div class="txt-center ">OR</div>

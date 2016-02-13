@@ -7,11 +7,11 @@
                 <h4 class=" ">Select Payment Method</h4>
             </div>
         </div>
-         <ion-radio ng-model="choice" ng-value="'cod'"><span class="radio-opt">Cash On Delivery</span></ion-radio>
-         <ion-radio ng-model="choice" ng-value="'online'"><span class="radio-opt">Pay Online</span></ion-radio>
+         <ion-radio ng-model="paymentMethod" ng-value="'cod'" ng-required="true"><span class="radio-opt">Cash On Delivery</span></ion-radio>
+         <ion-radio ng-model="paymentMethod" ng-value="'online'" ng-required="true"><span class="radio-opt">Pay Online</span></ion-radio>
              
     </ion-content>
     <ion-footer-bar align-title="center" class="bar-balanced foodex-primary">
-        <a href=""><h1 class="title">Pay Rs. 625</h1></a>
+        <a href="" ng-click="confirmOrder()"><h1 class="title">Pay Rs. {{cartGrandTotal}}</h1></a>
     </ion-footer-bar>
 </ion-view>

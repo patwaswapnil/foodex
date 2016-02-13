@@ -67,7 +67,8 @@ angular.module('foodex', ['ionic', 'ngCordova', 'foodex.controllers', 'foodex.se
             url: '/delivery',
             views: {
                 'menuContent': {
-                    templateUrl: 'templates/delivery.html'
+                    templateUrl: 'templates/delivery.html',
+                    controller: 'DeliveryCtrl'
                 }
             }
         })
@@ -75,7 +76,8 @@ angular.module('foodex', ['ionic', 'ngCordova', 'foodex.controllers', 'foodex.se
             url: '/payment',
             views: {
                 'menuContent': {
-                    templateUrl: 'templates/payment.html'
+                    templateUrl: 'templates/payment.html',
+                    controller: 'PaymentCtrl'
                 }
             }
         })
@@ -93,6 +95,15 @@ angular.module('foodex', ['ionic', 'ngCordova', 'foodex.controllers', 'foodex.se
                 'menuContent': {
                     templateUrl: 'templates/orders.html',
                     controller: 'OrdersCtrl'
+
+                }
+            }
+        })
+        .state('app.order-confirmation', {
+            url: '/order-confirmation',
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/order-confirmation.html' 
 
                 }
             }

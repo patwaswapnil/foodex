@@ -6,26 +6,11 @@ app.controller('AppCtrl', ['$scope', '$rootScope', '$ionicModal', '$timeout', '$
         $scope.showLogin = true;
         $scope.directClose = false; //if register button direct clicked
         //accordion
-        $scope.groups = [{
-            name: 'Sweets',
-            items: ['Bangali Sweet']
-        }, {
-            name: 'Farsan',
-            items: ['Ganthiya']
-        }, {
-            name: 'Homemade',
-            items: ['Sev']
-        }];
-        $scope.toggleGroup = function(group) {
-            if ($scope.isGroupShown(group)) {
-                $scope.shownGroup = null;
-            } else {
-                $scope.shownGroup = group;
-            }
-        };
-        $scope.isGroupShown = function(group) {
-            return $scope.shownGroup === group;
-        };
+       $scope.clickButton = function () {
+    var ionAutocompleteElement = document.getElementsByClassName("ion-autocomplete");
+    angular.element(ionAutocompleteElement).controller('ionAutocomplete').fetchSearchQuery("", true);
+    angular.element(ionAutocompleteElement).controller('ionAutocomplete').showModal();
+}
         //end accor
         $scope.registerToggle = function() {
             if ($scope.directClose == true) {
@@ -144,6 +129,9 @@ app.controller('AppCtrl', ['$scope', '$rootScope', '$ionicModal', '$timeout', '$
                                 email: profileInfo.email,
                                 picture: "http://graph.facebook.com/" + success.authResponse.userID + "/picture?type=large"
                             });
+
+                        $scope.user = UserService.getUser();
+
                             $state.go('app.home');
                         }, function(fail) {
                             //fail get profile info
@@ -164,8 +152,12 @@ app.controller('AppCtrl', ['$scope', '$rootScope', '$ionicModal', '$timeout', '$
                 }
             });
         };
-        // logout fb
+        $timeout(function(argument) {
+             // body...  
         $scope.user = UserService.getUser();
+        }, 100)
+
+        // logout fb 
         $scope.showLogOutMenu = function() {
             var hideSheet = $ionicActionSheet.show({
                 destructiveText: 'Logout',
@@ -182,7 +174,7 @@ app.controller('AppCtrl', ['$scope', '$rootScope', '$ionicModal', '$timeout', '$
                     // Facebook logout
                     facebookConnectPlugin.logout(function() {
                         $ionicLoading.hide();
-                        $state.go('app.location');
+                        $state.go('app.home');
                     }, function(fail) {
                         $ionicLoading.hide();
                     });
@@ -191,25 +183,38 @@ app.controller('AppCtrl', ['$scope', '$rootScope', '$ionicModal', '$timeout', '$
         };
     }
 ]);
-app.controller('LocationCtrl', ['$scope','$state', '$cordovaGeolocation', '$http', '$ionicHistory','LSFactory', function($scope, $state, $cordovaGeolocation, $http,  $ionicHistory, LSFactory) {
-      $ionicHistory.nextViewOptions({
-    disableBack: true
-  });
+app.controller('LocationCtrl', ['$scope', '$state', '$cordovaGeolocation', '$http', '$ionicHistory', 'LSFactory', '$filter', 'Loader', function($scope, $state, $cordovaGeolocation, $http, $ionicHistory, LSFactory, $filter, Loader) {
+   $scope.locationMaster = [{"id":1,"location":"Mira Road"},{"id":1,"location":"Chembur"},{"id":1,"location":"Andheri West"},{"id":1,"location":"Kharghar"},{"id":1,"location":"Malad West"},{"id":1,"location":"Andheri East"},{"id":1,"location":"Bandra West"},{"id":1,"location":"Goregaon West"},{"id":1,"location":"Kandivali East"},{"id":1,"location":"Ghodbunder Road"},{"id":1,"location":"Navi Mumbai"},{"id":1,"location":"Bhandup West"},{"id":1,"location":"Borivali West"},{"id":1,"location":"Panvel"},{"id":1,"location":"Khar East"},{"id":1,"location":"Kandivali West"},{"id":1,"location":"Goregaon East"},{"id":1,"location":"90 Feet Road"},{"id":1,"location":"Nelson Manickam Road"},{"id":1,"location":"Abdul Rehman Street"},{"id":1,"location":"Agripada"},{"id":1,"location":"Airoli"},{"id":1,"location":"Airoli Sector 4"},{"id":1,"location":"Airoli Sector 8"},{"id":1,"location":"Altamount Road"},{"id":1,"location":"Ambarnath"},{"id":1,"location":"Ambarnath East"},{"id":1,"location":"Ambernath West"},{"id":1,"location":"Amboli"},{"id":1,"location":"Andheri Kurla Road"},{"id":1,"location":"Andheri Sahar Road"},{"id":1,"location":"Antop Hill"},{"id":1,"location":"Apollo Bunder"},{"id":1,"location":"August Kranti Maidan"},{"id":1,"location":"Babulnath Road"},{"id":1,"location":"Badlapur"},{"id":1,"location":"Ballard Estate"},{"id":1,"location":"Bandra East"},{"id":1,"location":"Belapur"},{"id":1,"location":"Bhandup"},{"id":1,"location":"Bhandup East"},{"id":1,"location":"Bhayandar"},{"id":1,"location":"Bhayandar East"},{"id":1,"location":"Bhayandar Wada"},{"id":1,"location":"Bhayandar West"},{"id":1,"location":"Bhayander"},{"id":1,"location":"Bhayander East"},{"id":1,"location":"Bhayander West"},{"id":1,"location":"Bhindi Bazaar"},{"id":1,"location":"Bhiwandi"},{"id":1,"location":"Bhoiwada"},{"id":1,"location":"Bhulabhai Desai Road"},{"id":1,"location":"Bhuleshwar"},{"id":1,"location":"Bhyandar East"},{"id":1,"location":"Boisar"},{"id":1,"location":"Boisar West"},{"id":1,"location":"Borivali"},{"id":1,"location":"Borivali East"},{"id":1,"location":"Breach Candy"},{"id":1,"location":"Byculla"},{"id":1,"location":"Byculla East"},{"id":1,"location":"Byculla West"},{"id":1,"location":"CP Tank"},{"id":1,"location":"Chhatrapati Shivaji Terminus"},{"id":1,"location":"Carnac Bunder"},{"id":1,"location":"CBD Belapur"},{"id":1,"location":"CBD Belapur Sector 11"},{"id":1,"location":"Chakala"},{"id":1,"location":"Chandivali"},{"id":1,"location":"Charkop"},{"id":1,"location":"Charni Road"},{"id":1,"location":"Charni Road East"},{"id":1,"location":"Chembur Camp"},{"id":1,"location":"Chembur Colony"},{"id":1,"location":"Chembur East"},{"id":1,"location":"Chembur West"},{"id":1,"location":"Chinch Bandar"},{"id":1,"location":"Chinch Bunder"},{"id":1,"location":"Chinchpokli"},{"id":1,"location":"Chinchpokli East"},{"id":1,"location":"Chinchpokli West"},{"id":1,"location":"Chira Bazaar"},{"id":1,"location":"Chowpatti"},{"id":1,"location":"Chuna Bhatti"},{"id":1,"location":"Churchgate"},{"id":1,"location":"Colaba Causeway"},{"id":1,"location":"Cotton Green"},{"id":1,"location":"Cotton Green West"},{"id":1,"location":"Crawford Market"},{"id":1,"location":"Cuffe Parade"},{"id":1,"location":"Cumbala Hill"},{"id":1,"location":"Currey Road"},{"id":1,"location":"Dadabhai Naoroji Road"},{"id":1,"location":"Dadar East"},{"id":1,"location":"Dadar T T"},{"id":1,"location":"Dadar West"},{"id":1,"location":"Dahisar"},{"id":1,"location":"Dahisar East"},{"id":1,"location":"Dahisar West"},{"id":1,"location":"Dana Bunder"},{"id":1,"location":"Delisle Road"},{"id":1,"location":"Deonar"},{"id":1,"location":"Deonar East"},{"id":1,"location":"Dharavi"},{"id":1,"location":"Dhobhi Talao"},{"id":1,"location":"Dhobi Talao"},{"id":1,"location":"Dockyard"},{"id":1,"location":"Dombivali"},{"id":1,"location":"Dombivali East"},{"id":1,"location":"Dombivali West"},{"id":1,"location":"Dongri"},{"id":1,"location":"Elphinstone Road"},{"id":1,"location":"Flora Fountain"},{"id":1,"location":"Fort"},{"id":1,"location":"Gamdevi"},{"id":1,"location":"Ghansoli"},{"id":1,"location":"Ghatkopar"},{"id":1,"location":"Ghatkopar East"},{"id":1,"location":"Ghatkopar West"},{"id":1,"location":"Ghodbandar Road"},{"id":1,"location":"Girgaon"},{"id":1,"location":"Girgaon Chowpatty"},{"id":1,"location":"Girgaum"},{"id":1,"location":"Goregaon East"},{"id":1,"location":"Goregaon West"},{"id":1,"location":"Govandi"},{"id":1,"location":"Govandi East"},{"id":1,"location":"Govandi West"},{"id":1,"location":"Gowalia Tank"},{"id":1,"location":"Grant Road"},{"id":1,"location":"Grant Road East"},{"id":1,"location":"Grant Road West"},{"id":1,"location":"Green Park Extension"},{"id":1,"location":"Gulalwadi"},{"id":1,"location":"Haji Ali"},{"id":1,"location":"Horiman Circle"},{"id":1,"location":"Hughes Road"},{"id":1,"location":"Hutatma Chowk"},{"id":1,"location":"J B Nagar"},{"id":1,"location":"Jacob Circle"},{"id":1,"location":"Jogeshwari"},{"id":1,"location":"Jogeshwari East"},{"id":1,"location":"Jogeshwari West"},{"id":1,"location":"Juhu Scheme"},{"id":1,"location":"Juhu Tara Road"},{"id":1,"location":"Kalachowki"},{"id":1,"location":"Kala Ghoda"},{"id":1,"location":"Kalamboli"},{"id":1,"location":"Kalbadevi"},{"id":1,"location":"Kalina"},{"id":1,"location":"Kalwa"},{"id":1,"location":"Kalwa West"},{"id":1,"location":"Kalyan"},{"id":1,"location":"Kalyan East"},{"id":1,"location":"Kalyan West"},{"id":1,"location":"Kamothe"},{"id":1,"location":"Kandivali"},{"id":1,"location":"Kanjur Marg East"},{"id":1,"location":"Kanjur Marg West"},{"id":1,"location":"Kanjurmarg"},{"id":1,"location":"Kanjurmarg East"},{"id":1,"location":"Kanjurmarg West"},{"id":1,"location":"Kazi Sayed Street"},{"id":1,"location":"Kemps Corner"},{"id":1,"location":"Khar"},{"id":1,"location":"Khar Danda"},{"id":1,"location":"Khar West"},{"id":1,"location":"Kharghar Sector 12"},{"id":1,"location":"Kharghar Sector 2"},{"id":1,"location":"Kharghar Sector 7"},{"id":1,"location":"Khetwadi"},{"id":1,"location":"Khopoli"},{"id":1,"location":"Kings Circle"},{"id":1,"location":"Kopar Khairane"},{"id":1,"location":"Koper Khraine"},{"id":1,"location":"Andheri Kurla Road"},{"id":1,"location":"Kurla East"},{"id":1,"location":"Kurla West"},{"id":1,"location":"Lal Bahadur Shastri Marg"},{"id":1,"location":"Lal Baug"},{"id":1,"location":"Lalbaug"},{"id":1,"location":"Lamington Road"},{"id":1,"location":"LBS Marg"},{"id":1,"location":"Link Road"},{"id":1,"location":"Lohar Chawl"},{"id":1,"location":"Lokhandwala"},{"id":1,"location":"Parel"},{"id":1,"location":"Lower Parel East"},{"id":1,"location":"Lower Parel West"},{"id":1,"location":"M G Road"},{"id":1,"location":"Mahakali Caves Road"},{"id":1,"location":"Mahalaxmi"},{"id":1,"location":"Mahalaxmi West"},{"id":1,"location":"Mahape"},{"id":1,"location":"Mahim"},{"id":1,"location":"Mahim East"},{"id":1,"location":"Mahim West"},{"id":1,"location":"Malabar Hill"},{"id":1,"location":"Aarey Milk Colony"},{"id":1,"location":"Airport"},{"id":1,"location":"Ambewadi"},{"id":1,"location":"Andheri"},{"id":1,"location":"Asvini"},{"id":1,"location":"Azad Nagar"},{"id":1,"location":"BPT Colony"},{"id":1,"location":"BN Bhavan"},{"id":1,"location":"Bandra"},{"id":1,"location":"Bazargate"},{"id":1,"location":"Bharat Nagar"},{"id":1,"location":"Bhavani Shankar Road"},{"id":1,"location":"CGS Colony"},{"id":1,"location":"Air India Staff Colony"},{"id":1,"location":"Century Mills Worli"},{"id":1,"location":"Chamar Baug"},{"id":1,"location":"Colaba"},{"id":1,"location":"Cotton Exchange"},{"id":1,"location":"Dadar Colony"},{"id":1,"location":"Dadar"},{"id":1,"location":"Danda"},{"id":1,"location":"Dockyard Road"},{"id":1,"location":"Dr Deshmukh Marg"},{"id":1,"location":"Falkland Road"},{"id":1,"location":"Girgaon Mdg"},{"id":1,"location":"Gokhale Road"},{"id":1,"location":"Goregoan"},{"id":1,"location":"Government Colony"},{"id":1,"location":"HMP School"},{"id":1,"location":"Haffkine Institute"},{"id":1,"location":"Haines Road"},{"id":1,"location":"Hanuman Road"},{"id":1,"location":"High Court Building"},{"id":1,"location":"Holiday Camp"},{"id":1,"location":"INS Hamla"},{"id":1,"location":"Central Building"},{"id":1,"location":"Parel Naka"},{"id":1,"location":"Oshiwara"},{"id":1,"location":"Opera House"},{"id":1,"location":"New Yogakshema"},{"id":1,"location":"New Prabhadevi Road"},{"id":1,"location":"N S Patkar Marg"},{"id":1,"location":"Mori Road"},{"id":1,"location":"Mazgaon Road"},{"id":1,"location":"JJ Hospital"},{"id":1,"location":"Juhu"},{"id":1,"location":"Kamathipura"},{"id":1,"location":"Ketkipada"},{"id":1,"location":"Kherwadi"},{"id":1,"location":"Kidwai Nagar"},{"id":1,"location":"Liberty Garden"},{"id":1,"location":"Mazagon Dock"},{"id":1,"location":"Naigaon"},{"id":1,"location":"Mumbai Central"},{"id":1,"location":"Orlem"},{"id":1,"location":"Nagardas Road"},{"id":1,"location":"Madhavbaug"},{"id":1,"location":"Khar Delivery"},{"id":1,"location":"MPT"},{"id":1,"location":"M A Marg"},{"id":1,"location":"Magathane"},{"id":1,"location":"LBSNE College"},{"id":1,"location":"Mazagaon"},{"id":1,"location":"Matunga Railway Workshop"},{"id":1,"location":"Motilal Nagar"},{"id":1,"location":"Nariman Point"},{"id":1,"location":"International Airport"},{"id":1,"location":"Irla"},{"id":1,"location":"Malad"},{"id":1,"location":"Mantralaya"},{"id":1,"location":"Marine Lines"},{"id":1,"location":"Marol Naka"},{"id":1,"location":"Prabhadevi"},{"id":1,"location":"Princess Dock"},{"id":1,"location":"Raj Bhavan"},{"id":1,"location":"Rajendra Nagar"},{"id":1,"location":"Ramwadi"},{"id":1,"location":"Ranade Road"},{"id":1,"location":"Rani Sati Marg"},{"id":1,"location":"SRPF Camp"},{"id":1,"location":"S Savarkar Marg"},{"id":1,"location":"S.K. Nagar"},{"id":1,"location":"Sahar PT Colony"},{"id":1,"location":"Sahargaon"},{"id":1,"location":"Santacruz Central"},{"id":1,"location":"Santacruz P AND T Colony"},{"id":1,"location":"Santacruz"},{"id":1,"location":"Secretariat"},{"id":1,"location":"SEEPZ"},{"id":1,"location":"Sewri"},{"id":1,"location":"Sharma Estate"},{"id":1,"location":"Shroffmahajan"},{"id":1,"location":"Shroff Mahajan"},{"id":1,"location":"Stock Exchange"},{"id":1,"location":"Tajmahal"},{"id":1,"location":"Tajmahal Hotel"},{"id":1,"location":"Tank Road"},{"id":1,"location":"Tardeo"},{"id":1,"location":"Taj Mahal Hotel"},{"id":1,"location":"Thakurdwar"},{"id":1,"location":"Town Hall"},{"id":1,"location":"Tulsiwadi"},{"id":1,"location":"VJB Udyan"},{"id":1,"location":"VK Bhavan"},{"id":1,"location":"VP Road"},{"id":1,"location":"VWTC"},{"id":1,"location":"Vakola"},{"id":1,"location":"Vesava"},{"id":1,"location":"Vidyanagari"},{"id":1,"location":"Vileeparle"},{"id":1,"location":"Vile Parle"},{"id":1,"location":"Wadala"},{"id":1,"location":"Worli"},{"id":1,"location":"Ambarnath West"},{"id":1,"location":"Kharghar"}];
+    $ionicHistory.nextViewOptions({
+        disableBack: true
+    });
     $scope.model = "";
-    $scope.getTestItems = function(query) {
-        if (query) {
+    $scope.getTestItems = function(query) { 
+$scope.itemsArray = $scope.filterData(query);
+              if (query) {
             return {
-                items: [{
-                    id: "3",
-                    name: query + "3",
-                    view: "Location: " + query + "3"
-                }]
+                items: $scope.itemsArray
             };
         }
         return {
             items: []
         };
+
+         
     }
+    $scope.clickedMethod = function (callback) {
+    
+    LSFactory.set('location', callback.selectedItems.location);
+    $state.go('app.home');
+
+}
+          
+    $scope.filterData = function(argument) {
+         // body...  
+         var found = $filter('filter')($scope.locationMaster, {location: argument}, false);
+        return found;
+    }
+    
     $scope.gpsLocation = function() {
         var posOptions = {
             timeout: 10000,
@@ -218,9 +223,19 @@ app.controller('LocationCtrl', ['$scope','$state', '$cordovaGeolocation', '$http
         $cordovaGeolocation.getCurrentPosition(posOptions).then(function(position) {
             var lat = position.coords.latitude;
             var longi = position.coords.longitude;
+            var locationName;
+            Loader.showLoading();
             $http.get('http://maps.googleapis.com/maps/api/geocode/json?latlng=' + lat + ',' + longi + '&sensor=false').then(function(response) {
-                alert(response.data.results[0].formatted_address);
-                LSFactory.set('location',  response.data.results[3].address_components[3].short_name);
+                $scope.locationResult = response.data;
+                angular.forEach($scope.locationResult.results[0].address_components, function(element, index) {
+                    // statements
+                    if(element.types[0] === "sublocality_level_1"){
+                         locationName = element.long_name;
+                    }
+                });
+
+                LSFactory.set('location', locationName);
+                Loader.hideLoading();
                 $state.go('app.home');
             })
         }, function(err) {
@@ -230,13 +245,22 @@ app.controller('LocationCtrl', ['$scope','$state', '$cordovaGeolocation', '$http
     }
 }]);
 app.controller('HomeCtrl', ['$scope', '$state', '$timeout', 'Loader', 'LSFactory', '$ionicHistory', '$ionicPopover', function($scope, $state, $timeout, Loader, LSFactory, $ionicHistory, $ionicPopover) {
-  
     $scope.navTitle = LSFactory.get('location');
+    $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
+ if(fromState.name == "app.location"){
+    $scope.navTitle = LSFactory.get('location');
+ }
+$ionicHistory.clearCache().then(function(response){
+console.log('cleared history');
+})
+})
+
+
     $ionicPopover.fromTemplateUrl('templates/popover.html', {
-    scope: $scope,
-  }).then(function(popover) {
-    $scope.popover = popover;
-  });
+        scope: $scope,
+    }).then(function(popover) {
+        $scope.popover = popover;
+    });
     $scope.shops = [{
         id: 1,
         name: 'Haldiram',
@@ -362,188 +386,167 @@ app.controller('HomeCtrl', ['$scope', '$state', '$timeout', 'Loader', 'LSFactory
         LSFactory.set('Shops', $scope.shops);
     }
 }]);
-
-app.controller('ShopDetailCtrl', ['$scope', '$state', '$timeout', '$stateParams', 'LSFactory', '$rootScope', 'ShopService', 'Loader', function($scope, $state, $timeout, $stateParams, LSFactory, $rootScope, ShopService, Loader) {
-    Loader.showLoading('Fetching Data');
+app.controller('ShopDetailCtrl', ['$scope', '$state', '$timeout', '$stateParams', 'LSFactory', '$rootScope', 'ShopService', 'Loader', '$ionicPopup', function($scope, $state, $timeout, $stateParams, LSFactory, $rootScope, ShopService, Loader, $ionicPopup) {
+    Loader.showLoading();
     $timeout(function() {
-    Loader.hideLoading();
-       
+        Loader.hideLoading();
     }, 2000);
-
     $scope.shopList = ShopService.getItems();
-
-         $scope.selectedCat = 'Kaju Sweets';
- 
+    $scope.selectedCat = 'Kaju Sweets';
     angular.forEach(LSFactory.get('Shops'), function(value, key) {
         if ($stateParams.shopId == value.id) {
             $scope.shop = value;
         }
     });
-    $scope.addToCart = function(item) {
+    $scope.addToCart = function(item, shop) {
         var itemInCart = LSFactory.get('cart') || [];
         if (!itemInCart.length) {
             LSFactory.setArray('cart', item);
+            LSFactory.setArray('shop', shop);
         } else {
-            var cart = LSFactory.get('cart');
-            cart.push(item);
-            LSFactory.set('cart', cart);
+            var shopCheck = LSFactory.get('shop');
+            if (shopCheck[0].id === shop.id) {
+                var cart = LSFactory.get('cart');
+                cart.push(item);
+                LSFactory.set('cart', cart);
+            } else {
+                var confirmPopup = $ionicPopup.confirm({
+                    title: 'Warning',
+                    template: 'You can order from one shop at a time, if you add this item your previous cart will get clear.',
+
+                })
+                confirmPopup.then(function(res) {
+                    if (res) {
+                        LSFactory.delete('cart');
+                        LSFactory.delete('shop');
+                        LSFactory.setArray('cart', item);
+                        LSFactory.setArray('shop', shop);
+                        $rootScope.cartCount = (LSFactory.get('cart')).length;
+                    }  
+                });
+            }
         }
         $rootScope.cartCount = (LSFactory.get('cart')).length;
     }
 }]);
-app.controller('CartCtrl', ['$scope', '$rootScope', '$state', '$stateParams', 'LSFactory', function($scope, $rootScope, $state, $stateParams, LSFactory) {
+app.controller('CartCtrl', ['$scope', '$rootScope', '$state', '$stateParams', 'LSFactory', 'Loader', '$timeout', function($scope, $rootScope, $state, $stateParams, LSFactory, Loader, $timeout) {
     $scope.navTitle = LSFactory.get('location');
-     
     $scope.cartItems = LSFactory.get('cart');
+    $scope.shopFrom = LSFactory.get('shop');
+    $scope.discount;
+    $scope.deliveryChar;
+    $rootScope.grandTotal;
     $scope.removeFromCart = function(index) {
         $scope.cartItems.splice(index, 1);
         LSFactory.set('cart', $scope.cartItems);
         $scope.cartItems = LSFactory.get('cart');
         $rootScope.cartCount = $scope.cartItems.length;
+        if ($rootScope.cartCount < 1) {
+            LSFactory.delete('cart');
+            LSFactory.delete('shop');
+        }
+        calculateTotal();
     }
+    $scope.updateCart = function() {
+        LSFactory.set('cart', $scope.cartItems);
+        calculateTotal();
+    }
+    var calculateTotal = function() {
+        Loader.showLoading();
+        $timeout(function() {
+            $scope.subTotal = 0;
+            angular.forEach($scope.cartItems, function(val, index) {
+                $scope.subTotal += (val.price * val.qty);
+            });
+            Loader.hideLoading()
+        $scope.discount = 100;
+        $scope.deliveryChar = $scope.shopFrom[0].minOrder > $scope.subTotal ? $scope.shopFrom[0].deliveryCharge : 0;
+        $rootScope.grandTotal = ($scope.subTotal + $scope.deliveryChar) - $scope.discount; 
+        $scope.availFreeDelivery = $scope.shopFrom[0].minOrder - $scope.subTotal ;
+        }, 600)
+
+    }
+    if($scope.cartItems){
+    calculateTotal();
+    }
+    $scope.cartCheckout = function(cartObj, shopObj, subTotal, deliveryChar, grandTotal) {
+     var tempObj =  {"shop": shopObj, "payment":{"subtotal":subTotal, "deliveryCharge":deliveryChar, "grandTotal":grandTotal}, "items":cartObj, "address":""};
+      LSFactory.set('checkout',  tempObj ); 
+    $state.go('app.delivery');
+    }
+
 }]);
+app.controller('DeliveryCtrl', ['$scope', '$rootScope', '$state', '$stateParams', 'LSFactory', 'Loader', '$timeout', function($scope, $rootScope, $state, $stateParams, LSFactory, Loader, $timeout) {
+
+    $scope.address = 'A'; 
+      LSFactory.set("address", "504, Neelkanth Business Park, Vidyavihar West, Mumbai 440058");
+
+}]);
+app.controller('PaymentCtrl', ['$scope', '$rootScope', '$state', '$stateParams', 'LSFactory', 'Loader', '$timeout', '$ionicHistory', function($scope, $rootScope, $state, $stateParams, LSFactory, Loader, $timeout, $ionicHistory) {
+     $ionicHistory.nextViewOptions({
+        disableBack: true
+    });
+      var checkoutObj = LSFactory.get('checkout' ); 
+      var date = new Date("October 13, 2014 11:13:00");
+      console.log(date);
+      var orderDetail = {"OrderId": Math.floor((Math.random() * 1000000) + 1), "orderDate": date, "Address":LSFactory.get('address')};
+      if(checkoutObj){
+      angular.extend(checkoutObj, orderDetail);
+  }else {
+      return false;
+  }
+      LSFactory.set('checkout',checkoutObj)
+      var checkoutObj = LSFactory.get('checkout' ); 
+
+      $scope.cartGrandTotal = checkoutObj.payment.grandTotal;
+      $scope.confirmOrder = function () {
+           /* body... */ 
+           var checkoutObj = LSFactory.get('checkout');
+           if(!LSFactory.get('orders')){ 
+           LSFactory.setArray('orders', checkoutObj);
+
+}
+else{
+
+            var tempOrderObj = LSFactory.get('orders');
+            console.log(checkoutObj);
+            console.log(tempOrderObj);
+            tempOrderObj.push(checkoutObj);
+            angular.extend(tempOrderObj, checkoutObj );
+            LSFactory.set('orders', tempOrderObj);
+            console.log(LSFactory.get('orders'));
+}
+            LSFactory.delete('checkout');
+            LSFactory.delete('cart');
+            LSFactory.delete('address');
+            $rootScope.cartCount = 0;
+            $scope.$apply;
+            $state.go('app.order-confirmation');
+
+
+      }
+}]);
+
 app.controller('OrdersCtrl', ['$scope', '$rootScope', '$state', '$stateParams', 'LSFactory', function($scope, $rootScope, $state, $stateParams, LSFactory) {
-    $scope.groups = [];
-    $scope.toggleGroup = function(group) {
-        if ($scope.isGroupShown(group)) {
-            $scope.shownGroup = null;
-        } else {
-            $scope.shownGroup = group;
-        }
-    };
-    $scope.isGroupShown = function(group) {
-        return $scope.shownGroup === group;
-    };
-    var data = {
-        "error": null,
-        "data": [{
-            "Purchase made on 29-January-2016 at 19:37": [{
-                "_id": "55694262ee79b5ce02959047",
-                "title": "qui necessitatibus quas",
-                "author": "Lucious Skiles",
-                "author_image": "https://s3.amazonaws.com/uifaces/faces/twitter/mikebeecham/128.jpg",
-                "release_date": "2015-05-30T03:11:43.624Z",
-                "image": "http://lorempixel.com/640/480/abstract?_r=1153990251256",
-                "price": "239",
-                "short_description": "vel laboriosam doloremque vero in ut occaecati illo",
-                "rating": 4,
-                "long_description": "amet sapiente rerum autem ea corporis\nculpa quas ut saepe quibusdam\nperspiciatis velit assumenda dolorum et et\nad qui et unde optio in",
-                "qty": 1
-            }]
-        }, {
-            "Purchase made on 29-January-2016 at 19:51": [{
-                "_id": "55694262ee79b5ce02959047",
-                "title": "qui necessitatibus quas",
-                "author": "Lucious Skiles",
-                "author_image": "https://s3.amazonaws.com/uifaces/faces/twitter/mikebeecham/128.jpg",
-                "release_date": "2015-05-30T03:11:43.624Z",
-                "image": "http://lorempixel.com/640/480/abstract?_r=1153990251256",
-                "price": "239",
-                "short_description": "vel laboriosam doloremque vero in ut occaecati illo",
-                "rating": 4,
-                "long_description": "amet sapiente rerum autem ea corporis\nculpa quas ut saepe quibusdam\nperspiciatis velit assumenda dolorum et et\nad qui et unde optio in",
-                "qty": 1
-            }]
-        }],
-        "message": "Success"
-    };
-    var purchases = data.data;
-    $scope.purchases = [];
-    for (var i = 0; i < purchases.length; i++) {
-        var key = Object.keys(purchases[i]);
-        $scope.purchases.push(key[0]);
-        $scope.groups[i] = {
-            name: key[0],
-            items: purchases[i][key]
-        }
-        var sum = 0;
-        for (var j = 0; j < purchases[i][key].length; j++) {
-            sum += parseInt(purchases[i][key][j].price);
-        };
-        $scope.groups[i].total = sum;
-    };
-}]);
-app.directive('counter', function() {
-    return {
-        restrict: 'A',
-        scope: {
-            value: '=value'
-        },
-        template: '<button class="button button-small icon ion-minus cart-btn " ng-click="minus()"> </button>\
-                  <span ng-model="value" ng-change="changed()">{{value}}</span>\
-                  <button    class="button button-small icon ion-plus cart-btn " ng-click="plus()"> </button>',
-        link: function(scope, element, attributes) {
-            // Make sure the value attribute is not missing.
-            if (angular.isUndefined(scope.value)) {
-                throw "Missing the value attribute on the counter directive.";
-            }
-            var min = angular.isUndefined(attributes.min) ? null : parseInt(attributes.min);
-            var max = angular.isUndefined(attributes.max) ? null : parseInt(attributes.max);
-            var step = angular.isUndefined(attributes.step) ? 1 : parseInt(attributes.step);
-            element.addClass('counter-container');
-            // If the 'editable' attribute is set, we will make the field editable.
-            scope.readonly = angular.isUndefined(attributes.editable) ? true : false;
-            /**
-             * Sets the value as an integer.
-             */
-            var setValue = function(val) {
-                    scope.value = parseInt(val);
-                }
-                // Set the value initially, as an integer.
-            setValue(scope.value);
-            /**
-             * Decrement the value and make sure we stay within the limits, if defined.
-             */
-            scope.minus = function() {
-                if (min && (scope.value <= min || scope.value - step <= min) || min === 0 && scope.value < 1) {
-                    setValue(min);
-                    return false;
-                }
-                setValue(scope.value - step);
-            };
-            /**
-             * Increment the value and make sure we stay within the limits, if defined.
-             */
-            scope.plus = function() {
-                if (max && (scope.value >= max || scope.value + step >= max)) {
-                    setValue(max);
-                    return false;
-                }
-                setValue(scope.value + step);
-            };
-            /**
-             * This is only triggered when the field is manually edited by the user.
-             * Where we can perform some validation and make sure that they enter the
-             * correct values from within the restrictions.
-             */
-            scope.changed = function() {
-                // If the user decides to delete the number, we will set it to 0.
-                if (!scope.value) setValue(0);
-                // Check if what's typed is numeric or if it has any letters.
-                if (/[0-9]/.test(scope.value)) {
-                    setValue(scope.value);
-                } else {
-                    setValue(scope.min);
-                }
-                // If a minimum is set, let's make sure we're within the limit.
-                if (min && (scope.value <= min || scope.value - step <= min)) {
-                    setValue(min);
-                    return false;
-                }
-                // If a maximum is set, let's make sure we're within the limit.
-                if (max && (scope.value >= max || scope.value + step >= max)) {
-                    setValue(max);
-                    return false;
-                }
-                // Re-set the value as an integer.
-                setValue(scope.value);
-            };
-        }
-    }
+    $scope.orders =  LSFactory.get('orders');
+        $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
+ $scope.orders =  LSFactory.get('orders');
 })
-app.filter('capitalize', function() {
-    return function(input, all) {
-      var reg = (all) ? /([^\W_]+[^\s-]*) */g : /([^\W_]+[^\s-]*)/;
-      return (!!input) ? input.replace(reg, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();}) : '';
+
+  /*
+   * if given group is the selected group, deselect it
+   * else, select the given group
+   */
+  $scope.toggleItem= function(item) {
+    if ($scope.isItemShown(item)) {
+      $scope.shownItem = null;
+    } else {
+      $scope.shownItem = item;
     }
-  });
+  };
+  $scope.isItemShown = function(item) {
+    return $scope.shownItem === item;
+  };
+ 
+    
+}]);

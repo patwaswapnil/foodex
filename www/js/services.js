@@ -21,10 +21,13 @@ angular.module('foodex.services', [])
         var LOADERAPI = {
 
             showLoading: function(text) {
-                text = text || 'Loading...';
+                if(text){
                 $ionicLoading.show({
                     template: text
                 });
+            }else {
+                $ionicLoading.show();
+            }
             },
 
             hideLoading: function() {
