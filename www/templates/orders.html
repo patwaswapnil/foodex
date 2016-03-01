@@ -39,33 +39,33 @@
                         </div>
                         <div class="row plr15">
                             <div class="title-cart col-80">
-                                <p class="fz12">Subtotal: </p>
+                                <p class="fz12 fwbold">Subtotal: </p>
                             </div>
                             <div class="amt-cart col-20">
-                                <p class="fz12">Rs. {{::item.payment.subtotal}}</p>
+                                <p class="fz12 fwbold">Rs. {{::item.payment.subtotal}}</p>
                             </div>
                         </div>
                         <div class="row plr15">
                             <div class="title-cart col-80">
-                                <p class="fz12">Delivery Charge: </p>
+                                <p class="fz12 fwbold">Delivery Charge: </p>
                             </div>
                             <div class="amt-cart col-20">
-                                <p class="fz12">Rs. {{::item.payment.deliveryCharge}}</p>
+                                <p class="fz12 fwbold">Rs. {{::item.payment.deliveryCharge}}</p>
                             </div>
                         </div>
                            <div class="row plr15">
                             <div class="title-cart col-80">
-                                <p class="fz12">Discount: </p>
+                                <p class="fz12 fwbold">Discount: </p>
                             </div>
                             <div class="amt-cart col-20">
-                                <p class="fz12">Rs. {{(item.payment.subtotal+item.payment.deliveryCharge)-item.payment.grandTotal}}</p>
+                                <p class="fz12 fwbold">Rs. {{(item.payment.subtotal+item.payment.deliveryCharge)-item.payment.grandTotal}}</p>
                             </div>
                         </div>
                         <div class="row plr15">
-                            <div class="title-cart col-80">
+                            <div class="title-cart col-60">
                                 <h2>Total: </h2>
                             </div>
-                            <div class="amt-cart col-20">
+                            <div class="amt-cart col-40">
                                 <h2>Rs. {{::item.payment.grandTotal}}</h2>
                             </div>
                         </div>

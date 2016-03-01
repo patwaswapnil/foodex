@@ -17,8 +17,8 @@ console.log('cleared history');
     });
     $scope.shops = [{
         id: 1,
-        name: 'Haldiram',
-        image: 'shop2.jpg',
+        name: 'Saroj Sweets',
+        image: 'shop2.png',
         rating: 80,
         deliveryCharge: 100,
         deliveryTime: 40,

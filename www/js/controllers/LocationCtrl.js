@@ -31,6 +31,7 @@ $scope.itemsArray = $scope.filterData(query);
     }
     
     $scope.gpsLocation = function() {
+            Loader.showLoading();
         var posOptions = {
             timeout: 10000,
             enableHighAccuracy: false
@@ -39,7 +40,6 @@ $scope.itemsArray = $scope.filterData(query);
             var lat = position.coords.latitude;
             var longi = position.coords.longitude;
             var locationName;
-            Loader.showLoading();
             $http.get('http://maps.googleapis.com/maps/api/geocode/json?latlng=' + lat + ',' + longi + '&sensor=false').then(function(response) {
                 $scope.locationResult = response.data;
                 angular.forEach($scope.locationResult.results[0].address_components, function(element, index) {
@@ -55,6 +55,7 @@ $scope.itemsArray = $scope.filterData(query);
             })
         }, function(err) {
             // error
+                Loader.hideLoading();
             alert('Make sure device location is enabled');
         });
     }
