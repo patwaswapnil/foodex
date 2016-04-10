@@ -23,7 +23,7 @@
   <gap:platform name="android" />
   <plugin name="cordova-plugin-console" spec="1.0.1" source="npm" />
   <plugin name="cordova-plugin-device" spec="1.0.1" source="npm" />
-  <plugin name="com.plugin.datepicker" spec="0.4.0" source="npm" />
+  <plugin name="com.plugin.datepicker" source="pgb" />
   <plugin name="cordova-plugin-geolocation" spec="1.0.1" source="npm" />
   <plugin name="cordova-plugin-inappbrowser" spec="1.0.1" source="npm" />
   <plugin name="cordova-plugin-splashscreen" spec="2.1.0" source="npm" />
