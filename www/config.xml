@@ -28,7 +28,7 @@
   <plugin name="cordova-plugin-inappbrowser" spec="1.0.1" source="pgb" />
   <plugin name="cordova-plugin-splashscreen" spec="2.1.0" source="pgb" />
   <plugin name="cordova-plugin-statusbar" source="npm" />
-  <plugin name="cordova-plugin-x-toast" source="pgb" />
+  <plugin name="cordova-plugin-x-toast" source="npm" />
   <plugin name="cordova-plugin-whitelist" source="pgb" />
   <plugin name="com.ionic.keyboard" source="pgb" />
   <platform name="android">
