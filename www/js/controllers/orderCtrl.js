@@ -1,14 +1,14 @@
 
-app.controller('OrdersCtrl', ['$scope', '$rootScope', '$state', '$stateParams', 'LSFactory', function($scope, $rootScope, $state, $stateParams, LSFactory) {
-    $scope.orders =  LSFactory.get('orders');
+app.controller('OrdersCtrl', ['$scope', '$rootScope', '$state', '$stateParams', 'LSFactory', 
+function($scope, $rootScope, $state, $stateParams, LSFactory) {
         $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
- $scope.orders =  LSFactory.get('orders');
-})
+});
 
-  /*
-   * if given group is the selected group, deselect it
-   * else, select the given group
-   */
+  if (!$rootScope.isLoggedIn) {
+     $rootScope.$broadcast('showLoginModal', $scope, function (argument) {
+        $state.go('app.home');
+     }, null);
+  }
   $scope.toggleItem= function(item) {
     if ($scope.isItemShown(item)) {
       $scope.shownItem = null;
@@ -20,5 +20,4 @@ app.controller('OrdersCtrl', ['$scope', '$rootScope', '$state', '$stateParams', 
     return $scope.shownItem === item;
   };
  
-    
 }]);

@@ -1,0 +1,54 @@
+<ion-view>
+ <ion-nav-title> 
+ </ion-nav-title>
+    <ion-content >
+        <div class="hero" style="background-image: url('img/bgp.png'); background-color: #06A07D; background-size: initial">
+            <div class="content">
+                <div class="avatar" style="background-image: url('img/kohli.jpg');"></div>
+                <h3><a class="light">Swapnil Patwa</a></h3>
+                <h4>swapnil@infini.net</h4>
+            </div>
+        </div>
+        <div class="tabs tabs-dark tabs-icon-top static">
+            <a class="tab-item">
+                <i class="icon ion-arrow-graph-up-right"></i> Profile
+            </a>
+            <a class="tab-item">
+                <i class="icon ion-android-people"></i> Orders
+            </a>
+            <a class="tab-item">
+                <i class="icon ion-images"></i> Shop
+            </a>
+        </div>
+        <h4 class="content padding double-padding-x">Edit Profile</h4> 
+            <form class="margin30" ng-submit="registerUser(userData)">
+                <div class="list">
+                    <label class="item item-input item-floating-label">
+                        <span class="input-label ">Full Name</span>
+                        <input type="text" class="" ng-model="userData.fullname"  placeholder="Enter your Full Name">
+                    </label>
+                    <label class="item item-input item-floating-label">
+                        <span class="input-label ">Email</span>
+                        <input type="email" ng-disabled="true" class="" ng-model="userData.email" placeholder="Enter your Email">
+                    </label>
+                    <label class="item item-input item-floating-label">
+                        <span class="input-label ">Contact Number</span>
+                        <input type="tel" class="" ng-model="userData.mobile" placeholder="Enter your Contact Number">
+                    </label>
+                    <label class="item item-input item-floating-label">
+                        <span class="input-label ">Password</span>
+                        <input type="password" class="" ng-model="userData.pass" placeholder="Enter your password">
+                    </label> 
+                    <label class="item item-input item-floating-label">
+                        <span class="input-label ">Password</span>
+                        <input type="password" class="" ng-model="userData.pass_confirm" placeholder="Confirm password">
+                    </label> 
+                    <input type="hidden" ng-model="userData.dnd" value="on" >
+                 
+                    <button class="button button-small mt25 button-block button-balanced foodex-primary" type="submit">
+                       Update Profile
+                    </button>
+                </div>
+            </form> 
+    </ion-content>
+</ion-view>

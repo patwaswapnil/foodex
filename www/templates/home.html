@@ -20,31 +20,32 @@
                     <h4 class=" ">Shops in {{navTitle}}</h4>
                 </div>
                    <div class="col-20">
-                <button class="button button-icon pull-right button-clear pb8 ion-funnel filter-icon pr0" ng-click="popover.show($event)">
-                </button>
+               <!--  <button class="button button-icon pull-right button-clear pb8 ion-funnel filter-icon pr0" ng-click="popover.show($event)">
+                </button> -->
             </div>  
             </div>
             <div class="listing-wrap">
                 <div class="list">
-                    <div ng-repeat="shop in shops">
+                    <div ng-repeat="shop in shops track by $index">
                         <a href="#/app/shop/{{::shop.id}}" class=" card item-thumbnail-left shop-listing no-blue shop-icon-wrap">
-                            <img ng-src="img/shop/{{::shop.image}}">
+                            <img ng-src="{{::imgPath}}/restaurant_logo/{{::shop.logo}}">
                             <h2 class="">{{::shop.name}} </h2>
-                            <p class="fz12"> <span ng-repeat="item in shop.items">{{::item}} &nbsp;</span> </p>
+                            <p class="fz12"> <span>{{::shop.restaurant_has_category}}</span> </p>
                             <div class="rating row ">
                                 <div class="stars">
-                                    <i style="width:{{::shop.rating}}%"></i>
+                                    <i ng-style="set_star(shop.avg_rating)"></i>
                                 </div>
                                 <!-- <div  class="rating-count fz12">{{::shop.ratingCount}} Ratings</div> -->
                             </div>
                             <div class="row padding0">
                                 <div class="col padding0">
-                                    <p class="fz12">Delivery: Rs. {{::shop.deliveryCharge}} / {{::shop.deliveryTime}} min</p>
-                                    <p class="fz12">Free Delivery above Rs. {{::shop.minOrder}} </p>
+                                    <p class="fz12">Delivery Time: {{::shop.hd_approx_time}} min (Approx.)</p>
+                                    <p class="fz12">Minimum Order Value: {{::shop.hd_min_val}} </p>
                                 </div>
                             </div>
                         </a>
                     </div>
+
                 </div>
             </div>
         </div>

@@ -1,14 +1,19 @@
-<ion-view title="Adarsh Sweets" hide-back-button="false">
+<ion-view title="Saroj Sweets" hide-back-button="false">
     <ion-content class="main-bg bg-css info">
-        <div class="info-img-wrap">
-            <img src="img/1.png" alt="" class="w100 shop-info-img">
-        </div>
+<!--         <div class="banner-wrapper">
+            <ion-slide-box auto-play="true" does-continue="true" on-slide-changed="slideChanged(index)" style="text-align:center;">
+                <ion-slide  >
+                    <img ng-src="http://foodex.cruxservers.in/uploads/restaurant_slider/{{shop.slider}}" class="img">
+                </ion-slide>
+                
+            </ion-slide-box>
+        </div> -->
         <div class="info-wrap plr15 mb5 mt5">
-            <h3 class="  mb4">Adarsh Sweets <small>(Sweets, Farsan)</small></h3>
-            <p class="fz14   mb4">Chakala, Andheri East</p>
+            <h3 class="  mb4">{{::shop.name}}<small> ({{::shop.restaurant_has_category}})</small></h3>
+            <p class="fz14   mb4">{{::shop.address}}</p>
             <div class="rating row ">
                 <div class="stars">
-                    <i style="width:{{::shop.rating}}%"></i> 
+                    <i ng-style="set_star(shop.avg_rating)"></i> 
                 </div>
                  
             </div>
@@ -19,7 +24,7 @@
                  <i class="icon ion-heart"></i>Famous For:
             </div>
             <div class="col-60">
-                Mootichoor, Khandvi
+                {{::shop.chef_recommendation}}
             </div>
         </div>
         <br>
@@ -28,13 +33,13 @@
             </div>
         <div class="row plr15 mt5">
              <div class="col-40 pl22">
-                 Monday - Sunday 
+                 {{::shop.hd_days || 'Mon - Sun'}}
             </div>
             <div class="col-60">
-                9:00 AM - 11:00 PM
+                {{::shop.hd_start_time}} -  {{::shop.hd_end_time}}
             </div>
         </div>
-        <br>
+  <!--       <br>
            
         <div class="row plr15 mt5">
              <div class="col  ">
@@ -42,37 +47,38 @@
                  
             </div>
             
-        </div>
+        </div> -->
+<!--            
           <br>
-           
         <div class="row plr15 mt5">
              <div class="col  ">
                  <i class="icon ion-ios-location-outline"></i>  504, Chakala, Andheri East, Mumbai.
                  
             </div>
             
-        </div>
-          <br>
+        </div> -->
            
-        <div class="row plr15 mt5">
+          
+    <!--  <br>
+       <div class="row plr15 mt5">
              <div class="col  ">
                  <i class="icon ion-android-call"></i>   7566898987, 7569854855
                  
             </div>
             
-        </div>
+        </div> -->
           <br>
            
         <div class="row plr15 mt5">
              <div class="col  ">
-              NOTE: Minimum order time 45 minutes (will vary according to type of order).
+              NOTE: Minimum order time <span ng-if="shop.hd_approx_time">{{::shop.hd_approx_time}}</span><span ng-if="!shop.hd_approx_time">45</span> minutes (may vary according to type of order).
                  
             </div>
             
         </div>
 <br>
           <div class="banner-wrapper plr15">
-                <a class="button button-full button-balanced foodex-primary w100" href="#/app/shop/2">
+                <a class="button button-full button-balanced foodex-primary w100" ng-href="#/app/shop/{{::shop.id}}">
                     Go to menu
                 </a>
             </div>

@@ -1,142 +1,52 @@
-app.controller('HomeCtrl', ['$scope', '$state', '$timeout', 'Loader', 'LSFactory', '$ionicHistory', '$ionicPopover', function($scope, $state, $timeout, Loader, LSFactory, $ionicHistory, $ionicPopover) {
+app.controller('HomeCtrl', ['$scope', '$state', '$timeout', 'Loader', 'LSFactory', '$ionicHistory', '$ionicPopover', 'APIFactory',
+ function($scope, $state, $timeout, Loader, LSFactory, $ionicHistory, $ionicPopover, APIFactory) {
+    var axis
     $scope.navTitle = LSFactory.get('location');
-    $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
- if(fromState.name == "app.location"){
-    $scope.navTitle = LSFactory.get('location');
+    axis = LSFactory.get('axis') || {lat:'', long:''};
+    $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) { 
+    axis = LSFactory.get('axis') || {lat:'', long:''}; 
+ if(fromState.name == "app.location"){ 
+         $scope.navTitle = LSFactory.get('location'); 
+         var data = {location: $scope.navTitle};
+         $scope.getShops(data);
+ } 
+ if(!$scope.navTitle || $scope.navTitle == "No Data Found" || !axis.lat || !axis.long){
+        Loader.toast('No shops found. Please select another location');
+        $state.go('app.location');
  }
-$ionicHistory.clearCache().then(function(response){
-console.log('cleared history');
-})
-})
+});
+ if(!$scope.navTitle || $scope.navTitle == "No Data Found" || !axis.lat || !axis.long){
+        Loader.toast('No shops found. Please select another location');
+        $state.go('app.location');
+ }
+    //shop API
+    $scope.getShops = function (data) { 
+    Loader.show();
+    APIFactory.getShops(data).then(function (response) {
+    if(!response.data.data.length) {
+         Loader.toast('No shops found. Please select another location');
+         $state.go('app.location');
 
-
+    }
+    console.log(response.data.data);
+    $scope.shops = response.data.data;
+    Loader.hide();
+    $scope.$digest;
+    }, function (error) {
+      console.error(error);
+         Loader.hide();
+         Loader.toast('Oops! something went wrong. Please select another location');
+        $state.go('app.location');
+    
+    })
+    };
+    //get shop listing
+    var data = {location: $scope.navTitle};
+    $scope.getShops(data);
+    //for filters
     $ionicPopover.fromTemplateUrl('templates/popover.html', {
         scope: $scope,
     }).then(function(popover) {
         $scope.popover = popover;
     });
-    $scope.shops = [{
-        id: 1,
-        name: 'Saroj Sweets',
-        image: 'shop2.png',
-        rating: 80,
-        deliveryCharge: 100,
-        deliveryTime: 40,
-        minOrder: 200,
-        ratingCount: 22,
-        items: ['Sweets', 'Farsaan']
-    }, {
-        id: 2,
-        name: 'MM Mithaiwala',
-        image: 'shop3.jpg',
-        rating: 70,
-        deliveryCharge: 50,
-        deliveryTime: 60,
-        minOrder: 200,
-        ratingCount: 22,
-        items: ['Sweets']
-    }, {
-        id: 3,
-        name: 'Suleman',
-        image: 'shop4.jpg',
-        rating: 50,
-        deliveryCharge: 100,
-        deliveryTime: 90,
-        minOrder: 200,
-        ratingCount: 22,
-        items: ['Farsan']
-    }, {
-        id: 4,
-        name: 'Adarsh Sweets',
-        image: 'shop5.jpg',
-        rating: 90,
-        deliveryCharge: 40,
-        deliveryTime: 90,
-        minOrder: 200,
-        ratingCount: 22,
-        items: ['Farsan']
-    }, {
-        id: 5,
-        name: 'Haldiram',
-        image: 'shop2.jpg',
-        rating: 80,
-        deliveryCharge: 60,
-        deliveryTime: 40,
-        minOrder: 200,
-        ratingCount: 22,
-        items: ['Sweets', 'Farsaan']
-    }, {
-        id: 6,
-        name: 'MM Mithaiwala',
-        image: 'shop3.jpg',
-        rating: 70,
-        deliveryCharge: 80,
-        deliveryTime: 60,
-        minOrder: 200,
-        ratingCount: 22,
-        items: ['Sweets']
-    }, {
-        id: 7,
-        name: 'Suleman',
-        image: 'shop4.jpg',
-        rating: 50,
-        deliveryCharge: 50,
-        deliveryTime: 90,
-        minOrder: 200,
-        ratingCount: 22,
-        items: ['Farsan']
-    }, {
-        id: 8,
-        name: 'Adarsh Sweets',
-        image: 'shop5.jpg',
-        rating: 90,
-        deliveryCharge: 100,
-        deliveryTime: 90,
-        minOrder: 200,
-        ratingCount: 22,
-        items: ['Farsan']
-    }, {
-        id: 9,
-        name: 'Haldiram',
-        image: 'shop2.jpg',
-        rating: 80,
-        deliveryCharge: 0,
-        deliveryTime: 40,
-        minOrder: 200,
-        ratingCount: 22,
-        items: ['Sweets', 'Farsaan']
-    }, {
-        id: 10,
-        name: 'MM Mithaiwala',
-        image: 'shop3.jpg',
-        rating: 25,
-        deliveryCharge: 90,
-        deliveryTime: 60,
-        minOrder: 200,
-        ratingCount: 22,
-        items: ['Sweets']
-    }, {
-        id: 11,
-        name: 'Suleman',
-        image: 'shop4.jpg',
-        rating: 68,
-        deliveryCharge: 100,
-        deliveryTime: 90,
-        minOrder: 200,
-        ratingCount: 22,
-        items: ['Farsan']
-    }, {
-        id: 12,
-        name: 'Adarsh Sweets',
-        image: 'shop5.jpg',
-        rating: 54,
-        deliveryCharge: 100,
-        deliveryTime: 90,
-        minOrder: 200,
-        ratingCount: 22,
-        items: ['Farsan']
-    }];
-    if (!LSFactory.get('Shops')) {
-        LSFactory.set('Shops', $scope.shops);
-    }
 }]);

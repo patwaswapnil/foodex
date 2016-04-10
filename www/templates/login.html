@@ -4,7 +4,7 @@
         <ion-header-bar class="bar-balanced foodex-primary">
             <div class="title">Login</div>
             <div class="buttons">
-                <button class="button button-clear capitalize" ng-click="closeLogin()">Close</button>
+                <button class="button button-clear capitalize" ng-click="hide()">Close</button>
             </div>
         </ion-header-bar>
         <ion-content class="main-bg login-bg">
@@ -13,17 +13,19 @@
                     <img ng-src="img/logo-dark.png" alt="">
                 </div>
             </div>
-            <form class="margin30">
+            <form class="margin30" name="userForm" ng-submit="authUser(formUser)">
                 <div class="list">
                     <label class="item item-input item-floating-label">
-                        <span class="input-label ">Email</span>
-                        <input type="email" class="" ng-model="user.username" placeholder="Enter your email">
-                    </label>
+                        <span class="input-label ">Email*</span>
+                        <input type="email" class="" name="email" ng-required="true" ng-model="formUser.email" placeholder="Enter your email">
+                    </label> 
                     <label class="item item-input item-floating-label">
-                        <span class="input-label ">Password</span>
-                        <input type="password" class="" ng-model="user.password" placeholder="Enter your password">
+                        <span class="input-label ">Password*</span>
+                        <input type="password" class="" name="password" ng-required="true" ng-model="formUser.password" placeholder="Enter your password">
                     </label>
-                    <button class="button button-small mt25 button-block button-balanced foodex-primary">
+                    <div class="padding"> 
+        </div> 
+                    <button class="button button-small mt25 button-block button-balanced foodex-primary" ng-disabled="userForm.$invalid" type="submit" >
                         Login
                     </button>
                 </div>
@@ -31,7 +33,7 @@
             <div class="wrapper-login-offer">
                 <div class="row login-pad ">
                     <div class="col">
-                        <a class="  " ng-click="registerOpen()">
+                        <a class="  " ng-click="registerToggle()">
                         Create Account
                     </a>
                     </div>
@@ -44,7 +46,7 @@
             </div>
             <div class="txt-center ">OR</div>
             <div class="list list-inset location-btn-wrap">
-                <button class="button button-small button-full facebook-background button-balanced  facebook-sign-in" ng-click="facebookSignIn()">LOG IN WITH FACEBOOK</button>
+                <button class="button button-small button-full facebook-background button-balanced  facebook-sign-in" ng-click="facebookLogin()">LOG IN WITH FACEBOOK</button>
             </div>
         </ion-content>
     </ion-pane>
@@ -57,37 +59,31 @@
             </div>
         </ion-header-bar>
         <ion-content class="main-bg">
-            <form class="margin30">
+            <form class="margin30" name="registerUser" ng-submit="registerUser(userData)">
                 <div class="list">
                     <label class="item item-input item-floating-label">
-                        <span class="input-label ">First Name</span>
-                        <input type="text" class="" ng-model="user.firstName"  placeholder="Enter your First Name">
+                        <span class="input-label ">Full Name*</span>
+                        <input type="text" name="name" class="" ng-required="true" ng-model="userData.fullname"  placeholder="Enter your Full Name">
                     </label>
                     <label class="item item-input item-floating-label">
-                        <span class="input-label ">Last Name</span>
-                        <input type="text" class="" ng-model="user.lastName" placeholder="Enter your Last Name">
+                        <span class="input-label ">Email*</span>
+                        <input type="email" class="" name="email" ng-required="true" ng-model="userData.email" placeholder="Enter your Email">
                     </label>
                     <label class="item item-input item-floating-label">
-                        <span class="input-label ">Email</span>
-                        <input type="email" class="" ng-model="user.email" placeholder="Enter you Email">
+                        <span class="input-label ">Contact Number*</span>
+                        <input type="text" class="" name="contact" ng-required="true" ng-model="userData.mobile" placeholder="Enter your Contact Number">
                     </label>
                     <label class="item item-input item-floating-label">
-                        <span class="input-label ">Contact Number</span>
-                        <input type="tel" class="" ng-model="user.mobile" placeholder="Enter you Contact Number">
-                    </label>
+                        <span class="input-label ">Password*</span>
+                        <input type="password" class="" name="pass" ng-required="true" ng-model="userData.pass" placeholder="Enter your password">
+                    </label> 
                     <label class="item item-input item-floating-label">
-                        <span class="input-label ">Password</span>
-                        <input type="password" class="" ng-model="user.password" placeholder="Enter you password">
-                    </label>
-                    <label class="item item-input item-floating-label">
-                        <span class="input-label ">Confirm Password</span>
-                        <input type="password" class="" ng-model="user.cnfPassword" placeholder="Enter you password again">
-                    </label>
-   
+                        <span class="input-label ">Confirm Password*</span>
+                        <input type="password" class="" name="cnfpass" ng-required="true" ng-model="userData.pass_confirm" placeholder="Confirm password">
+                    </label> 
+                    <input type="hidden" ng-model="userData.dnd"  value="on" >
                  
- 
- 
-                    <button class="button button-small mt25 button-block button-balanced foodex-primary" type="submit">
+                    <button class="button button-small mt25 button-block button-balanced foodex-primary"  ng-disabled="registerUser.$invalid"  type="submit">
                         Create Account
                     </button>
                 </div>

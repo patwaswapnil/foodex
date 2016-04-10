@@ -1,5 +1,5 @@
 angular.module('foodex.services', [])
-    .service('UserService', function() {
+.service('UserService', function() {
 
         //for the purpose of this example I will store user data on ionic local storage but you should save it on a database
 
@@ -16,11 +16,21 @@ angular.module('foodex.services', [])
             setUser: setUser
         };
     })
-    .factory('Loader', ['$ionicLoading', '$timeout', function($ionicLoading, $timeout) {
+// .factory('oAuth', ['$cordovaOauth', 'LSFactory', function($cordovaOauth, LSFactory) {
+
+//         //for the purpose of this example I will store user data on ionic local storage but you should save it on a database
+
+//         var fbLogin = function(data) {
+//              return $cordovaOauth.facebook("254398101561891", ["email", "public_profile"],  {redirect_uri: "/callback"});
+//         };
+
+       
+//     }])
+.factory('Loader', ['$ionicLoading', '$timeout', '$cordovaToast', function($ionicLoading, $timeout, $cordovaToast) {
 
         var LOADERAPI = {
 
-            showLoading: function(text) {
+            show: function(text) {
                 if(text){
                 $ionicLoading.show({
                     template: text
@@ -30,36 +40,30 @@ angular.module('foodex.services', [])
             }
             },
 
-            hideLoading: function() {
+            hide: function() {
                 $ionicLoading.hide();
             },
 
-            toggleLoadingWithMessage: function(text, timeout) {
+           toggleLoadingWithMessage: function(text, timeout) {
                 var self = this;
-
-                self.showLoading(text);
-
+                self.show(text);
                 $timeout(function() {
-                    self.hideLoading();
+                    self.hide();
                 }, timeout || 3000);
+            },
+
+            toast: function (msg) {   
+                var isAndroid = ionic.Platform.isAndroid();
+                var isIOS = ionic.Platform.isIOS();
+                if (msg && isAndroid && isIOS) {
+                 $cordovaToast.show(msg, 'short', 'center').then(function(success) {});    
+                }
             }
 
         };
         return LOADERAPI;
-    }])
-    .factory('ShopService', ['$ionicLoading', '$timeout', function($ionicLoading, $timeout) {
-
-        var ShopFactory = {
-
-            getItems: function() {
-              var items=  {"results":[{"category":"Kaju Sweets","data":[{"id":1,"name":"KAJU KATLI","price":820,"qty":1,"unit":"KG"},{"id":2,"name":"KESHAR KAJU KATLI","price":960,"qty":1,"unit":"KG"},{"id":3,"name":"KESHAR KAJU WADI","price":940,"qty":1,"unit":"KG"},{"id":4,"name":"ANJEER KAJU KATLI","price":940,"qty":1,"unit":"KG"},{"id":5,"name":"DOUBLE DECKER KAJU KATLI","price":940,"qty":1,"unit":"KG"},{"id":6,"name":"CHOCLATE KAJU KATLI","price":940,"qty":1,"unit":"KG"},{"id":7,"name":"ROSE KAJU KATLI","price":840,"qty":1,"unit":"KG"},{"id":8,"name":"KAJU ROLL","price":940,"qty":1,"unit":"KG"},{"id":9,"name":"KESHAR KAJU ROLL","price":960,"qty":1,"unit":"KG"},{"id":10,"name":"ANJEER KAJU ROLL","price":940,"qty":1,"unit":"KG"},{"id":11,"name":"NEW CHOCLATE ROLL","price":940,"qty":1,"unit":"KG"},{"id":12,"name":"KAJU KAMAL","price":940,"qty":1,"unit":"KG"},{"id":13,"name":"KAJU APPLE","price":940,"qty":1,"unit":"KG"},{"id":14,"name":"KAJU KHARBUJA","price":940,"qty":1,"unit":"KG"},{"id":15,"name":"KAJU TACOS","price":940,"qty":1,"unit":"KG"},{"id":16,"name":"KAJU ANJEER TACOS","price":940,"qty":1,"unit":"KG"},{"id":17,"name":"KAJU DRYFRUIT","price":940,"qty":1,"unit":"KG"},{"id":18,"name":"KAJU MUN MUN ","price":940,"qty":1,"unit":"KG"},{"id":19,"name":"KAJU STRAWBERRY","price":940,"qty":1,"unit":"KG"},{"id":20,"name":"BADAM BAHAR","price":940,"qty":1,"unit":"KG"},{"id":21,"name":"KAJU CASATTA","price":940,"qty":1,"unit":"KG"},{"id":22,"name":"CHOCLATE CASATTA","price":940,"qty":1,"unit":"KG"},{"id":23,"name":"GULKAND WATI","price":940,"qty":1,"unit":"KG"},{"id":24,"name":"JELLY WATI","price":940,"qty":1,"unit":"KG"},{"id":25,"name":"ANARKALI DRYFRUIT","price":940,"qty":1,"unit":"KG"},{"id":26,"name":"NEW ANJEER DRYFRUIT","price":940,"qty":1,"unit":"KG"},{"id":27,"name":"WHITE ALMONDS","price":940,"qty":1,"unit":"KG"},{"id":28,"name":"CHOCLATE ALMONDS","price":960,"qty":1,"unit":"KG"},{"id":29,"name":"KESHAR ALMONDS ","price":960,"qty":1,"unit":"KG"},{"id":30,"name":"STRAWBERRY DELITE","price":940,"qty":1,"unit":"KG"},{"id":31,"name":"PINEAPPLE DELITE","price":940,"qty":1,"unit":"KG"},{"id":32,"name":"MANGO DELITE","price":940,"qty":1,"unit":"KG"},{"id":33,"name":"ROSE DELITE","price":940,"qty":1,"unit":"KG"},{"id":34,"name":"PRUNES DELITE","price":940,"qty":1,"unit":"KG"},{"id":35,"name":"DRYFRUIT DELITE","price":940,"qty":1,"unit":"KG"},{"id":36,"name":"PISTA CRUNCH","price":1020,"qty":1,"unit":"KG"},{"id":37,"name":"MANGO MAST","price":1020,"qty":1,"unit":"KG"},{"id":38,"name":"GULKAND PAN","price":940,"qty":1,"unit":"KG"},{"id":39,"name":"TUKDA JELLY","price":940,"qty":1,"unit":"KG"},{"id":40,"name":"KAJU STRAWBERRY SANDWICH","price":940,"qty":1,"unit":"KG"},{"id":41,"name":"KAJU ORANGE SANDWICH","price":940,"qty":1,"unit":"KG"},{"id":42,"name":"ORANGE MELBA","price":940,"qty":1,"unit":"KG"},{"id":43,"name":"ANJEER PAK ","price":960,"qty":1,"unit":"KG"},{"id":44,"name":"KHAJUR PAK","price":960,"qty":1,"unit":"KG"}]},{"category":"Milk Sweets","data":[{"id":1,"name":"MALAI BARFI","price":580,"qty":1,"unit":"KG"},{"id":2,"name":"MALAI MANGO BARFI","price":580,"qty":1,"unit":"KG"},{"id":3,"name":"MALAI CHOCLATE BARFI","price":580,"qty":1,"unit":"KG"},{"id":4,"name":"DOUBLE DECKER BARFI","price":580,"qty":1,"unit":"KG"},{"id":5,"name":"ANJEER BARFI","price":580,"qty":1,"unit":"KG"},{"id":6,"name":"KALAKAND BARFI","price":580,"qty":1,"unit":"KG"},{"id":7,"name":"PINEAPPLE BARFI","price":580,"qty":1,"unit":"KG"},{"id":8,"name":"ROSE BARFI","price":580,"qty":1,"unit":"KG"},{"id":9,"name":"SHEV BARFI","price":560,"qty":1,"unit":"KG"},{"id":10,"name":"CHOCLATE BARFI","price":580,"qty":1,"unit":"KG"},{"id":11,"name":"STRAWBERRY BARFI","price":580,"qty":1,"unit":"KG"},{"id":12,"name":"MAWA BARFI ","price":580,"qty":1,"unit":"KG"},{"id":13,"name":"MILK FOOD","price":580,"qty":1,"unit":"KG"},{"id":14,"name":"MILK SLICE","price":580,"qty":1,"unit":"KG"},{"id":15,"name":"NEW MILK FOOD ","price":580,"qty":1,"unit":"KG"},{"id":16,"name":"MANGO CREAM","price":580,"qty":1,"unit":"KG"},{"id":17,"name":"MANGO STRAWBERRY","price":580,"qty":1,"unit":"KG"},{"id":18,"name":"MALAI KESHAR ROLL ","price":580,"qty":1,"unit":"KG"},{"id":19,"name":"MALAI CHOCLATE ROLL","price":580,"qty":1,"unit":"KG"},{"id":20,"name":"CHOCO DELITE","price":580,"qty":1,"unit":"KG"},{"id":21,"name":"MALAI TOTA","price":600,"qty":1,"unit":"KG"}]},{"category":"Peda","data":[{"id":1,"name":"KESHAR KAJU PEDHA ","price":"940","qty":1,"unit":"KG"},{"id":2,"name":"KESHAR MALAI PEDHA ","price":"600","qty":1,"unit":"KG"},{"id":3,"name":"KESHAR GULKAND PEDHA","price":"600","qty":1,"unit":"KG"},{"id":4,"name":"KESHAR MALAI DISH PEDHA","price":"580","qty":1,"unit":"KG"},{"id":5,"name":"ANJEER PEDHA","price":"580","qty":1,"unit":"KG"},{"id":6,"name":"SAFED PEDHA ","price":"560","qty":1,"unit":"KG"},{"id":7,"name":"SAFED GULKAND PEDHA","price":"580","qty":1,"unit":"KG"},{"id":8,"name":"MATHURA PEDHA ","price":"540","qty":1,"unit":"KG"},{"id":9,"name":"SMALL PEDHA","price":"520","qty":1,"unit":"KG"}]},{"category":"Ladoos","data":[{"id":1,"name":"GHEE BOONDI LADOO","price":"540","qty":1,"unit":"KG"},{"id":2,"name":"BESAN LADOO ","price":"540","qty":1,"unit":"KG"},{"id":3,"name":"MOONG LADOO","price":"520","qty":1,"unit":"KG"},{"id":4,"name":"WHEAT LADOO","price":"500","qty":1,"unit":"KG"},{"id":5,"name":"METHI LADOO","price":"540","qty":1,"unit":"KG"},{"id":6,"name":"DINK LADOO","price":"540","qty":1,"unit":"KG"},{"id":7,"name":"TEEL LADOO","price":"","qty":1,"unit":"KG"},{"id":8,"name":"RAJGIRA LADOO  (PER PKT )","price":"30","qty":1,"unit":"PKT"},{"id":9,"name":"KURMURA LADOO (PER PKT)","price":"30","qty":1,"unit":"PKT"},{"id":10,"name":"SHENGDANA LADOO (PER PKT )","price":"60","qty":1,"unit":"PKT"},{"id":11,"name":"ALEEV LADOO  (SEASONAL)","price":"800","qty":1,"unit":"KG"},{"id":null,"name":"NEW BESAN LADOO ","price":"520","qty":1,"unit":"KG"},{"id":12,"name":"DRY FRUIT LADOO","price":"920","qty":1,"unit":"KG"}]},{"category":"Halwa","data":[{"id":1,"name":"KAJU HALWA ","price":"560","qty":1,"unit":"KG"},{"id":2,"name":"BADAM HALWA","price":"560","qty":1,"unit":"KG"},{"id":3,"name":"ANJEER HALWA","price":"560","qty":1,"unit":"KG"},{"id":4,"name":"STRAWBERRY HALWA","price":"560","qty":1,"unit":"KG"},{"id":5,"name":"PINEAPPLE MAHIM HALWA ","price":"600","qty":1,"unit":"KG"},{"id":6,"name":"MAHIM HALWA","price":"520","qty":1,"unit":"KG"},{"id":7,"name":"KESHAR MAHIM HALWA ","price":"640","qty":1,"unit":"KG"},{"id":8,"name":"SAFED MAHIM HALWA ","price":"620","qty":1,"unit":"KG"},{"id":10,"name":"GAJAR HALWA  (SEASONAL)","price":"900","qty":1,"unit":"KG"}]},{"category":"Besan and Maida Sweets","data":[{"id":1,"name":"GHEE MAISURPAK ","price":"540","qty":1,"unit":"KG"},{"id":2,"name":"SP. SOHANPAPDI","price":"540","qty":1,"unit":"KG"},{"id":3,"name":"SP.GHEE MOHANTAL","price":"540","qty":1,"unit":"KG"},{"id":4,"name":"SP.GHEE BALUSHAHI","price":"540","qty":1,"unit":"KG"},{"id":5,"name":"SP.GHEE JELEBI","price":"340","qty":1,"unit":"KG"},{"id":6,"name":"SP.GHEE GAGAN GATHIA","price":"60","qty":1,"unit":"KG"},{"id":7,"name":"PURAN POLI ( PER PKT )","price":"60","qty":1,"unit":"KG"},{"id":8,"name":"TEL POLI (PER PKT )","price":"27","qty":1,"unit":"KG"},{"id":9,"name":"GUL POLI  (SEASONAL)","price":"","qty":1,"unit":"KG"},{"id":10,"name":"NARALI PAK  (SEASONAL)","price":"400","qty":1,"unit":"KG"}]},{"category":"Mix Mithai","data":[{"id":1,"name":"KAJU MIX MITHAI","price":"960","qty":1,"unit":"KG"},{"id":2,"name":"SP.MIX MITHAI ","price":"580","qty":1,"unit":"KG"}]},{"category":"Modak","data":[{"id":1,"name":"KAJU MODAK","price":"840","qty":1,"unit":"KG"},{"id":2,"name":"KESHAR MALAI MODAK ","price":"620","qty":1,"unit":"KG"},{"id":3,"name":"ANJEER MODAK","price":"600","qty":1,"unit":"KG"},{"id":4,"name":"MAWA MODAK","price":"540","qty":1,"unit":"KG"},{"id":6,"name":"DRYFRUIT MODAK","price":"940","qty":1,"unit":"KG"},{"id":5,"name":"UKADI MODAK (PRE PIC)","price":"27","qty":1,"unit":"KG"}]},{"category":"Bengali Methai","data":[{"id":1,"name":"MALAI SANDWICH","price":"25","qty":1,"unit":"Piece"},{"id":2,"name":"CREAM SANDWICH","price":"25","qty":1,"unit":"Piece"},{"id":3,"name":"KESHAR BADAM SANDWICH","price":"25","qty":1,"unit":"Piece"},{"id":4,"name":"PINEAPPLE SANDWICH","price":"25","qty":1,"unit":"Piece"},{"id":5,"name":"SRAWBERRY SANDWICH","price":"25","qty":1,"unit":"Piece"},{"id":6,"name":"MANGO SHANDWICH","price":"25","qty":1,"unit":"Piece"},{"id":7,"name":"CREAM CHAMCHAM","price":"25","qty":1,"unit":"Piece"},{"id":8,"name":"CREAM RAS KADAM","price":"25","qty":1,"unit":"Piece"},{"id":9,"name":"ANARKALI","price":"25","qty":1,"unit":"Piece"},{"id":10,"name":"BADAM BHOG ","price":"25","qty":1,"unit":"Piece"},{"id":11,"name":"RAJ BHOG","price":"25","qty":1,"unit":"Piece"},{"id":12,"name":"RASGULLA","price":"20","qty":1,"unit":"Piece"},{"id":13,"name":"KALA JAMUN","price":"24","qty":1,"unit":"Piece"},{"id":14,"name":"GULAB JAMUN","price":"22","qty":1,"unit":"Piece"},{"id":15,"name":"RAS MALAI","price":"50","qty":1,"unit":"Piece"}]},{"category":"Milk Declicacies","data":[{"id":1,"name":"RABDI","price":"50","qty":1,"unit":"Cup"},{"id":2,"name":"CHOCLATE RABDI","price":"55","qty":1,"unit":"Cup"},{"id":3,"name":"MANGO RABDI","price":"55","qty":1,"unit":"Cup"},{"id":4,"name":"STRAWBERRY RABDI","price":"55","qty":1,"unit":"Cup"},{"id":5,"name":"FIRNI","price":"50","qty":1,"unit":"Cup"},{"id":6,"name":"CHOCLATE FIRNI","price":"55","qty":1,"unit":"Cup"},{"id":7,"name":"MANGO FIRNI","price":"55","qty":1,"unit":"Cup"},{"id":8,"name":"STRAWBERRY FIRNI","price":"55","qty":1,"unit":"Cup"}]},{"category":"Varity of Shrikhand","data":[{"id":2,"name":"ELAICHI SHRIKHAND","price":"300","qty":1,"unit":"KG"},{"id":3,"name":"KESHAR JAIPHAL SHRIKHAND","price":"320","qty":1,"unit":"KG"},{"id":4,"name":"KESHAR SHRIKHAND","price":"340","qty":1,"unit":"KG"},{"id":5,"name":"STARWBERRY SHRIKHAND","price":"340","qty":1,"unit":"KG"},{"id":6,"name":"AMRAKHAND","price":"340","qty":1,"unit":"KG"},{"id":7,"name":"BASUNDI","price":"380","qty":1,"unit":"KG"},{"id":8,"name":"KHARVAS","price":"380","qty":1,"unit":"KG"},{"id":9,"name":"KESHARI KHARVAS","price":"400","qty":1,"unit":"KG"}]},{"category":"Snex","data":[{"id":1,"name":"SAMOSA","price":"280","qty":1,"unit":"Dozon"},{"id":2,"name":"KOTHIMBIR WADI","price":"280","qty":1,"unit":"Dozon"},{"id":3,"name":"ALU WADI","price":"280","qty":1,"unit":"Dozon"},{"id":4,"name":"BATATA BHAJI","price":"260","qty":1,"unit":"Dozon"},{"id":5,"name":"KANDA BHAJI","price":"260","qty":1,"unit":"Dozon"},{"id":6,"name":"MOONG BHAJI","price":"260","qty":1,"unit":"Dozon"}]},{"category":"Namkeen","data":[{"id":1,"name":"BAKARWADI","price":"70","qty":1,"unit":"Packet"},{"id":2,"name":"MINI BAKARWADI","price":"70","qty":1,"unit":"Packet"},{"id":3,"name":"KACHORI","price":"70","qty":1,"unit":"Packet"},{"id":4,"name":"KHRI PURI","price":"70","qty":1,"unit":"Packet"},{"id":5,"name":"KHARI BOONDI","price":"70","qty":1,"unit":"Packet"},{"id":6,"name":"KHARI SHANKARPALI","price":"70","qty":1,"unit":"Packet"},{"id":7,"name":"MOONG SAMOSA","price":"70","qty":1,"unit":"Packet"},{"id":8,"name":"BHAVNAGARI","price":"70","qty":1,"unit":"Packet"},{"id":9,"name":"GATHIA","price":"70","qty":1,"unit":"Packet"},{"id":10,"name":"MASALA PAPDI","price":"70","qty":1,"unit":"Packet"},{"id":11,"name":"GATHI FARSAN","price":"70","qty":1,"unit":"Packet"},{"id":12,"name":"MANGOLORI FARSAN","price":"70","qty":1,"unit":"Packet"},{"id":13,"name":"MIX FARASN","price":"70","qty":1,"unit":"Packet"},{"id":14,"name":"LASUN FARSAN","price":"70","qty":1,"unit":"Packet"},{"id":15,"name":"SPL. FARSAN","price":"70","qty":1,"unit":"Packet"},{"id":16,"name":"FARALI CHIWDA (BATATA)","price":"110","qty":1,"unit":"Packet"},{"id":17,"name":"KACCHA CHIWDA ","price":"70","qty":1,"unit":"Packet"},{"id":18,"name":"MAHALAXMI CHIWDA","price":"70","qty":1,"unit":"Packet"},{"id":19,"name":"MAKAI CHIWDA","price":"70","qty":1,"unit":"Packet"},{"id":20,"name":"BATATA SALLI CHIWDA ","price":"80","qty":1,"unit":"Packet"},{"id":21,"name":"MASALA SALLI CHIWDA","price":"85","qty":1,"unit":"Packet"},{"id":22,"name":"BATATA SALII","price":"105","qty":1,"unit":"Packet"},{"id":23,"name":"MASALA BATATA SALLI","price":"110","qty":1,"unit":"Packet"},{"id":24,"name":"DIET CHIWDA","price":"75","qty":1,"unit":"Packet"},{"id":25,"name":"ZERO SHEV","price":"70","qty":1,"unit":"Packet"},{"id":26,"name":"THIKHAT SHEV","price":"70","qty":1,"unit":"Packet"},{"id":27,"name":"PALAK SHEV","price":"70","qty":1,"unit":"Packet"},{"id":28,"name":"LASUN SHEV","price":"70","qty":1,"unit":"Packet"},{"id":29,"name":"LAVANG SHEV","price":"70","qty":1,"unit":"Packet"},{"id":30,"name":"BHEL SHEV","price":"70","qty":1,"unit":"Packet"},{"id":31,"name":"UJJAIN SHEV","price":"70","qty":1,"unit":"Packet"},{"id":32,"name":"RATLAMI SHEV","price":"70","qty":1,"unit":"Packet"},{"id":33,"name":"PIWLI THIKHAT SHEV","price":"70","qty":1,"unit":"Packet"},{"id":34,"name":"THIKHAT  ZERO SHEV","price":"70","qty":1,"unit":"Packet"},{"id":35,"name":"THIKHAT JAD SHEV","price":"70","qty":1,"unit":"Packet"},{"id":36,"name":"BHEL","price":"70","qty":1,"unit":"Packet"},{"id":37,"name":"NAVRATAN MIX","price":"80","qty":1,"unit":"Packet"},{"id":38,"name":"KHATTA MITHA MIX","price":"80","qty":1,"unit":"Packet"},{"id":39,"name":"MASALA GROUNDNUT ","price":"28","qty":1,"unit":"Packet"},{"id":40,"name":"CHANA DAL","price":"28","qty":1,"unit":"Packet"},{"id":41,"name":"MOONG DAL","price":"28","qty":1,"unit":"Packet"},{"id":42,"name":"BADAM LACCHA","price":"80","qty":1,"unit":"Packet"},{"id":43,"name":"KELA WAFER","price":"100","qty":1,"unit":"Packet"},{"id":44,"name":"CHEESE KELA WAFER","price":"90","qty":1,"unit":"Packet"},{"id":45,"name":"MASALA KELA WAFER","price":"80","qty":1,"unit":"Packet"},{"id":46,"name":"MIRI KELA WAFER","price":"80","qty":1,"unit":"Packet"},{"id":47,"name":"TOMATO KELA WAFER","price":"80","qty":1,"unit":"Packet"},{"id":48,"name":"KARELA WAFER","price":"100","qty":1,"unit":"Packet"},{"id":49,"name":"BATATA WAFER 100GRM","price":"42","qty":1,"unit":"Packet"},{"id":50,"name":"BATATA WAFER 500GRM","price":"210","qty":1,"unit":"Packet"},{"id":51,"name":"TOMATO BATATA WAFER","price":"45","qty":1,"unit":"Packet"},{"id":52,"name":"HOT 'N' SPICY WAFER","price":"45","qty":1,"unit":"Packet"},{"id":53,"name":"PUNJABI CHOLE BITE","price":"45","qty":1,"unit":"Packet"},{"id":54,"name":"MASTI BHEL","price":"70","qty":1,"unit":"Packet"},{"id":55,"name":"NACHANI CHIPS","price":"56","qty":1,"unit":"Packet"},{"id":56,"name":"BHAJANI CHAKLI","price":"84","qty":1,"unit":"Packet"},{"id":57,"name":"BUTTER CHAKLI","price":"45","qty":1,"unit":"Packet"},{"id":58,"name":"MURKU CHAKLI","price":"70","qty":1,"unit":"Packet"},{"id":59,"name":"SOYA CHAKLI","price":"70","qty":1,"unit":"Packet"},{"id":60,"name":"SHEZWAN CHAKLI","price":"70","qty":1,"unit":"Packet"},{"id":61,"name":"NACHANI CHAKLI","price":"70","qty":1,"unit":"Packet"},{"id":62,"name":"TOMATO CHAKLI","price":"70","qty":1,"unit":"Packet"},{"id":63,"name":"NADIYADI BHUSA","price":"70","qty":1,"unit":"Packet"},{"id":64,"name":"CHOCO VINILLA ","price":"100","qty":1,"unit":"Packet"},{"id":65,"name":"SABUDANA PURI","price":"70","qty":1,"unit":"Packet"},{"id":66,"name":"SABUDANA GATHI","price":"70","qty":1,"unit":"Packet"},{"id":67,"name":"METHI PURI","price":"64","qty":1,"unit":"Packet"},{"id":68,"name":"SHANDWICH SHANKARPALI","price":"64","qty":1,"unit":"Packet"},{"id":69,"name":"GOD SHANKARPALI","price":"70","qty":1,"unit":"Packet"},{"id":70,"name":"KADBOLI  (ONLY IN DIWALI)","price":"","qty":1,"unit":"Packet"},{"id":71,"name":"ANARSE  (SEASONAL)","price":"110","qty":1,"unit":"Packet"},{"id":72,"name":"APPAM ","price":"45","qty":1,"unit":"Packet"},{"id":73,"name":"OLI KARANJI","price":"130","qty":1,"unit":"Packet"},{"id":74,"name":"DRY KARANJI","price":"100","qty":1,"unit":"Packet"},{"id":75,"name":"KHAKRA","price":"65","qty":1,"unit":"Packet"},{"id":75,"name":"KHAJUR WADI","price":"70","qty":1,"unit":"Packet"},{"id":76,"name":"TEEL WADI","price":"35","qty":1,"unit":"Packet"},{"id":77,"name":"NARIAL WADI","price":"35","qty":1,"unit":"Packet"},{"id":78,"name":"BATATA WADI","price":"35","qty":1,"unit":"Packet"},{"id":79,"name":"GUL PAPDI","price":"35","qty":1,"unit":"Packet"},{"id":80,"name":"ALEPAK","price":"35","qty":1,"unit":"Packet"},{"id":81,"name":"RAJGIRA ROLL","price":"30","qty":1,"unit":"Packet"},{"id":82,"name":"CHIKY","price":"30","qty":1,"unit":"Packet"},{"id":83,"name":"KAIRI PAHNE  (SEASONAL)","price":"25","qty":1,"unit":"Packet"},{"id":84,"name":"SOLKADHI","price":"25","qty":1,"unit":"Packet"},{"id":85,"name":"LASUN CHATNI","price":"50","qty":1,"unit":"Packet"},{"id":86,"name":"KESHAR 1GRM","price":"325","qty":1,"unit":"Packet"},{"id":87,"name":"TAK MASALA ","price":"30","qty":1,"unit":"Packet"}]}]}
-            return items ;
-            } 
-
-        };
-        return ShopFactory;
-    }])
-    .factory('LSFactory', [function() {
+}])
+.factory('LSFactory', [function() {
 
         var LSAPI = {
 
@@ -89,4 +93,34 @@ angular.module('foodex.services', [])
 
         return LSAPI;
 
-    }])
+    }]) 
+.factory('APIFactory', ['$http', '$httpParamSerializer', function ($http, $httpParamSerializer) {
+    var api = {
+        getShops : function (data) {
+            return $http.get(domain+'app/shops?search_rest='+data.location, {cache:false});
+        }, 
+        getShopDetail : function (shopId, axis) {
+            return $http.get(domain+'app/shop/'+shopId+'?lat='+axis.lat+'&long='+axis.long);
+        }, 
+        authUser : function (data) {
+            var req = {method: 'POST', url: domain+'login', headers: {'Content-Type': 'application/x-www-form-urlencoded'}, data: $httpParamSerializer(data)};
+            return $http(req);
+        }, 
+        registerUser : function (data) {
+            var req = {method: 'POST', url: domain+'register', headers: {'Content-Type': 'application/x-www-form-urlencoded'}, data: $httpParamSerializer(data)};
+            return $http(req);
+        }, 
+        resetPwd : function (data) {
+            var req = {method: 'POST', url: domain+'forgetpassword', headers: {'Content-Type': 'application/x-www-form-urlencoded'}, data: $httpParamSerializer(data)};
+            return $http(req);
+        },
+        searchLocation: function (location) {
+            return $http.get(domain+'search_restaurant?location='+location);
+        },
+        placeOrder: function (data) { 
+            return $http.post(domain+'app/place-order', data);
+            
+        }
+    };
+    return api;
+}])

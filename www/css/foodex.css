@@ -1,5 +1,6 @@
 /* Empty. Add your own CSS if you like */
-
+.ion-datetime-picker .calendar{text-align:center;font-size:12px}.ion-datetime-picker .calendar .col{padding:0}.ion-datetime-picker .calendar .day,.ion-datetime-picker .calendar .weekday{padding:5px}.ion-datetime-picker .calendar .day:hover,.ion-datetime-picker .calendar .day.activated,.ion-datetime-picker .calendar .day.today:hover,.ion-datetime-picker .calendar .day.today.activated{background-color:#bdf;color:black;cursor:pointer}.ion-datetime-picker .calendar .day.today{background-color:#e4e4e4}.ion-datetime-picker .calendar .day.selected,.ion-datetime-picker .calendar .day.selected:hover,.ion-datetime-picker .calendar .day.selected.activated{background-color:#387ef5;color:white}.ion-datetime-picker .calendar .weekday{font-weight:bold}.ion-datetime-picker .month-year{padding:0;text-align:center}.ion-datetime-picker .month-year select{width:100%}.ion-datetime-picker .month-year .button{padding:0;width:100%;height:25px;min-width:0;min-height:0}.ion-datetime-picker .month-year .item-input{height:25px;padding:0;margin:0}.ion-datetime-picker .month-year .item-input.item-select:after{right:5px}.ion-datetime-picker .month-year .item-input input,.ion-datetime-picker .month-year .item-input select{font-size:12px;width:100%;height:100%;max-width:none;line-height:20px}.ion-datetime-picker .month-year .item-input select{left:0;padding:0 15px 0 1px;direction:ltr}.ion-datetime-picker .month-year .item-input input{text-align:center;padding:0 5px}.ion-datetime-picker .month-year .item-input input.ng-invalid{background-color:#ffe4ea}.ion-datetime-picker .month-year .item-input input::-webkit-outer-spin-button,.ion-datetime-picker .month-year .item-input input::-webkit-inner-spin-button{display:none}.ion-datetime-picker .time-buttons .col{padding:0}.ion-datetime-picker .time-buttons .button{padding:0;width:100%;height:36px;min-width:0;min-height:0}.ion-datetime-picker .time-buttons .button:before{line-height:35px}.ion-datetime-picker .time-buttons:first-child{padding-top:0}.ion-datetime-picker .time-buttons:last-child{padding-bottom:0}.ion-datetime-picker .time .col{padding:0}.ion-datetime-picker .time .colon{color:#999;font-size:16px;padding:0;text-align:center;line-height:32px}.ion-datetime-picker .time .item-input{height:35px;padding:0;margin:0}.ion-datetime-picker .time .item-input input{font-size:16px;width:100%;height:100%;max-width:none;text-align:center;padding:0 5px}.ion-datetime-picker .time .item-input input.ng-invalid{background-color:#ffe4ea}.ion-datetime-picker .time .item-input input::-webkit-outer-spin-button,.ion-datetime-picker .time .item-input input::-webkit-inner-spin-button{display:none}
+/* Date time css */
 .ion-autocomplete-container {
     position: fixed;
     top: 0;
@@ -54,7 +55,7 @@ input.ion-autocomplete[readonly] {
 }
 
 .wrapper-logo {
-    margin-top: 40%;
+    margin-top: 10vh;
     margin-bottom: 5%;
     text-align: center;
 }
@@ -293,8 +294,8 @@ a.item.item-thumbnail-left.shop-listing {
 .cart-btn {
     padding: 1px 1px 2px 1px;
     margin: 0px 10px 0px 10px;
-    height: 28px;
-    width: 28px;
+    height: 32px;
+    width: 32px;
     min-height: auto;
     color: #06A07D;
     line-height: 0;
@@ -338,6 +339,15 @@ a.item.item-thumbnail-left.shop-listing {
 
 .fz12 {
     font-size: 12px !important;
+}
+.fz18 {
+    font-size: 18px !important;
+}
+.fz16 {
+    font-size: 16px !important;
+}
+.fz20 {
+    font-size: 20px !important;
 }
 
 .item-thumbnail-left,
@@ -426,9 +436,12 @@ a.item.item-thumbnail-left.shop-listing {
 .mt10 {
     margin-top: 10px !important;
 }
+.mt15 {
+    margin-top: 15px !important;
+}
 
 .cart-page .button-small:before {
-    font-size: 11px !important;
+    font-size: 16px !important;
     line-height: 19px !important;
     margin-top: 0px !important;
 }
@@ -458,20 +471,12 @@ a.item.item-thumbnail-left.shop-listing {
 .radio-content .item-content {
     white-space: normal !important;
 }
-
-.item-radio input:checked + .radio-content .item-content {
-    background: #06A07D;
-        color: #fff;
-    font-weight: bold;
-}
+ 
 
 .label .item-radio {
     border-bottom: 1px solid #D6D1D1 !important;
 }
-
-.radio-content .radio-icon {
-    color: #fff;
-}
+ 
 
 .w100 {
     width: 100%;
@@ -594,16 +599,8 @@ a.item.item-thumbnail-left.shop-listing {
     padding-bottom: 7px;
 }
 .listing-cat-filter{
-        margin-bottom: 11px !important;
-    padding: 5px 5px !important;
-    background-color: #06A07D;
-    color: #fff;
-    height: 45px;
-    border: none;
-    border-radius: 2px;
-    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12); 
-    margin-top: 7px;
-        text-transform: uppercase;
+  height: 45px;
+      margin-top: 12px;
 }
 .shop-detail .shop-icon-wrap > img:first-child {
     border-radius: 0px !important;
@@ -617,7 +614,9 @@ a.item.item-thumbnail-left.shop-listing {
     border: 1px solid #ddd;
     box-shadow: none;
 }
-
+.pull-right{
+    float: right;
+}
 .pt22 {
     padding-top: 22px !important;
 }
@@ -744,4 +743,41 @@ a.item.item-thumbnail-left.shop-listing {
 }
 .display-none{
     display: none !important;
+}
+h1.title-footer {
+    text-align: center;
+    font-size: 18px;
+    color: #fff; 
+    padding: 7px 0px;
+}
+a.deco-none{
+    text-decoration: none !important;
+}
+.border-right{
+        border-right: 1px solid #EEE;
+}
+.cat-dll{ 
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background: url('../img/ddl-arrow.png') no-repeat;
+    background-repeat: no-repeat; 
+    background-position: 99% 6px;
+    background-size: 35px;
+    background-color: white;
+}
+.or-option{
+        font-weight: bold;
+    margin-top: 8px;
+}
+.mr6{
+    margin-right: 6px !important;
+}
+.box-shadow-none{
+    box-shadow: none;
+}
+.ml22 {
+    margin-top: 14px;
+}
+.error{
+    border-color: red;
 }

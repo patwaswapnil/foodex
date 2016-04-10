@@ -22,11 +22,11 @@
   <ion-side-menu side="left">
 <ion-header-bar class="expanded bar bar-header disable-user-behavior bg-css"  style="background-image: url('img/side-menu-bg.jpg');"> 
 
-            <div   class="avatar motion spin fade"  style="background-color:#eee; background-image:url({{user.picture}}); background-size:cover" ng-if="user.picture"></div>
-            <div   class="avatar motion spin fade" style="background-color:#eee; background-image:url('img/icon.png'); background-size:cover" ng-if="!user.picture"></div>
+            <!-- <div   class="avatar motion spin fade"  style="background-color:#eee; background-image:url({{user.picture}}); background-size:cover" ng-if="user.profile_pic"></div>
+ -->            <div   class="avatar" style="background-color:#eee; background-image:url('img/icon.png'); background-size:cover"></div>
             
             <div class="menu-bottom">
-               Hi, {{user.name || 'Guest'}}
+               Hi, <span ng-if="isLoggedIn">{{appUser.name | capitalize}}</span> <span ng-if="!isLoggedIn">Guest</span>
             </div>
         </ion-header-bar>
 
@@ -44,25 +44,19 @@
        
           Orders
         </ion-item>
-        </a>
-      <!--   <a ui-sref="app.home" class="no-blue">
-       <ion-item class="menu-item"  menu-close  >
-       
-          Home
-        </ion-item>
-        </a> -->
+        </a> 
         <a href='' class="no-blue">
        <ion-item class="menu-item"  menu-close  >
        
           Offers
         </ion-item>
         </a>
-    <a href='' ng-click="login()" class="no-blue" ng-if="!user.name">
+    <a ng-if="!isLoggedIn" ng-click="loginFromMenu()" class="no-blue">
         <ion-item class="menu-item"  menu-close>
           Login
         </ion-item>
         </a>
-    <a href='' ng-click="showLogOutMenu()" class="no-blue" ng-if="user.name">
+    <a ng-if="isLoggedIn" ng-click="showLogOutMenu()" class="no-blue">
 
         <ion-item class="menu-item"  menu-close >
           Logout

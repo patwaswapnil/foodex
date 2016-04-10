@@ -1,75 +1,60 @@
- 
 <ion-view title="{{::shop.name}}" hide-back-button="false">
-    <ion-content class="main-bg bg-css shop-detail" ng-class="cartCount > 0 ? 'has-footer' : ''">
-        <div class="listing-wrap">
-            <div class="list mb0">
-                <div>
-                    <span class="item item-thumbnail-left shop-detail shop-icon-wrap pt22">
-                      <img ng-src="img/shop/{{::shop.image}}"> 
-                        <h2 class="">{{::shop.name}} </h2> 
-                        <p class="fz12"> <span ng-repeat="item in shop.items">{{::item}} &nbsp;</span> </p>
-                    <div class="rating row ">
-                        <div class="stars">
-                            <i style="width:{{::shop.rating}}%"></i>
-                        </div>
-                        <!-- <div  class="rating-count fz12">{{::shop.ratingCount}} Ratings</div> -->
-                    </div>
-                    <div class="row padding0">
-                        <div class="col padding0">
-                            <p class="fz12">Delivery: Rs. {{::shop.deliveryCharge}} / {{::shop.deliveryTime}} min</p>
-                            <p class="fz12">Free Delivery above Rs. {{::shop.minOrder}} </p>
-                        </div>
-                    </div>
-                    </span>
-                </div>
+   <ion-content class="main-bg bg-css shop-detail" ng-class="cartCount > 0 ? 'has-footer' : ''">
+      <div class="listing-wrap">
+         <div class="list mb0">
+            <div>
+               <span class="item item-thumbnail-left shop-detail shop-icon-wrap pt22">
+                  <img ng-src="{{::imgPath}}/restaurant_logo/{{::shop.logo}}"> 
+                  <h2 class="fz18">{{::shop.name}} </h2>
+                  <p class="fz16"> <span>{{::shop.restaurant_has_category}} &nbsp;</span> </p>
+                  <div class="rating row ">
+                     <div class="stars">
+                        <i ng-style="set_star(shop.avg_rating)"></i>
+                     </div>
+                     <!-- <div  class="rating-count fz16">{{::shop.ratingCount}} Ratings</div> -->
+                  </div>
+                  <div class="row padding0">
+                     <div class="col padding0">
+                        <p class="fz16">Delivery: Rs. {{::shop.hd_delivery_charge}} / {{::shop.hd_approx_time}} min</p>
+                        <p class="fz16">Minimum Order Value: {{::shop.hd_min_val}} <a class="pull-right" href="#/app/shop-info/{{::shop.id}}">More Info</a></p>
+                     </div>
+                  </div>
+               </span>
             </div>
-        <div class="banner-wrapper plr15">
-                <a class="button button-full button-balanced foodex-primary w100" href="#/app/shop-info/2">
-                    More Info
-                </a>
-            </div>  
-
-
-            <div class="list">
-                    <div class="banner-wrapper plr15">
- <select name="" id="" class="w100 listing-cat-filter" ng-model="selectedCat"   >
- 
-    <option ng-value="value.category" ng-repeat="(key, value) in shopList.results">{{value.category}}</option>
- 
-</select>
-</div>
-<span  >
-    <span  ng-if="listing.category === selectedCat "  ng-repeat="listing in shopList.results"><span  >
-              
-                <span class="item   shop-detail shop-icon-wrap  flex-container item-border" ng-repeat="item in listing.data">
-                      <div class="row">
-                         <div class="col-80 flex-item">
-                        <h2> {{::item.name | capitalize:true}} </h2> 
-                        <p class="fz12"> Rs. {{::item.price}}/{{::item.unit}}</p>
-                     
+         </div>
+         <div class="list">
+            <div class="banner-wrapper plr15">
+               <select class="w100 sw listing-cat-filter fz20 cat-dll" ng-model="selectedCat" ng-options="item.id as item.name for item in menu.parent">
+               </select>
+            </div>
+            <span ng-if="listing.id == selectedCat" ng-repeat="listing in menu.parent">
+               <span class="item   shop-detail shop-icon-wrap  flex-container item-border" ng-repeat="item in listing.child">
+                  <div class="row">
+                     <div class="col-80 flex-item">
+                        <h2> {{::item.name | capitalize:true}} </h2>
+                        <p class="fz16"> Rs. {{::item.cost}}/{{::item.unit_type}}</p>
                         <div class=" padding0">
-                            <div class="col qty-warp">
-                                <p class="fz12">Qty:<span counter value="item.qty" min="1" max="100" step="1" class="ml5" ></span>
-                </p>
-            </div>
-        </div>
-        </div>
-        <div class="col padding0 flex-item txt-center">
-            <button class="button  button-small  button-balanced foodex-primary add-to-cart" ng-click="addToCart(item, shop)">Add </button>
-        </div>
-        </div>
-        </span>
-        </span></span>
-   
-</span>
-</div>
- 
-        </div>
-        </div>
-    </ion-content>
-        <ion-footer-bar align-title="center" ng-if="cartCount > 0"  class="bar-balanced foodex-primary" >
-        <a  ui-sref="app.cart"> <button class="button button-icon button-clear ion-android-cart">
-             <span class="badge custom-badge" >{{cartCount}}</span>
-                 </button><h1 class="title">Proceed to Cart</h1></a>
-    </ion-footer-bar>
+                           <div class="col qty-warp">
+                              <p class="fz16">Qty:<span counter value="item.status" ng-click="getTotalQty(item)"  min="1" max="100" step="1" class="ml5" ></span><span ng-show="item.totalQty && item.status != 1">= {{item.totalQty}}</span>
+                              </p>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="col padding0 flex-item txt-center">
+                        <button class="button  button-small  button-balanced foodex-primary add-to-cart" ng-click="addToCart(item, shop, $index)">Add </button>
+                     </div>
+                  </div>
+               </span>
+            </span> 
+         </div>
+      </div> 
+   </ion-content>
+   <ion-footer-bar align-title="center" ng-if="cartCount > 0" class="bar-balanced foodex-primary">
+      <a ui-sref="app.cart">
+         <button class="button button-icon button-clear ion-android-cart">
+         <span class="badge custom-badge">{{cartCount}}</span>
+         </button>
+         <h1 class="title">Proceed to Cart</h1>
+      </a>
+   </ion-footer-bar>
 </ion-view>

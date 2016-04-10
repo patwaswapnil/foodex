@@ -41,9 +41,9 @@ angular.module('ion-autocomplete', []).directive('ionAutocomplete', [
                 // set the default values of the one way binded attributes
                 $timeout(function () {
                     controller.placeholder = valueOrDefault(controller.placeholder, 'Click to enter a value...');
-                    controller.cancelLabel = valueOrDefault(controller.cancelLabel, 'Done');
-                    controller.selectItemsLabel = valueOrDefault(controller.selectItemsLabel, "Select an item...");
-                    controller.selectedItemsLabel = valueOrDefault(controller.selectedItemsLabel, $interpolate("Selected items{{maxSelectedItems ? ' (max. ' + maxSelectedItems + ')' : ''}}:")(controller));
+                    controller.cancelLabel = valueOrDefault(controller.cancelLabel, 'Cancel');
+                    controller.selectItemsLabel = valueOrDefault(controller.selectItemsLabel, "Select a location..."); 
+                      controller.selectedItemsLabel = valueOrDefault(controller.selectedItemsLabel, $interpolate("Selected items{{maxSelectedItems ? ' (max. ' + maxSelectedItems + ')' : ''}}:")(controller));
                 });
 
                 // set the default values of the passed in attributes
@@ -85,11 +85,10 @@ angular.module('ion-autocomplete', []).directive('ionAutocomplete', [
                     '<i class="icon ion-search placeholder-icon"></i>',
                     '<input type="search" class="ion-autocomplete-search" ng-model="viewModel.searchQuery" ng-model-options="viewModel.ngModelOptions" placeholder="{{viewModel.placeholder}}"/>',
                     '</label>',
-                    '<div class="ion-autocomplete-loading-icon" ng-if="viewModel.showLoadingIcon && viewModel.loadingIcon"><ion-spinner icon="{{viewModel.loadingIcon}}"></ion-spinner></div>',
+                    '<div class="ion-autocomplete-loading-icon" ng-if="viewModel.showLoadingIcon && viewModel.loadingIcon"><ion-spinner icon="ios"></ion-spinner></div>',
                     '<button class="ion-autocomplete-cancel button button-clear" ng-click="viewModel.cancelClick()">{{viewModel.cancelLabel}}</button>',
                     '</div>',
-                    '<ion-content class="has-header">',
-                    '<ion-item class="item-divider">{{viewModel.selectedItemsLabel}}</ion-item>',
+                    '<ion-content class="has-header">', 
                     '<ion-item ng-if="viewModel.isArray(viewModel.selectedItems)" ng-repeat="selectedItem in viewModel.selectedItems track by $index" class="item-icon-left item-icon-right item-text-wrap">',
                     '<i class="icon ion-checkmark"></i>',
                     '{{viewModel.getItemValue(selectedItem, viewModel.itemViewValueKey)}}',

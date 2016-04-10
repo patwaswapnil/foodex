@@ -1,21 +1,89 @@
 <ion-view title="Delivery Address" hide-back-button="false">
      
-    <ion-content class="main-bg has-footer bg-css">
+    <ion-content class="main-bg bg-css">
     <div class="row" >
             <div class="col">
-                <h4 class=" ">Select Delivery Address</h4>
+                <h4 class="">Select Delivery Address</h4>
+            </div>
+        </div> 
+                  <div class="banner-wrapper plr15" ng-if="!isLoggedIn">
+                <a class="button button-full button-balanced foodex-primary w100" ng-click="loginFromMenu()">
+                    Login
+                </a>
+            <div class="txt-center"><p class="or-option">OR</p></div>
+            </div>
+            <form name="userForm" >
+        <div class="form-wrapper"> 
+                <div class="list">
+                    <label class="item item-input item-floating-label">
+                        <span class="input-label ">Full Name*</span>
+                        <input type="text" name="name" ng-required="true" ng-model="appUser.name"  placeholder="Enter your First Name">
+                    </label> 
+                    <label class="item item-input item-floating-label">
+                        <span class="input-label ">Email/</span>
+                        <input type="email" name="email" ng-required="true" ng-model="appUser.email" placeholder="Enter you Email">
+                    </label>
+                    <label class="item item-input item-floating-label">
+                        <span class="input-label" >Contact Number*</span>
+                        <input type="text" name="contact" ng-required="true" ng-model="appUser.contact_no"  placeholder="Enter you Contact Number">
+                    </label>
+                    <label class="item item-input item-floating-label">
+                        <span class="input-label">Complete Address*</span>
+                        <input type="text" name="address" ng-required="true" ng-model="appUser.address" placeholder="Enter you Complete Address with landmark">
+                    </label>
+
+                   <label class="item item-input item-select mt15">
+     
+    <div class="input-label" >
+      Location:
+    </div> 
+    <select class=" " ng-disabled="true">
+      <option selected="selected">{{::location}}</option> 
+    </select>
+  </label>
+
+    <li class="item item-toggle mt10">
+     Pre Order:
+     <label class="toggle toggle-balanced">
+       <input type="checkbox" ng-model="preOrder.isPreOrder">
+       <div class="track">
+         <div class="handle"></div>
+       </div>
+     </label>
+  </li>
+  <span ng-if="preOrder.isPreOrder">
+<label class="item item-input  ">
+   <div class="input-label" >
+      Date:
+    </div>
+                     <button class="button icon-left ion-android-calendar" ng-click="setDate()"><span ng-if="!preOrder.date">Tab to select</span><span ng-if="preOrder.date">{{preOrder.date}}</span></button>
+ </label>  
+<label class="item item-input ">
+   <div class="input-label" >
+      Time:
+    </div>
+                     <button class="button icon-left ion-clock" ng-click="setTime()"><span ng-if="!preOrder.time">Tab to select</span><span ng-if="preOrder.time">{{preOrder.time}}</span></button>
+              </label>       
+                          
+</span>
+                </div>
+    <div class="row" >
+            <div class="col">
+                <h4 class="">Select Payment Method</h4>
+            </div>
+        </div> 
+
+        <ion-list>
+  <ion-radio ng-model="paymentChoice" ng-value="'cod'">Cash on Delivery (COD)</ion-radio> 
+</ion-list>
+                        <div class="banner-wrapper row plr15">
+                  <button class="button mr6  button-block button-balanced foodex-primary col" ng-disabled="userForm.$invalid" ng-click="saveUser(appUser, preOrder)">
+                      Pay Rs. {{cartGrandTotal}}
+                    </button>   
             </div>
         </div>
-         <ion-radio ng-model="address" checked="checked" ng-value="'A'"><span class="radio-opt">511, Poonam Nagar, Andheri East, Mumbai 440058</span></ion-radio>
-         <ion-radio ng-model="address" ng-value="'B'"><span class="radio-opt">504, Neelkanth Business Park, Vidyavihar West, Mumbai 440058</span></ion-radio>
-             
-                  <div class="banner-wrapper plr15">
-                <a class="button button-full button-balanced foodex-primary w100" href="">
-                    Add New Address
-                </a>
-            </div>
+            </form>
+
     </ion-content>
-    <ion-footer-bar align-title="center" class="bar-balanced foodex-primary">
-        <a href="" ui-sref="app.payment"><h1 class="title">Deliver Here</h1></a>
-    </ion-footer-bar>
+ 
 </ion-view>
