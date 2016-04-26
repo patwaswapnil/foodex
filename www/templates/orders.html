@@ -1,84 +1,40 @@
 <ion-view title="My Orders" hide-back-button="false" cache-view="false">
     <ion-content class="main-bg bg-css">
         <ion-list> 
-            <div ng-repeat="item in orders track by $index" class="card">
-                <div ng-class="isItemShown(item) ? 'item-expand active' : 'item-expand inactive'">
-                    <span class=" item item-thumbnail-left shop-listing no-blue cart-icon-wrap">
-                            <img ng-src="img/shop/{{::item.shop.image}}">
-                            <h2 class="">Order ID {{::item.OrderId}} </h2>
-                            <p class="fz12">From:  <span  >{{::item.shop.name}} &nbsp;</span> </p>
+            <div ng-repeat="item in orders track by $index | orderBy:'id'" class="card">
+                <div>
+                    <span class=" item item-thumbnail-left shop-listing no-blue cart-icon-wrap mb5">
+                          <img ng-src="{{::imgPath}}/restaurant_logo/{{::item.shop_logo}}" ui-sref="app.shop({shopId: item.restaurant_id})" />
+                            <h2 class=""> Order ID {{::item.id}} </h2>
+                            <p class="fz12"><strong>From:</strong>  <span >{{::item.shop_name}} &nbsp;</span> </p>
                     <div class="row padding0">
                         <div class="col padding0">
-                            <p class="fz12">Order Amount: Rs. {{::item.payment.grandTotal}}</p>
-                            <p class="fz12">Date: 29 May 2015</p>
+                            <p class="fz12"><strong>Order Amount:</strong> Rs. {{::item.final_amount}}</p>
+                            <p class="fz12"><strong>Date:</strong> {{::item.order_date}}</p>
                         </div>
                     </div>
-                    </span>
+                    </span><!-- 
                     <div class="   wrapper-items">
-                        <div class="row plr15">
-                            <div class="col-60 fwbold">
-                                <p class="fz12">Item</p>
-                            </div>
-                            <div class="col-20 fwbold">
-                                <p class="fz12">Unit</p>
-                            </div>
-                            <div class="col-20 fwbold txt-right">
-                                <p class="fz12">Price</p>
-                            </div>
-                        </div>
-                        <div class="row plr15" ng-repeat="shopItem in item.items track by $index">
-                            <div class="col-60">
-                                <p class="fz12">{{shopItem.name  | capitalize:true}}</p>
-                            </div>
-                            <div class="col-20">
-                                <p class="fz12">{{shopItem.qty}}</p>
-                            </div>
-                            <div class="col-20 txt-right">
-                                <p class="fz12">{{shopItem.price * shopItem.qty}}</p>
-                            </div>
-                        </div>
-                        <div class="row plr15">
-                            <div class="title-cart col-80">
-                                <p class="fz12 fwbold">Subtotal: </p>
-                            </div>
-                            <div class="amt-cart col-20">
-                                <p class="fz12 fwbold">Rs. {{::item.payment.subtotal}}</p>
-                            </div>
-                        </div>
-                        <div class="row plr15">
-                            <div class="title-cart col-80">
-                                <p class="fz12 fwbold">Delivery Charge: </p>
-                            </div>
-                            <div class="amt-cart col-20">
-                                <p class="fz12 fwbold">Rs. {{::item.payment.deliveryCharge}}</p>
-                            </div>
-                        </div>
-                           <div class="row plr15">
-                            <div class="title-cart col-80">
-                                <p class="fz12 fwbold">Discount: </p>
-                            </div>
-                            <div class="amt-cart col-20">
-                                <p class="fz12 fwbold">Rs. {{(item.payment.subtotal+item.payment.deliveryCharge)-item.payment.grandTotal}}</p>
-                            </div>
-                        </div>
+                        
+                           
                         <div class="row plr15">
                             <div class="title-cart col-60">
                                 <h2>Total: </h2>
                             </div>
                             <div class="amt-cart col-40">
-                                <h2>Rs. {{::item.payment.grandTotal}}</h2>
+                                <h2>Rs. {{::item.final_amount}}</h2>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
                 <div>
-                </div>
+                </div><!-- 
                 <div ng-click="toggleItem(item)" class="item-expand-footer">
                     <span class="btn-warp">
             <i ng-class="isItemShown(item) ? 'ion-ios-minus-outline' : 'ion-ios-plus-outline'"></i>
             {{ isItemShown(item) ? 'Collapse' : ' Expand' }}
             </span>
-                </div>
+                </div> -->
             </div>
         </ion-list>
     </ion-content>

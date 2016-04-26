@@ -12,25 +12,26 @@
                 </a>
             <div class="txt-center"><p class="or-option">OR</p></div>
             </div>
-            <form name="userForm" >
+            <form name="checkoutForm" >
         <div class="form-wrapper"> 
                 <div class="list">
-                    <label class="item item-input item-floating-label">
+                    <label class="item item-input item-floating-label" ng-class="checkoutForm.name.$touched && checkoutForm.name.$invalid ? 'error-border' : ''">
                         <span class="input-label ">Full Name*</span>
                         <input type="text" name="name" ng-required="true" ng-model="appUser.name"  placeholder="Enter your First Name">
                     </label> 
-                    <label class="item item-input item-floating-label">
-                        <span class="input-label ">Email/</span>
+                    <label class="item item-input item-floating-label" ng-class="checkoutForm.email.$touched && checkoutForm.email.$invalid ? 'error-border' : ''">
+                        <span class="input-label ">Email*</span>
                         <input type="email" name="email" ng-required="true" ng-model="appUser.email" placeholder="Enter you Email">
                     </label>
-                    <label class="item item-input item-floating-label">
+                    <label class="item item-input item-floating-label" ng-class="checkoutForm.contact.$touched && checkoutForm.contact.$invalid ? 'error-border' : ''">
                         <span class="input-label" >Contact Number*</span>
                         <input type="text" name="contact" ng-required="true" ng-model="appUser.contact_no"  placeholder="Enter you Contact Number">
                     </label>
-                    <label class="item item-input item-floating-label">
+                    <label class="item item-input item-floating-label" ng-class="checkoutForm.address.$touched && checkoutForm.address.$invalid ? 'error-border' : ''">
                         <span class="input-label">Complete Address*</span>
-                        <input type="text" name="address" ng-required="true" ng-model="appUser.address" placeholder="Enter you Complete Address with landmark">
+                        <textarea type="text" class="text-area-order" name="address" ng-required="true" ng-model="appUser.address" placeholder="Enter you Complete Address with landmark"></textarea>
                     </label>
+ 
 
                    <label class="item item-input item-select mt15">
      
@@ -76,8 +77,9 @@
         <ion-list>
   <ion-radio ng-model="paymentChoice" ng-value="'cod'">Cash on Delivery (COD)</ion-radio> 
 </ion-list>
+  <span ng-show="checkoutForm.email.$touched && checkoutForm.email.$invalid" class="validation-error">Please enter a valid Email Id.</span>  
                         <div class="banner-wrapper row plr15">
-                  <button class="button mr6  button-block button-balanced foodex-primary col" ng-disabled="userForm.$invalid" ng-click="saveUser(appUser, preOrder)">
+                  <button class="button mr6  button-block button-balanced foodex-primary col" ng-disabled="checkoutForm.$invalid" ng-click="saveUser(appUser, preOrder)">
                       Pay Rs. {{cartGrandTotal}}
                     </button>   
             </div>

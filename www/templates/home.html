@@ -26,7 +26,7 @@
             </div>
             <div class="listing-wrap">
                 <div class="list">
-                    <div ng-repeat="shop in shops track by $index">
+                    <div ng-repeat="shop in shops | unique: 'id'">
                         <a href="#/app/shop/{{::shop.id}}" class=" card item-thumbnail-left shop-listing no-blue shop-icon-wrap">
                             <img ng-src="{{::imgPath}}/restaurant_logo/{{::shop.logo}}">
                             <h2 class="">{{::shop.name}} </h2>

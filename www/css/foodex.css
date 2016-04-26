@@ -646,10 +646,10 @@ a.item.item-thumbnail-left.shop-listing {
 }
 .login-bg{
     background-image: url('../img/login-bg.jpg');
-    background-repeat: no-repeat !important;
-    background-position: center !important;
+    background-repeat: no-repeat;
     background-size: cover;
-    -webkit-background-size: cover; 
+   
+    
 }
 .capitalize{
     text-transform: capitalize !important;
@@ -780,4 +780,22 @@ a.deco-none{
 }
 .error{
     border-color: red;
+}
+.error-border {
+        border-bottom: 1px solid red !important; 
+}
+.validation-error {
+        color: red;
+    font-weight: bold;
+    /* position: absolute; */
+    margin-top: 10px;
+    margin-bottom: -6px;
+}
+.text-area-order{
+        background: rgb(238, 238, 238) !important;
+        height: 55px !important;
+        resize: none;
+}
+.mb5{
+    margin-bottom: 5px !important;
 }

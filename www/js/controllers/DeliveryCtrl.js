@@ -57,7 +57,7 @@ app.controller('DeliveryCtrl', ['$scope', '$rootScope', '$state', '$stateParams'
   	 	tempUserObj.name = userInfo.name;
   	 	tempUserObj.email = userInfo.email;
       tempUserObj.address = userInfo.address;
-      tempUserObj.mobile = userInfo.mobile;
+      tempUserObj.contact_no = userInfo.contact_no;
   	 	tempUserObj.location = LSFactory.get('location');
 
   	 	if(tempUserObj.id){
@@ -92,6 +92,10 @@ app.controller('DeliveryCtrl', ['$scope', '$rootScope', '$state', '$stateParams'
                 LSFactory.delete('cart');
                 LSFactory.delete('shop');
                 LSFactory.delete('checkout'); 
+                $ionicHistory.nextViewOptions({ 
+                  disableBack: true
+                });
+                $ionicHistory.clearHistory()
                 $state.go('app.orders');
               }
             }, function (error) {

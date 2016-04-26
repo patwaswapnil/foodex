@@ -55,8 +55,11 @@ angular.module('foodex.services', [])
             toast: function (msg) {   
                 var isAndroid = ionic.Platform.isAndroid();
                 var isIOS = ionic.Platform.isIOS();
-                if (msg && isAndroid && isIOS) {
+                if (isAndroid || isIOS) {
                  $cordovaToast.show(msg, 'short', 'center').then(function(success) {});    
+                } 
+                else {
+                    alert(msg);
                 }
             }
 
@@ -120,6 +123,9 @@ angular.module('foodex.services', [])
         placeOrder: function (data) { 
             return $http.post(domain+'app/place-order', data);
             
+        },
+        orderHistory: function (user) { 
+            return $http.get(domain+'app/order/'+user.id); 
         }
     };
     return api;

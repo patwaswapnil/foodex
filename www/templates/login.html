@@ -15,11 +15,11 @@
             </div>
             <form class="margin30" name="userForm" ng-submit="authUser(formUser)">
                 <div class="list">
-                    <label class="item item-input item-floating-label">
+                    <label class="item item-input item-floating-label" ng-class="userForm.email.$touched && userForm.email.$invalid ? 'error-border' : ''">
                         <span class="input-label ">Email*</span>
                         <input type="email" class="" name="email" ng-required="true" ng-model="formUser.email" placeholder="Enter your email">
                     </label> 
-                    <label class="item item-input item-floating-label">
+                    <label class="item item-input item-floating-label" ng-class="userForm.password.$touched && userForm.password.$invalid ? 'error-border' : ''">
                         <span class="input-label ">Password*</span>
                         <input type="password" class="" name="password" ng-required="true" ng-model="formUser.password" placeholder="Enter your password">
                     </label>
@@ -58,31 +58,33 @@
                 <button class="button button-clear capitalize" ng-click="registerToggle()">Close</button>
             </div>
         </ion-header-bar>
-        <ion-content class="main-bg">
-            <form class="margin30" name="registerUser" ng-submit="registerUser(userData)">
+        <ion-content class="main-bg login-bg">
+            <form class="margin30" name="registerUser" ng-submit="registerUserr(userData)">
                 <div class="list">
-                    <label class="item item-input item-floating-label">
+                    <label class="item item-input item-floating-label" ng-class="registerUser.name.$touched && registerUser.name.$invalid ? 'error-border' : ''">
                         <span class="input-label ">Full Name*</span>
-                        <input type="text" name="name" class="" ng-required="true" ng-model="userData.fullname"  placeholder="Enter your Full Name">
+                        <input type="text" name="name" class="" ng-required="true" ng-model="userData.fullname"  placeholder="Enter your Full Name*">
                     </label>
-                    <label class="item item-input item-floating-label">
+                    <label class="item item-input item-floating-label" ng-class="registerUser.email.$touched && registerUser.email.$invalid ? 'error-border' : ''">
                         <span class="input-label ">Email*</span>
-                        <input type="email" class="" name="email" ng-required="true" ng-model="userData.email" placeholder="Enter your Email">
+                        <input type="email" class="" name="email" ng-required="true" ng-model="userData.email" placeholder="Enter your Email*">
                     </label>
-                    <label class="item item-input item-floating-label">
+                    <label class="item item-input item-floating-label" ng-class="registerUser.contact.$touched && registerUser.contact.$invalid ? 'error-border' : ''">
                         <span class="input-label ">Contact Number*</span>
-                        <input type="text" class="" name="contact" ng-required="true" ng-model="userData.mobile" placeholder="Enter your Contact Number">
+                        <input type="text" class="" name="contact" ng-required="true" ng-model="userData.mobile" placeholder="Enter your Contact Number*">
                     </label>
-                    <label class="item item-input item-floating-label">
+                    <label class="item item-input item-floating-label" ng-class="registerUser.pass.$touched && registerUser.pass.$invalid ? 'error-border' : ''">
                         <span class="input-label ">Password*</span>
-                        <input type="password" class="" name="pass" ng-required="true" ng-model="userData.pass" placeholder="Enter your password">
+                        <input type="password" class="" name="pass" ng-required="true" ng-model="userData.pass" placeholder="Enter your password*">
                     </label> 
-                    <label class="item item-input item-floating-label">
+                    <label class="item item-input item-floating-label" ng-class="registerUser.cnfpass.$touched && (registerUser.cnfpass.$invalid || registerUser.cnfpass.$error.noMatch) ? 'error-border' : ''">
                         <span class="input-label ">Confirm Password*</span>
-                        <input type="password" class="" name="cnfpass" ng-required="true" ng-model="userData.pass_confirm" placeholder="Confirm password">
+                        <input type="password" class="" name="cnfpass" valid-password-c ng-required="true" ng-model="userData.pass_confirm" placeholder="Confirm password*">
                     </label> 
-                    <input type="hidden" ng-model="userData.dnd"  value="on" >
-                 
+                    <input type="hidden" ng-model="userData.dnd"  value="on" > 
+                       <span ng-show="registerUser.name.$touched && registerUser.email.$invalid" class="validation-error">Please enter a valid Email Id.</span>  
+                       <span ng-show="registerUser.cnfpass.$error.noMatch" class="validation-error">Passwords do not match.</span> 
+                    <input type="hidden" ng-model="userData.dnd"  value="on" > 
                     <button class="button button-small mt25 button-block button-balanced foodex-primary"  ng-disabled="registerUser.$invalid"  type="submit">
                         Create Account
                     </button>

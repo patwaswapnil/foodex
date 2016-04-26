@@ -20,7 +20,6 @@ app.controller('AppCtrl', ['$scope', '$rootScope', '$ionicModal', '$timeout', '$
         $scope.updateUser = function() { 
             if (LSFactory.get('authUser')) {
                 $rootScope.isLoggedIn = true;
-                console.log($rootScope.appUser);
                 $timeout(function() {
                 $rootScope.appUser = LSFactory.get('authUser');
                     $rootScope.isLoggedIn = true;
@@ -66,6 +65,9 @@ app.controller('AppCtrl', ['$scope', '$rootScope', '$ionicModal', '$timeout', '$
                             LSFactory.set('authUser', response.data.data)
                             $scope.updateUser();
                             $scope.formUser = {};
+                            if (typeof callback === 'function') {
+                                     callback();
+                               }
                         } else {
                             Loader.toggleLoadingWithMessage('Oops! something went wrong. Please try again', 2000);
                         }
@@ -73,7 +75,7 @@ app.controller('AppCtrl', ['$scope', '$rootScope', '$ionicModal', '$timeout', '$
                         console.error(error)
                     })
                 }
-                $scope.registerUser = function(data) {
+                $scope.registerUserr = function(data) {
                     Loader.show('Registering');
                     APIFactory.registerUser(data).then(function(response) {
                         console.log(response.data.error);
