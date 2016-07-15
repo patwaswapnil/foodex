@@ -80,7 +80,7 @@
   <span ng-show="checkoutForm.email.$touched && checkoutForm.email.$invalid" class="validation-error">Please enter a valid Email Id.</span>  
                         <div class="banner-wrapper row plr15">
                   <button class="button mr6  button-block button-balanced foodex-primary col" ng-disabled="checkoutForm.$invalid" ng-click="saveUser(appUser, preOrder)">
-                      Pay Rs. {{cartGrandTotal}}
+                      Pay <span class="draw-inr"></span>{{cartGrandTotal}}
                     </button>   
             </div>
         </div>

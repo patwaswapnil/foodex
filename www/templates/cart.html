@@ -13,7 +13,7 @@
                       <div class="row">
                          <div class="col-60 flex-item">
                         <h2 class="fz18"> {{cartItem.name | capitalize:true}} </h2> 
-                        <p class="fz16">Rs. {{::cartItem.cost}}/{{::cartItem.unit_type}}</p>
+                        <p class="fz16"><span class="draw-inr"></span>{{::cartItem.cost}}/{{::cartItem.unit_type}}</p>
                          <div class=" padding0">
                             <div class="col qty-warp">
                                 <p class="fz16"> <span counter value="cartItem.status" ng-click="updateCart(cartItem)" min="1" max="100" step="1"> </span>  <span>  <span ng-if="cartItem.status > 1">{{cartItem.totalQty}}</span><span ng-if="cartItem.status == 1"> {{cartItem.unit_type}}</span></span>
@@ -22,7 +22,7 @@
                 </div>
             </div>
             <div class="col-20 padding0 flex-item txt-center">
-                <p class="fz16">Rs. {{cartItem.cost * cartItem.status}}</p>
+                <p class="fz16"><span class="draw-inr"></span>{{cartItem.cost * cartItem.status}}</p>
             </div>
             <div class="col-20 padding0 flex-item txt-right ml22">
                 <button class="button button-icon button-clear ion-trash-a trash-btn" ng-click="removeFromCart($index)"></button>
@@ -47,7 +47,7 @@
 </div> -->
 
 <div class="row" >
-  <div class="information-msg foodex-danger fff col" ng-if="availFreeDelivery > 0"><i class="icon ion-ios-information-outline icon-info"></i><p class="fff ml25 fz12">Shop for more Rs. <span class="fwbold">{{availFreeDelivery}}</span> to place THE ORDER</p></div> 
+  <div class="information-msg foodex-danger fff col" ng-if="availFreeDelivery > 0"><i class="icon ion-ios-information-outline icon-info"></i><p class="fff ml25 fz12">Shop for more <span class="draw-inr"></span><span class="fwbold">{{availFreeDelivery}}</span> to place THE ORDER</p></div> 
 
 <!--    <div class="information-msg foodex-primary fff col" ng-if="availFreeDelivery <= 0"><i class="icon ion-ios-information-outline icon-info"></i><p class="fff ml25 fz12">You are eligible to place  <span class="fwbold">THE ORDER</span></p></div> -->
 </div>
@@ -58,43 +58,43 @@
 </div> -->
                
                   <div class="row flex-item">
-                  <div class="title-cart col-80">
+                  <div class="title-cart col-60">
                     <p class="fz16">Subtotal: </p>
                   </div>
-                  <div class="amt-cart col-20">
-                    <p class="fz16">Rs. {{subTotal}}</p>
+                  <div class="amt-cart col-40">
+                    <p class="fz16"><span class="draw-inr"></span>{{subTotal}}</p>
                   </div>
                   </div>
                
               
                 
                   <div class="row flex-item">
-                  <div class="title-cart col-80">
+                  <div class="title-cart col-60">
                     <p class="fz16">Delivery Charge: </p>
                   </div>
-                  <div class="amt-cart col-20">
-                    <p class="fz16">Rs. {{deliveryChar}}</p>
+                  <div class="amt-cart col-40">
+                    <p class="fz16"><span class="draw-inr"></span>{{deliveryChar}}</p>
                   </div>
                   </div>
                    
               
                 
      <!--              <div class="row flex-item">
-                  <div class="title-cart col-80">
+                  <div class="title-cart col-60">
                     <p class="fz12">Discount(10%): </p>
                   </div>
-                  <div class="amt-cart col-20">
-                    <p class="fz12">Rs. {{discount}}</p>
+                  <div class="amt-cart col-40">
+                    <p class="fz12"><span class="draw-inr"></span>{{discount}}</p>
                   </div>
                   </div> -->
                  
                 
                   <div class="row flex-item mt10">
-                  <div class="title-cart col-80">
+                  <div class="title-cart col-60">
                     <h2  class="fz18">Total: </h2>
                   </div>
-                  <div class="amt-cart col-20">
-                    <h2  class="fz18">Rs. {{grandTotal < 0 ? 0 : grandTotal}}</h2>
+                  <div class="amt-cart col-40">
+                    <h2  class="fz18"><span class="draw-inr"></span>{{grandTotal < 0 ? 0 : grandTotal}}</h2>
                   </div>
                   </div>
                    

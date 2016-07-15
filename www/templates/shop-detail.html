@@ -15,8 +15,9 @@
                   </div>
                   <div class="row padding0">
                      <div class="col padding0">
-                        <p class="fz16">Delivery: Rs. {{::shop.hd_delivery_charge}} / {{::shop.hd_approx_time}} min</p>
-                        <p class="fz16">Minimum Order Value: {{::shop.hd_min_val}} <a class="pull-right" href="#/app/shop-info/{{::shop.id}}">More Info</a></p>
+                        <p class="fz16">Delivery Charge: <span class="draw-inr"></span>{{::shop.hd_delivery_charge}} </p>
+                        <p class="fz16">Minimum Order Value: <span class="draw-inr"></span>{{::shop.hd_min_val}} </p>
+                        <a class="pull-right" href="#/app/shop-info/{{::shop.id}}">More Info</a>
                      </div>
                   </div>
                </span>
@@ -32,7 +33,7 @@
                   <div class="row">
                      <div class="col-80 flex-item">
                         <h2> {{::item.name | capitalize:true}} </h2>
-                        <p class="fz16"> Rs. {{::item.cost}}/{{::item.unit_type}}</p>
+                        <p class="fz16"> <span class="draw-inr"></span>{{::item.cost}}/{{::item.unit_type}}</p>
                         <div class=" padding0">
                            <div class="col qty-warp">
                               <p class="fz16">Qty:<span counter value="item.status" ng-click="getTotalQty(item)"  min="1" max="100" step="1" class="ml5" ></span><span ng-show="item.totalQty && item.status != 1">= {{item.totalQty}}</span>
@@ -41,7 +42,7 @@
                         </div>
                      </div>
                      <div class="col padding0 flex-item txt-center">
-                        <button class="button  button-small  button-balanced foodex-primary add-to-cart" ng-click="addToCart(item, shop, $index)">Add </button>
+                        <button class="button  button-small  button-balanced foodex-primary add-to-cart" ng-click="addToCart(item, shop, $index, $parent.$index)">Add </button>
                      </div>
                   </div>
                </span>

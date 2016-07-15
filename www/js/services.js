@@ -125,7 +125,11 @@ angular.module('foodex.services', [])
             
         },
         orderHistory: function (user) { 
-            return $http.get(domain+'app/order/'+user.id); 
+            return $http.get(domain+'app/order_details/'+user.id); 
+        },
+        socialRegister: function (data) { 
+            var req = {method: 'POST', url: domain+'app/fb_login', headers: {'Content-Type': 'application/x-www-form-urlencoded'}, data: $httpParamSerializer(data)};
+            return $http(req);
         }
     };
     return api;

@@ -1,20 +1,48 @@
 <ion-view title="My Orders" hide-back-button="false" cache-view="false">
+<ion-nav-buttons side="right">
+   
+</ion-nav-buttons>
     <ion-content class="main-bg bg-css">
-        <ion-list> 
-            <div ng-repeat="item in orders track by $index | orderBy:'id'" class="card">
-                <div>
+        <ion-list>  
+            <div ng-repeat="item in orders track by $index | orderBy:'order_id'" class="card">
+                <div ng-class="isItemShown(item) ? 'item-expand active' : 'item-expand inactive'">
                     <span class=" item item-thumbnail-left shop-listing no-blue cart-icon-wrap mb5">
-                          <img ng-src="{{::imgPath}}/restaurant_logo/{{::item.shop_logo}}" ui-sref="app.shop({shopId: item.restaurant_id})" />
-                            <h2 class=""> Order ID {{::item.id}} </h2>
+                          <img ng-src="{{::imgPath}}/restaurant_logo/{{::item.shop_logo}}"  />
+                            <h2 class=""> Order ID {{::item.order_id}} </h2>
                             <p class="fz12"><strong>From:</strong>  <span >{{::item.shop_name}} &nbsp;</span> </p>
                     <div class="row padding0">
                         <div class="col padding0">
-                            <p class="fz12"><strong>Order Amount:</strong> Rs. {{::item.final_amount}}</p>
+                            <p class="fz12"><strong>Order Amount:</strong> <span class="draw-inr"></span>{{::item.order_total}}</p>
                             <p class="fz12"><strong>Date:</strong> {{::item.order_date}}</p>
                         </div>
                     </div>
-                    </span><!-- 
-                    <div class="   wrapper-items">
+                    </span>
+ 
+                        <div class="row plr15">
+                            <div class="col-60 fwbold">
+                                <p class="fz12">Item</p>
+                            </div>
+                            <div class="col-20 fwbold">
+                                <p class="fz12">Qty</p>
+                            </div>
+                            <div class="col-20 fwbold txt-right">
+                                <p class="fz12">Price</p>
+                            </div>
+                        </div>
+                        <div class="row plr15" ng-repeat="shopItem in item.menu_details track by $index">
+                            <div class="col-60">
+                                <p class="fz12">{{shopItem.menu_name  | capitalize:true}}</p>
+                            </div>
+                            <div class="col-20">
+                                <p class="fz12">{{shopItem.menu_qty}} * {{shopItem.menu_unit}}</p>
+                            </div>
+                            <div class="col-20 txt-right">
+                                <p class="fz12"> <span class="draw-inr"></span>{{shopItem.menu_cost}}</p>
+                            </div>
+                        </div>
+                         
+                    
+             <!--        <div class="item wrapper-items">
                         
                            
                         <div class="row plr15">
@@ -22,20 +50,28 @@
                                 <h2>Total: </h2>
                             </div>
                             <div class="amt-cart col-40">
-                                <h2>Rs. {{::item.final_amount}}</h2>
+                                <h2><span class="draw-inr"></span>{{::item.order_total}}</h2>
                             </div>
                         </div>
                     </div> -->
                 </div>
-                <div>
-                </div><!-- 
+               
+
                 <div ng-click="toggleItem(item)" class="item-expand-footer">
                     <span class="btn-warp">
             <i ng-class="isItemShown(item) ? 'ion-ios-minus-outline' : 'ion-ios-plus-outline'"></i>
             {{ isItemShown(item) ? 'Collapse' : ' Expand' }}
             </span>
-                </div> -->
+                </div>
             </div>
+             <span  class=" "  ng-show="!orders.length">
+          <div class="empty-cart-wrap">
+               
+                    <h4 class="fz16">No previous order found.</h4>
+<br>
+             <div> <button class="button   foodex-primary white" nav-clear ui-sref="app.home">Continue Shopping</button></div>
+          </div>
+        </span>
         </ion-list>
     </ion-content>
 </ion-view>

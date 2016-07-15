@@ -77,15 +77,15 @@
                         <span class="input-label ">Password*</span>
                         <input type="password" class="" name="pass" ng-required="true" ng-model="userData.pass" placeholder="Enter your password*">
                     </label> 
-                    <label class="item item-input item-floating-label" ng-class="registerUser.cnfpass.$touched && (registerUser.cnfpass.$invalid || registerUser.cnfpass.$error.noMatch) ? 'error-border' : ''">
+                    <label class="item item-input item-floating-label" ng-class="registerUser.cnfpass.$touched && registerUser.cnfpass.$invalid ? 'error-border' : ''">
                         <span class="input-label ">Confirm Password*</span>
-                        <input type="password" class="" name="cnfpass" valid-password-c ng-required="true" ng-model="userData.pass_confirm" placeholder="Confirm password*">
+                        <input type="password" class="" name="cnfpass"   ng-required="true" ng-model="userData.pass_confirm" placeholder="Confirm password*">
                     </label> 
                     <input type="hidden" ng-model="userData.dnd"  value="on" > 
                        <span ng-show="registerUser.name.$touched && registerUser.email.$invalid" class="validation-error">Please enter a valid Email Id.</span>  
-                       <span ng-show="registerUser.cnfpass.$error.noMatch" class="validation-error">Passwords do not match.</span> 
+                       <span ng-show="userData.pass_confirm != userData.pass" class="validation-error">Passwords do not match.</span> 
                     <input type="hidden" ng-model="userData.dnd"  value="on" > 
-                    <button class="button button-small mt25 button-block button-balanced foodex-primary"  ng-disabled="registerUser.$invalid"  type="submit">
+                    <button class="button button-small mt25 button-block button-balanced foodex-primary"  ng-disabled="registerUser.$invalid || userData.pass_confirm != userData.pass"  type="submit">
                         Create Account
                     </button>
                 </div>

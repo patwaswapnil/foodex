@@ -2,6 +2,7 @@ app.controller('CartCtrl', ['$scope', '$rootScope', '$state', '$stateParams', 'L
     $scope.navTitle = LSFactory.get('location');
     $scope.cartItems = LSFactory.get('cart');
     $scope.shopFrom = LSFactory.get('shop'); 
+    $scope.deliveryChargeCopy = angular.copy($scope.shopFrom.hd_delivery_charge);
     $scope.deliveryChar = $scope.shopFrom.hd_delivery_charge;
     $rootScope.grandTotal;
     $scope.removeFromCart = function(index) {
@@ -29,8 +30,8 @@ app.controller('CartCtrl', ['$scope', '$rootScope', '$state', '$stateParams', 'L
             });
             Loader.hide()
         // $scope.discount = (10/100) * $scope.subTotal;
-        // $scope.deliveryChar = delivery_charge $scope.shopFrom[0].minOrder > $scope.subTotal ? $scope.shopFrom[0].deliveryCharge : 0;
-         
+       $scope.deliveryChar =   $scope.subTotal >= $scope.shopFrom.freeDeliveryAbove ? 0 : $scope.deliveryChargeCopy ;
+ 
         $rootScope.grandTotal = ($scope.subTotal + $scope.deliveryChar); 
         $scope.availFreeDelivery = $scope.shopFrom.hd_min_val - $scope.subTotal ;
         }, 200)

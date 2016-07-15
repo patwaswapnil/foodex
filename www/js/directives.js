@@ -83,19 +83,7 @@ app.filter('capitalize', function() {
             return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
         }) : '';
     }
-})
-.directive('validPasswordC', function () {
-    return {
-        require: 'ngModel',
-        link: function (scope, elm, attrs, ctrl) {
-            ctrl.$parsers.unshift(function (viewValue, $scope) {
-                var noMatch = viewValue != scope.registerUser.pass.$viewValue
-                console.log(noMatch);
-                ctrl.$setValidity('noMatch', !noMatch)
-            })
-        }
-    }
-})
+}) 
 app.filter('unique', function() {
    return function(collection, keyname) {
       var output = [], 

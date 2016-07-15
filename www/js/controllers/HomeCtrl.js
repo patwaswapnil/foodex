@@ -1,5 +1,5 @@
 app.controller('HomeCtrl', ['$scope', '$state', '$timeout', 'Loader', 'LSFactory', '$ionicHistory', '$ionicPopover', 'APIFactory',
- function($scope, $state, $timeout, Loader, LSFactory, $ionicHistory, $ionicPopover, APIFactory) {
+ function($scope, $state, $timeout, Loader, LSFactory, $ionicHistory, $ionicPopover, APIFactory) { 
     var axis
     $scope.navTitle = LSFactory.get('location');
     axis = LSFactory.get('axis') || {lat:'', long:''};
@@ -10,25 +10,15 @@ app.controller('HomeCtrl', ['$scope', '$state', '$timeout', 'Loader', 'LSFactory
          var data = {location: $scope.navTitle};
          $scope.getShops(data);
  } 
- if(!$scope.navTitle || $scope.navTitle == "No Data Found" || !axis.lat || !axis.long){
+ if(!$scope.navTitle || !axis.lat || !axis.long){
         Loader.toast('No shops found. Please select another location');
         $state.go('app.location');
  }
-});
- if(!$scope.navTitle || $scope.navTitle == "No Data Found" || !axis.lat || !axis.long){
-        Loader.toast('No shops found. Please select another location');
-        $state.go('app.location');
- }
+}); 
     //shop API
     $scope.getShops = function (data) { 
     Loader.show();
-    APIFactory.getShops(data).then(function (response) {
-    if(!response.data.data.length) {
-         Loader.toast('No shops found. Please select another location');
-         $state.go('app.location');
-
-    }
-    console.log(response.data.data);
+    APIFactory.getShops(data).then(function (response) { 
     $scope.shops = response.data.data;
     Loader.hide();
     $scope.$digest;

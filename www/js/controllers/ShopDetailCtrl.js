@@ -17,6 +17,7 @@ app.controller('ShopDetailCtrl', ['$scope', '$state', '$timeout', '$stateParams'
             APIFactory.getShopDetail(shopId, axis).then(function(response) {
                 $scope.shop = response.data.shop;
                 $scope.menu = response.data.menu;
+                $scope.shop.freeDeliveryAbove = response.data.shop.hd_delivery_charge;
                 $scope.shop.hd_delivery_charge = response.data.delCharge;
                 $scope.selectedCat = response.data.menu.parent[0].id;
                 Loader.hide();
@@ -27,13 +28,14 @@ app.controller('ShopDetailCtrl', ['$scope', '$state', '$timeout', '$stateParams'
         };
         $scope.getShopDetail();
       
-        $scope.addToCart = function(item, shop, index) {
+        $scope.addToCart = function(item, shop, index, parentIndex) {
             var increaseQty = false;
             var increasedQty = null;
             var itemInCart = LSFactory.get('cart') || [];
             if (!itemInCart.length) {
                 LSFactory.setArray('cart', item);
-                LSFactory.set('shop', shop); 
+                LSFactory.set('shop', shop);
+                Loader.toast(item.name + ' added to cart'); 
             } else {
                 var shopCheck = LSFactory.get('shop');
                 if (shopCheck.id === shop.id) {
@@ -66,11 +68,14 @@ app.controller('ShopDetailCtrl', ['$scope', '$state', '$timeout', '$stateParams'
                             LSFactory.setArray('cart', item);
                             LSFactory.set('shop', shop);
                             $scope.cartCount = (LSFactory.get('cart')).length;
+                             Loader.toast(item.name + ' added to cart');
+
                         }
                     });
                 }
             };
-            $scope.cartCount = (LSFactory.get('cart')).length; 
+            $scope.cartCount = (LSFactory.get('cart')).length;  
+            $scope.menu.parent[parentIndex].child[index].status = 1;
         };
     }
 ]);

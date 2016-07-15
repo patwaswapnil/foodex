@@ -40,13 +40,21 @@
                             <div class="row padding0">
                                 <div class="col padding0">
                                     <p class="fz12">Delivery Time: {{::shop.hd_approx_time}} min (Approx.)</p>
-                                    <p class="fz12">Minimum Order Value: {{::shop.hd_min_val}} </p>
+                                    <p class="fz12">Minimum Order Value: <span class="draw-inr"></span>{{::shop.hd_min_val}} </p>
                                 </div>
                             </div>
                         </a>
                     </div>
 
                 </div>
+                        <span  class=" "  ng-show="!shops.length">
+          <div class="empty-cart-wrap">
+               
+                    <h4 class="fz16">No shop found for {{navTitle}}</h4>
+<br>
+             <div> <button class="button icon-left ion-edit foodex-primary white" ui-sref="app.location">Change Location</button></div>
+          </div>
+        </span>
             </div>
         </div>
     </ion-content>

@@ -1,11 +1,18 @@
-var domain = 'http://foodex.cruxservers.in/';
+var domain = 'http://pethjinni.com/';
 // var domain = 'http://foodex.dev/';
 var imgPath = 'http://foodex.dev/';
-angular.module('foodex', ['ionic', 'ngCordova', 'foodex.controllers', 'foodex.services', 'ion-autocomplete', 'ngCordovaOauth'])
-.run(function($ionicPlatform, $cordovaStatusbar) {
+angular.module('foodex', ['ionic','ionic.service.core', 'ngCordova', 'foodex.controllers', 'foodex.services', 'ion-autocomplete', 'ngCordovaOauth', 'ionic.service.analytics'])
+.run(function($ionicPlatform, $cordovaStatusbar, $ionicAnalytics) {
     $ionicPlatform.ready(function() {
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
         // for form inputs)
+    setTimeout(function() {
+      try { 
+        navigator.splashscreen.hide();
+      } catch(e) { 
+        console.log('It will work on app only');
+      }
+    }, 3000);
         $cordovaStatusbar.overlaysWebView(true)
         if (window.cordova && window.cordova.plugins.Keyboard) {
             cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
@@ -18,6 +25,24 @@ angular.module('foodex', ['ionic', 'ngCordova', 'foodex.controllers', 'foodex.se
         }
         $cordovaStatusbar.styleHex('#027158');
     });
+     //for ionic analytics
+    $ionicAnalytics.register();
+    //for ionic push
+try {
+      var push = new Ionic.Push({
+      "debug": true
+    });
+
+    push.register(function(token) {
+      console.log("Device token:",token.token);
+      push.saveToken(token);  // persist the token in the Ionic Platform
+    });
+} catch(e) {
+    // statements
+    console.error(e);
+} 
+    //push
+ 
 })
 
 .config(function($stateProvider, $urlRouterProvider) {
@@ -102,11 +127,11 @@ angular.module('foodex', ['ionic', 'ngCordova', 'foodex.controllers', 'foodex.se
                 }
             }
         })
-        .state('app.order-confirmation', {
-            url: '/order-confirmation',
+        .state('app.offers', {
+            url: '/offers',
             views: {
                 'menuContent': {
-                    templateUrl: 'templates/order-confirmation.html' 
+                    templateUrl: 'templates/offers.html' 
 
                 }
             }

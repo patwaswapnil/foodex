@@ -16,6 +16,9 @@ app.controller('LocationCtrl', ['$scope', '$state', '$cordovaGeolocation', '$htt
             };
         }
         $scope.clickedMethod = function(callback) {
+            if(callback.selectedItems.value == 'No Data Found'){
+                return false;
+            } 
             LSFactory.set('location', callback.selectedItems.value);
             LSFactory.set('axis', {lat: callback.selectedItems.latitude,long: callback.selectedItems.longitude});
             $state.go('app.home');
@@ -43,13 +46,14 @@ app.controller('LocationCtrl', ['$scope', '$state', '$cordovaGeolocation', '$htt
                 var locationName;
                 $http.get('http://maps.googleapis.com/maps/api/geocode/json?latlng=' + lat + ',' + longi + '&sensor=false').then(function(response) {
                     $scope.locationResult = response.data;
-                    angular.forEach($scope.locationResult.results[0].address_components, function(element, index) {
-                        // statements
-                        if (element.types[0] === "sublocality_level_1") {
-                            locationName = element.long_name;
-                        }
-                    });
-                    
+                    // angular.forEach($scope.locationResult.results[0].address_components, function(element, index) {
+                    //     // statements
+                    //     if (element.types[0] === "sublocality_level_1") {
+                    //         locationName = element.long_name;
+                    //     }
+                    // });
+                    console.log($scope.locationResult.results[5].address_components[1].long_name)
+                    locationName = $scope.locationResult.results[5].address_components[1].long_name;
                     LSFactory.set('location', locationName);
                     Loader.hide();
                     $state.go('app.home');

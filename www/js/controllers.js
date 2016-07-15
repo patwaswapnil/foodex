@@ -1,7 +1,7 @@
 var app = angular.module('foodex.controllers', [])
-app.controller('AppCtrl', ['$scope', '$rootScope', '$ionicModal', '$timeout', '$ionicPopup', '$state', '$q', 'LSFactory',  '$ionicLoading', 'UserService', '$ionicActionSheet', 'Loader', 'APIFactory', '$cordovaOauth', '$cordovaInAppBrowser', '$http',
-    function($scope, $rootScope, $ionicModal, $timeout, $ionicPopup, $state, $q, LSFactory, $ionicLoading, UserService, $ionicActionSheet, Loader, APIFactory, $cordovaOauth, $cordovaInAppBrowser, $http) {
-        $scope.imgPath = 'http://foodex.cruxservers.in/uploads/';
+app.controller('AppCtrl', ['$scope', '$rootScope', '$ionicModal', '$timeout', '$ionicPopup', '$state', '$q', 'LSFactory',  '$ionicLoading', 'UserService', '$ionicActionSheet', 'Loader', 'APIFactory', '$cordovaOauth', '$cordovaInAppBrowser', '$http', '$ionicHistory',
+    function($scope, $rootScope, $ionicModal, $timeout, $ionicPopup, $state, $q, LSFactory, $ionicLoading, UserService, $ionicActionSheet, Loader, APIFactory, $cordovaOauth, $cordovaInAppBrowser, $http, $ionicHistory) {
+        $scope.imgPath = 'http://pethjinni.com/uploads/';
         var itemInCart = LSFactory.get('cart') || [];
         $rootScope.cartCount = itemInCart.length;
         $scope.showLogin = true;
@@ -101,7 +101,52 @@ app.controller('AppCtrl', ['$scope', '$rootScope', '$ionicModal', '$timeout', '$
                         console.error(error)
                     })
                 }
+                  $scope.facebookLogin = function() {
+                Loader.show();
+                $cordovaOauth.facebook("254398101561891", ["email", "public_profile"], {
+                    redirect_uri: "http://localhost/callback"
+                }).then(function(result) {
+                    $http.get("https://graph.facebook.com/v2.2/me", {
+                        params: {
+                            access_token: result.access_token,
+                            fields: "name,first_name,last_name,location,picture,email",
+                            format: "json"
+                        }
+                    }).then(function(result) {
+                        console.log(result);
+                        $scope.data = {
+                            "data": {
+                            "data": {
+                                "email": result.data.email,
+                                "name": result.data.name,
+                                "id": result.data.id,
+                                "img": result.data.picture.data.url,
+                                "gender": result.data.gender
+                            }
+                        }
+                        };
+                        APIFactory.socialRegister($scope.data).then(function(response) {
+                            $scope.modal.hide();
+                            Loader.hide();
+                            Loader.toast('Logged in successfuly');
+                            LSFactory.set('authUser', response.data.data)
+                            $scope.updateUser();
+                            if (typeof callback === 'function') {
+                                callback();
+                            }
+                        }, function(error) {
+                            Loader.hide();
+                        })
+                    }, function(error) {
+                        Loader.hide();
+                    });
+                }, function(error) {
+                    Loader.hide();
+                    console.log(error);
+                });
+            }
             });
+           
         });
 
         $scope.loginFromMenu = function() {
@@ -149,24 +194,8 @@ app.controller('AppCtrl', ['$scope', '$rootScope', '$ionicModal', '$timeout', '$
                  }) 
             });
         };
-        $scope.facebookLogin = function () {
-           $cordovaOauth.facebook("254398101561891", ["email", "public_profile"],  {redirect_uri: "http://localhost/callback"}).then(function(result) {
-             LSFactory.set('fbUser', result);
-             console.log(result);
-             displayData(result.access_token);
-        }, function(error) {
-            // error
-            console.log(error);
-        });
-        };
-        function displayData(access_token)
-{
-    $http.get("https://graph.facebook.com/v2.2/me", {params: {access_token: access_token, fields: "name,gender,location,picture,email", format: "json" }}).then(function(result) {
-        LSFactory.set('userFacebook', result);
-    }, function(error) {
-        alert("Error: " + error);
-    });
-}
+
+       
 
         $scope.showLogOutMenu = function() {
             var hideSheet = $ionicActionSheet.show({
@@ -205,12 +234,27 @@ app.controller('AppCtrl', ['$scope', '$rootScope', '$ionicModal', '$timeout', '$
                 }
             } else {
                 itemQty = 1;
-                var removePer = product.unit_type.replace('Per ', '');
+                var removePer = product.unit_type.replace('PER' || 'Per' || 'per', '');
                 var getUnit = removePer.replace(/[0-9]/g, '');
                 var totalItemQty = (itemQty * product.status);
                 product.totalQty = totalItemQty + ' ' + getUnit;
             }
         };
-
+        $scope.changeLocation = function () {
+            
+                      var confirmPopup1 = $ionicPopup.confirm({
+                        title: 'Alert',
+                        template: 'Do you want to change the location?',
+                        okText: 'YES'
+                    });
+                    confirmPopup1.then(function(res) {
+                        if (res) {
+                      $ionicHistory.nextViewOptions({
+                              disableAnimate: true 
+                            })
+                            $state.go('app.location');
+                        }
+                    });
+        }
     }
 ]);
