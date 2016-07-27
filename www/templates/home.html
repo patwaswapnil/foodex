@@ -1,17 +1,23 @@
-<ion-view  cache-view="false" hide-menu-button="true">
-<ion-nav-title>{{navTitle}}</ion-nav-title>
+<ion-view cache-view="false" hide-menu-button="true">
+    <ion-nav-title>{{navTitle}}</ion-nav-title>
     <ion-content class="main-bg">
         <div class="banner-wrapper">
             <ion-slide-box auto-play="true" does-continue="true" on-slide-changed="slideChanged(index)" style="text-align:center;">
                 <ion-slide>
-                    <img ng-src="img/banner/banner1.png" class="img">
+                    <img ng-src="img/banner/banner1.jpg" class="img">
                 </ion-slide>
                 <ion-slide>
-                    <img ng-src="img/banner/banner2.png" class="img">
-                </ion-slide>
-                <ion-slide>
-                    <img ng-src="img/banner/banner3.png" class="img">
-                </ion-slide>
+                    <img ng-src="img/banner/banner2.jpg" class="img">
+                    </ion-slide>
+                    <ion-slide>
+                        <img ng-src="img/banner/banner3.jpg" class="img">
+                    </ion-slide>
+                    <ion-slide>
+                        <img ng-src="img/banner/banner4.jpg" class="img">
+                    </ion-slide> 
+                    <ion-slide>
+                        <img ng-src="img/banner/banner5.jpg" class="img">
+                    </ion-slide>
             </ion-slide-box>
         </div>
         <div class="wrapper-listing">
@@ -19,10 +25,10 @@
                 <div class="col-80">
                     <h4 class=" ">Shops in {{navTitle}}</h4>
                 </div>
-                   <div class="col-20">
-               <!--  <button class="button button-icon pull-right button-clear pb8 ion-funnel filter-icon pr0" ng-click="popover.show($event)">
+                <div class="col-20">
+                    <!--  <button class="button button-icon pull-right button-clear pb8 ion-funnel filter-icon pr0" ng-click="popover.show($event)">
                 </button> -->
-            </div>  
+                </div>
             </div>
             <div class="listing-wrap">
                 <div class="list">
@@ -47,7 +53,7 @@
                     </div>
 
                 </div>
-                        <span  class=" "  ng-show="!shops.length">
+                <span class=" " ng-show="!shops.length">
           <div class="empty-cart-wrap">
                
                     <h4 class="fz16">No shop found for {{navTitle}}</h4>

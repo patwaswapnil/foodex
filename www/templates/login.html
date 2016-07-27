@@ -1,7 +1,7 @@
 <ion-modal-view>
  
     <ion-pane ng-show="showLogin">
-        <ion-header-bar class="bar-balanced foodex-primary">
+        <ion-header-bar class="bar-balanced foodex-bar foodex-border">
             <div class="title">Login</div>
             <div class="buttons">
                 <button class="button button-clear capitalize" ng-click="hide()">Close</button>
@@ -25,7 +25,7 @@
                     </label>
                     <div class="padding"> 
         </div> 
-                    <button class="button button-small mt25 button-block button-balanced foodex-primary" ng-disabled="userForm.$invalid" type="submit" >
+                    <button class="button button-small mt25 button-block button-balanced foodex-btn foodex-primary" ng-disabled="userForm.$invalid" type="submit" >
                         Login
                     </button>
                 </div>
@@ -52,7 +52,7 @@
     </ion-pane>
     <!-- Register   -->
     <ion-pane ng-hide="showLogin">
-        <ion-header-bar class="bar-balanced foodex-primary">
+        <ion-header-bar class="bar-balanced foodex-bar foodex-border">
             <div class="title">Register</div>
             <div class="buttons">
                 <button class="button button-clear capitalize" ng-click="registerToggle()">Close</button>

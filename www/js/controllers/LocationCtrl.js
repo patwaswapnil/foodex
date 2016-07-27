@@ -52,8 +52,8 @@ app.controller('LocationCtrl', ['$scope', '$state', '$cordovaGeolocation', '$htt
                     //         locationName = element.long_name;
                     //     }
                     // });
-                    console.log($scope.locationResult.results[5].address_components[1].long_name)
-                    locationName = $scope.locationResult.results[5].address_components[1].long_name;
+                    console.log($scope.locationResult.results[2].address_components[1].long_name)
+                    locationName = $scope.locationResult.results[2].address_components[1].long_name;
                     LSFactory.set('location', locationName);
                     Loader.hide();
                     $state.go('app.home');

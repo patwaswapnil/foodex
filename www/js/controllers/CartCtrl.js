@@ -1,11 +1,11 @@
-app.controller('CartCtrl', ['$scope', '$rootScope', '$state', '$stateParams', 'LSFactory', 'Loader', '$timeout', function($scope, $rootScope, $state, $stateParams, LSFactory, Loader, $timeout) {
+app.controller('CartCtrl', ['$scope', '$rootScope', '$state', '$stateParams', 'LSFactory', 'Loader', '$timeout', function ($scope, $rootScope, $state, $stateParams, LSFactory, Loader, $timeout) {
     $scope.navTitle = LSFactory.get('location');
     $scope.cartItems = LSFactory.get('cart');
-    $scope.shopFrom = LSFactory.get('shop'); 
+    $scope.shopFrom = LSFactory.get('shop');
     $scope.deliveryChargeCopy = angular.copy($scope.shopFrom.hd_delivery_charge);
     $scope.deliveryChar = $scope.shopFrom.hd_delivery_charge;
     $rootScope.grandTotal;
-    $scope.removeFromCart = function(index) {
+    $scope.removeFromCart = function (index) {
         $scope.cartItems.splice(index, 1);
         LSFactory.set('cart', $scope.cartItems);
         $scope.cartItems = LSFactory.get('cart');
@@ -16,34 +16,37 @@ app.controller('CartCtrl', ['$scope', '$rootScope', '$state', '$stateParams', 'L
         }
         calculateTotal();
     }
-    $scope.updateCart = function(cartItem) {
-        $scope.getTotalQty(cartItem); 
+    $scope.updateCart = function (cartItem) {
+        $scope.getTotalQty(cartItem);
         LSFactory.set('cart', $scope.cartItems);
         calculateTotal();
     }
-    var calculateTotal = function() {
+    var calculateTotal = function () {
         Loader.show();
-        $timeout(function() {
+        $timeout(function () {
             $scope.subTotal = 0;
-            angular.forEach($scope.cartItems, function(val, index) {
+            angular.forEach($scope.cartItems, function (val, index) {
                 $scope.subTotal += (val.cost * val.status);
             });
             Loader.hide()
-        // $scope.discount = (10/100) * $scope.subTotal;
-       $scope.deliveryChar =   $scope.subTotal >= $scope.shopFrom.freeDeliveryAbove ? 0 : $scope.deliveryChargeCopy ;
- 
-        $rootScope.grandTotal = ($scope.subTotal + $scope.deliveryChar); 
-        $scope.availFreeDelivery = $scope.shopFrom.hd_min_val - $scope.subTotal ;
+            // $scope.discount = (10/100) * $scope.subTotal; 
+            $scope.deliveryChar = $scope.subTotal >= $scope.shopFrom.freeDeliveryAbove ? 0 : $scope.deliveryChargeCopy;
+
+            $scope.availFreeDelivery = $scope.shopFrom.hd_min_val - $scope.subTotal;
+             var serviceCharge = ($scope.subTotal * $scope.shopFrom.service_charges)/100;
+             $scope.taxes = Math.round((((serviceCharge + $scope.deliveryChargeCopy) * $scope.shopFrom.service_tax)/100)); 
+            $rootScope.grandTotal = ($scope.subTotal + $scope.deliveryChargeCopy + $scope.taxes);
+            console.log($scope.deliveryChargeCopy)
         }, 200)
 
     }
-    if($scope.cartItems){
-    calculateTotal();
+    if ($scope.cartItems) {
+        calculateTotal();
     }
-    $scope.cartCheckout = function(cartObj, shopObj, subTotal, deliveryChar, grandTotal) {
-     var tempObj =  {"payment":{"subtotal":subTotal, "deliveryCharge":deliveryChar, "grandTotal":grandTotal, "delivery_date":"", "delivery_time":""}};
-    LSFactory.set('checkout',  tempObj ); 
-    $state.go('app.delivery');
+    $scope.cartCheckout = function (cartObj, shopObj, subTotal, deliveryChar, grandTotal, taxes) {
+        var tempObj = { "payment": { "subtotal": subTotal, "deliveryCharge": deliveryChar, "grandTotal": grandTotal, "taxes": taxes, "delivery_date": "", "delivery_time": "" } };
+        LSFactory.set('checkout', tempObj);
+        $state.go('app.delivery');
     }
 
 }]);

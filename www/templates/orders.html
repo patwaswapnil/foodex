@@ -4,16 +4,25 @@
 </ion-nav-buttons>
     <ion-content class="main-bg bg-css">
         <ion-list>  
-            <div ng-repeat="item in orders track by $index | orderBy:'order_id'" class="card">
+            <div ng-repeat="item in orders | orderBy:'-order_date'" class="card">
                 <div ng-class="isItemShown(item) ? 'item-expand active' : 'item-expand inactive'">
                     <span class=" item item-thumbnail-left shop-listing no-blue cart-icon-wrap mb5">
                           <img ng-src="{{::imgPath}}/restaurant_logo/{{::item.shop_logo}}"  />
-                            <h2 class=""> Order ID {{::item.order_id}} </h2>
+                            <h2 class=""> Order ID: {{::item.order_id}} </h2>
                             <p class="fz12"><strong>From:</strong>  <span >{{::item.shop_name}} &nbsp;</span> </p>
                     <div class="row padding0">
                         <div class="col padding0">
                             <p class="fz12"><strong>Order Amount:</strong> <span class="draw-inr"></span>{{::item.order_total}}</p>
                             <p class="fz12"><strong>Date:</strong> {{::item.order_date}}</p>
+                            <p class="fz12"><strong>Status:</strong> <span ng-switch on="item.order_status">
+                                <span ng-switch-when="6" class="bold">Received</span>
+                                <span ng-switch-when="7" class="bold">Accepted</span>
+                                <span ng-switch-when="8" class="bold">cancelled</span>
+                                <span ng-switch-when="3" class="bold">Return</span>
+                                <span ng-switch-when="4" class="bold">Dispatched</span>
+                                <span ng-switch-when="5" class="success bold">Delivered</span>
+                                </span></p>
+                           
                         </div>
                     </div>
                     </span>

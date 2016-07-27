@@ -439,7 +439,7 @@ a.item.item-thumbnail-left.shop-listing {
 
 .trash-btn {
     font-size: 24px;
-    color: #06A07D !important;
+    color: #050608 !important;
     padding: 0px 10px;
 }
 
@@ -557,7 +557,11 @@ a.item.item-thumbnail-left.shop-listing {
 }
 
 .foodex-primary {
-    background-color: #06A07D !important;
+    background-color: #fece6c !important;
+    border: none;
+}
+.foodex-bar {
+    background-color: #050608 !important;
     border: none;
 }
 .foodex-danger {
@@ -727,11 +731,13 @@ a.item.item-thumbnail-left.shop-listing {
 .item-expand {
   position: relative;
   width: 100%;
-       max-height: 105px;
+       max-height: 115px;
   transition: max-height 0.1s ease-out;
   overflow: hidden;
 }
-
+.success {
+    color: green;
+}
 .item-expand.inactive:after {
   content: "";
   position: absolute;
@@ -829,6 +835,29 @@ a.deco-none{
 .mb5{
     margin-bottom: 5px !important;
 }
-.white {
-    color: #fff !important;
+ 
+.foodex-btn {
+    color: #000000 !important;
+
+}
+.trash-btn-wrap {
+        position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+.wrapper-logo img {
+    width: 160px;
+    padding: 5px;
+    /*background-color: #050608;*/
+    border-radius: 7px;
+}
+.btn-disbled {
+        background: #d8d8d8 !important;
+    color: #828181 !important;
+} 
+.foodex-border {
+    border-color: #000000 !important;
+}
+.login-bg ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: #484848;
 }

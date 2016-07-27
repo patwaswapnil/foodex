@@ -23,7 +23,7 @@ angular.module('foodex', ['ionic','ionic.service.core', 'ngCordova', 'foodex.con
             // org.apache.cordova.statusbar required
             StatusBar.styleDefault();
         }
-        $cordovaStatusbar.styleHex('#027158');
+        $cordovaStatusbar.styleHex();
     });
      //for ionic analytics
     $ionicAnalytics.register();

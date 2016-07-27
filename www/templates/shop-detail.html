@@ -42,7 +42,7 @@
                         </div>
                      </div>
                      <div class="col padding0 flex-item txt-center">
-                        <button class="button  button-small  button-balanced foodex-primary add-to-cart" ng-click="addToCart(item, shop, $index, $parent.$index)">Add </button>
+                        <button class="button  button-small  button-balanced foodex-primary foodex-btn add-to-cart" ng-click="addToCart(item, shop, $index, $parent.$index)">Add </button>
                      </div>
                   </div>
                </span>
@@ -50,7 +50,7 @@
          </div>
       </div> 
    </ion-content>
-   <ion-footer-bar align-title="center" ng-if="cartCount > 0" class="bar-balanced foodex-primary">
+   <ion-footer-bar align-title="center" ng-if="cartCount > 0" class=" foodex-btn foodex-primary">
       <a ui-sref="app.cart">
          <button class="button button-icon button-clear ion-android-cart">
          <span class="badge custom-badge">{{cartCount}}</span>

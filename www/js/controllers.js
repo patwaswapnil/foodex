@@ -165,7 +165,7 @@ app.controller('AppCtrl', ['$scope', '$rootScope', '$ionicModal', '$timeout', '$
                     type: 'fs12'
                 }, {
                     text: 'Submit',
-                    type: 'button-balanced fs12',
+                    type: 'button-balanced foodex-primary foodex-bar fs12',
                     onTap: function(e) {
                         if (!$scope.data.email) {
                             //don't allow the user to close unless he enters wifi password
