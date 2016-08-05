@@ -124,6 +124,9 @@ angular.module('foodex.services', [])
             return $http.post(domain+'app/place-order', data);
             
         },
+        getShopLocationById: function (id) { 
+            return $http.get(domain+'app/get_tag_location/'+id); 
+        },
         orderHistory: function (user) { 
             return $http.get(domain+'app/order_details/'+user.id); 
         },

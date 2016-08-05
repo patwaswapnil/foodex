@@ -1,14 +1,11 @@
-<ion-view cache-view="false" hide-menu-button="true">
+<ion-view cache-view="false" hide-menu-button="false">
     <ion-nav-title>{{navTitle}}</ion-nav-title>
     <ion-content class="main-bg">
         <div class="banner-wrapper">
             <ion-slide-box auto-play="true" does-continue="true" on-slide-changed="slideChanged(index)" style="text-align:center;">
                 <ion-slide>
                     <img ng-src="img/banner/banner1.jpg" class="img">
-                </ion-slide>
-                <ion-slide>
-                    <img ng-src="img/banner/banner2.jpg" class="img">
-                    </ion-slide>
+                </ion-slide> 
                     <ion-slide>
                         <img ng-src="img/banner/banner3.jpg" class="img">
                     </ion-slide>
@@ -17,6 +14,9 @@
                     </ion-slide> 
                     <ion-slide>
                         <img ng-src="img/banner/banner5.jpg" class="img">
+                    </ion-slide>
+                    <ion-slide>
+                        <img ng-src="img/banner/banner6.jpg" class="img">
                     </ion-slide>
             </ion-slide-box>
         </div>

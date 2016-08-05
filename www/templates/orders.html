@@ -1,4 +1,4 @@
-<ion-view title="My Orders" hide-back-button="false" cache-view="false">
+<ion-view title="My Orders" hide-back-button="false">
 <ion-nav-buttons side="right">
    
 </ion-nav-buttons>
@@ -12,7 +12,7 @@
                             <p class="fz12"><strong>From:</strong>  <span >{{::item.shop_name}} &nbsp;</span> </p>
                     <div class="row padding0">
                         <div class="col padding0">
-                            <p class="fz12"><strong>Order Amount:</strong> <span class="draw-inr"></span>{{::item.order_total}}</p>
+                            <p class="fz12"><strong>Order Amount:</strong> <span class="draw-inr"></span>{{::item.order_final_amount}}</p>
                             <p class="fz12"><strong>Date:</strong> {{::item.order_date}}</p>
                             <p class="fz12"><strong>Status:</strong> <span ng-switch on="item.order_status">
                                 <span ng-switch-when="6" class="bold">Received</span>
@@ -28,10 +28,10 @@
                     </span>
  
                         <div class="row plr15">
-                            <div class="col-60 fwbold">
+                            <div class="col-50 fwbold">
                                 <p class="fz12">Item</p>
                             </div>
-                            <div class="col-20 fwbold">
+                            <div class="col-25 fwbold">
                                 <p class="fz12">Qty</p>
                             </div>
                             <div class="col-20 fwbold txt-right">
@@ -39,10 +39,10 @@
                             </div>
                         </div>
                         <div class="row plr15" ng-repeat="shopItem in item.menu_details track by $index">
-                            <div class="col-60">
+                            <div class="col-50">
                                 <p class="fz12">{{shopItem.menu_name  | capitalize:true}}</p>
                             </div>
-                            <div class="col-20">
+                            <div class="col-25">
                                 <p class="fz12">{{shopItem.menu_qty}} * {{shopItem.menu_unit}}</p>
                             </div>
                             <div class="col-20 txt-right">
@@ -73,12 +73,21 @@
             </span>
                 </div>
             </div>
-             <span  class=" "  ng-show="!orders.length">
+             <span  class=" "  ng-show="!orders.length && isLoggedIn">
           <div class="empty-cart-wrap">
                
                     <h4 class="fz16">No previous order found.</h4>
 <br>
              <div> <button class="button   foodex-primary white" nav-clear ui-sref="app.home">Continue Shopping</button></div>
+          </div>
+        </span>
+        
+             <span  class=" "  ng-show="!isLoggedIn">
+          <div class="empty-cart-wrap">
+               
+                    <h4 class="fz16">Please login to view orders.</h4>
+<br>
+             <div> <button class="button   foodex-primary white" ng-click="loginFromOrder()">Login</button></div>
           </div>
         </span>
         </ion-list>

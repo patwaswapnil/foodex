@@ -199,7 +199,7 @@ app.controller('AppCtrl', ['$scope', '$rootScope', '$ionicModal', '$timeout', '$
 
         $scope.showLogOutMenu = function() {
             var hideSheet = $ionicActionSheet.show({
-                destructiveText: 'Logout',
+                destructiveText: '<i class="icon ion-log-out assertive valm"></i> Logout',
                 titleText: 'Are you sure you want to logout?',
                 cancelText: 'Cancel',
                 cancel: function() {},

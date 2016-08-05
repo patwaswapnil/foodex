@@ -32,14 +32,17 @@
                         <textarea type="text" class="text-area-order" name="address" ng-required="true" ng-model="appUser.address" placeholder="Enter your Complete Address with landmark"></textarea>
                     </label>
  
-
+        <label class="item item-input item-floating-label" ng-class="checkoutForm.comment.$touched && checkoutForm.comment.$invalid ? 'error-border' : ''">
+                        <span class="input-label">Special Comment</span>
+                        <textarea type="text" class="text-area-order" name="comment" ng-required="false" ng-model="comment" placeholder="Enter your special comments (Optional)"></textarea>
+                    </label>
                    <label class="item item-input item-select mt15">
      
     <div class="input-label" >
-      Location:
+      Location: 
     </div> 
-    <select class="btn-disbled" ng-disabled="true">
-      <option selected="selected">{{::location}}</option> 
+    <select required ng-model="location" id="location" ng-change="updateCartTotal()">
+      <option ng-value="locations.location" data-lat="{{locations.latitude}}" data-long="{{locations.longitude}}"  ng-repeat="locations in shopDelLocation">{{::locations.location}}</option> 
     </select>
   </label>
 
@@ -79,7 +82,7 @@
 </ion-list>
   <span ng-show="checkoutForm.email.$touched && checkoutForm.email.$invalid" class="validation-error">Please enter a valid Email Id.</span>  
                         <div class="banner-wrapper row plr15">
-                  <button class="button mr6  button-block button-balanced foodex-primary col" ng-disabled="checkoutForm.$invalid" ng-click="saveUser(appUser, preOrder)">
+                  <button class="button mr6  button-block button-balanced foodex-primary foodex-btn col" ng-disabled="checkoutForm.$invalid" ng-click="saveUser(appUser, preOrder)">
                       Pay <span class="draw-inr"></span>{{cartGrandTotal}}
                     </button>   
             </div>

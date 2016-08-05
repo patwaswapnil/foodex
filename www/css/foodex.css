@@ -83,13 +83,16 @@ input.ion-autocomplete[readonly] {
     background-size: cover;
     -webkit-background-size: cover !important;
 }
-
+.mt-30 {
+    margin-top: -30px; 
+}
 .wrapper-logo {
-    margin-top: 3vh;
     margin-bottom: 0%;
     text-align: center;
 }
-
+.login-brand-logo {
+        width: 120px !important;
+}
 .location-btn-wrap {
     background-color: transparent !important;
     border: 0px !important;
@@ -176,6 +179,9 @@ input.ion-autocomplete[readonly] {
     -webkit-background-size: cover;*/
 }
 
+.valm {
+        vertical-align: middle !important;
+}
 .img {
     width: 100%;
 }

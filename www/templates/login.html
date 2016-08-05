@@ -10,12 +10,12 @@
         <ion-content class="main-bg login-bg">
             <div class="row">
                 <div class="col wrapper-logo">
-                    <img ng-src="img/logo-dark.png" alt="">
+                    <img ng-src="img/logo-dark.png" class="login-brand-logo" alt="">
                 </div>
             </div>
             <form class="margin30" name="userForm" ng-submit="authUser(formUser)">
                 <div class="list">
-                    <label class="item item-input item-floating-label" ng-class="userForm.email.$touched && userForm.email.$invalid ? 'error-border' : ''">
+                    <label class="item item-input item-floating-label mt-30" ng-class="userForm.email.$touched && userForm.email.$invalid ? 'error-border' : ''">
                         <span class="input-label ">Email*</span>
                         <input type="email" class="" name="email" ng-required="true" ng-model="formUser.email" placeholder="Enter your email">
                     </label> 

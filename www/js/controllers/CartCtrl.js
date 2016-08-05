@@ -23,6 +23,7 @@ app.controller('CartCtrl', ['$scope', '$rootScope', '$state', '$stateParams', 'L
     }
     var calculateTotal = function () {
         Loader.show();
+        $scope.deliveryChargeCopy = $scope.shopFrom.hd_delivery_charge;
         $timeout(function () {
             $scope.subTotal = 0;
             angular.forEach($scope.cartItems, function (val, index) {
@@ -35,7 +36,7 @@ app.controller('CartCtrl', ['$scope', '$rootScope', '$state', '$stateParams', 'L
             $scope.availFreeDelivery = $scope.shopFrom.hd_min_val - $scope.subTotal;
              var serviceCharge = ($scope.subTotal * $scope.shopFrom.service_charges)/100;
              $scope.taxes = Math.round((((serviceCharge + $scope.deliveryChargeCopy) * $scope.shopFrom.service_tax)/100)); 
-            $rootScope.grandTotal = ($scope.subTotal + $scope.deliveryChargeCopy + $scope.taxes);
+            $rootScope.grandTotal = ($scope.subTotal + $scope.deliveryChar + $scope.taxes);
             console.log($scope.deliveryChargeCopy)
         }, 200)
 
@@ -44,7 +45,7 @@ app.controller('CartCtrl', ['$scope', '$rootScope', '$state', '$stateParams', 'L
         calculateTotal();
     }
     $scope.cartCheckout = function (cartObj, shopObj, subTotal, deliveryChar, grandTotal, taxes) {
-        var tempObj = { "payment": { "subtotal": subTotal, "deliveryCharge": deliveryChar, "grandTotal": grandTotal, "taxes": taxes, "delivery_date": "", "delivery_time": "" } };
+        var tempObj = { "payment": { "subtotal": subTotal, "deliveryCharge": deliveryChar, "grandTotal": grandTotal, "taxes": taxes, "delivery_date": "", "delivery_time": "", "specialComments": "" } };
         LSFactory.set('checkout', tempObj);
         $state.go('app.delivery');
     }
