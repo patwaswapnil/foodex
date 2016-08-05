@@ -52,6 +52,7 @@ app.controller('DeliveryCtrl', ['$scope', '$rootScope', '$state', '$stateParams'
         calculateTotal(response.data.delCharge);
       } 
       LSFactory.set('location', jQuery('#location option:selected').attr('value')); 
+      LSFactory.set('locationId', jQuery('#location option:selected').attr('data-id')); 
     }, function (error) {
       console.log(error);
       Loader.hide();
@@ -107,12 +108,24 @@ console.log($scope.location);
       var tempUserObj = LSFactory.get('authUser') || {};
       tempUserObj.name = userInfo.name;
       tempUserObj.email = userInfo.email;
-      tempUserObj.address = userInfo.address.replace(/\n/g, ", "); 
       tempUserObj.contact_no = userInfo.contact_no;
+      tempUserObj.address_line1 = userInfo.address_line1;
+      tempUserObj.address_line2 = userInfo.address_line2;
+      tempUserObj.landmark = userInfo.landmark;
+      tempUserObj.pincode = userInfo.pincode;
+      tempUserObj.comments = userInfo.comments;
+      tempUserObj.city = userInfo.city; 
+      
+      
       tempUserObj.location = LSFactory.get('location');
-
+      if(!(LSFactory.get('locationId'))) {
+         LSFactory.set('locationId', jQuery('#location option:selected').attr('data-id')); 
+      }
+      tempUserObj.locationId = LSFactory.get('locationId');
+      tempUserObj.location = LSFactory.get('location');
+      
       if (tempUserObj.id) {
-        LSFactory.set('authUser', tempUserObj);
+        LSFactory.set('checkOutUser', tempUserObj);
       } else {
         LSFactory.set('tempUserObj', tempUserObj);
 
@@ -130,14 +143,11 @@ console.log($scope.location);
       if ($scope.preOrder.date || $scope.preOrder.time) {
         paymentObj.delivery_date = $scope.preOrder.date;
         paymentObj.delivery_time = $scope.preOrder.time;
-      }
-      if ($scope.comment != '') {
-       paymentObj.specialComments =  $scope.comment.replace(/\n/g, ", ");
-      }
+      } 
       var location = LSFactory.get('location');
       var userObj;
-      if (LSFactory.get('authUser')) {
-        userObj = LSFactory.get('authUser');
+      if (LSFactory.get('checkOutUser')) {
+        userObj = LSFactory.get('checkOutUser');
       } else {
         userObj = LSFactory.get('tempUserObj');
       }
@@ -149,6 +159,7 @@ console.log($scope.location);
           LSFactory.delete('cart');
           LSFactory.delete('shop');
           LSFactory.delete('checkout');
+          LSFactory.delete('checkOutUser');
           $ionicHistory.nextViewOptions({
             disableBack: true
           });

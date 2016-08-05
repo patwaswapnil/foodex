@@ -868,3 +868,6 @@ a.deco-none{
 .login-bg ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
   color: #484848;
 }
+.disbled-bg {
+    background-color: #d2d2d2 !important;
+}
