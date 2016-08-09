@@ -148,7 +148,7 @@ angular.module('foodex', ['ionic', 'ionic.service.core', 'ngCordova', 'foodex.co
                 views: {
                     'menuContent': {
                         templateUrl: 'templates/user-profile.html',
-                        controller: 'OrdersCtrl'
+                        controller: 'ProfileCtrl'
                     }
                 }
             })

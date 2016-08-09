@@ -117,6 +117,14 @@ angular.module('foodex.services', [])
             var req = {method: 'POST', url: domain+'forgetpassword', headers: {'Content-Type': 'application/x-www-form-urlencoded'}, data: $httpParamSerializer(data)};
             return $http(req);
         },
+        updateUser : function (data) {
+            var req = {method: 'POST', url: domain+'app/get_user_details/'+data.id, headers: {'Content-Type': 'application/x-www-form-urlencoded'}, data: $httpParamSerializer(data)};
+            return $http(req);
+        },
+        changePassword : function (data) {
+            var req = {method: 'POST', url: domain+'app/user_change_password/'+data.id, headers: {'Content-Type': 'application/x-www-form-urlencoded'}, data: $httpParamSerializer(data)};
+            return $http(req);
+        },
         searchLocation: function (location) {
             return $http.get(domain+'search_restaurant?location='+location);
         },

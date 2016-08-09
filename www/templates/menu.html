@@ -42,6 +42,11 @@
                         Offers
                     </ion-item>
                 </a>
+                <a href='' ng-if="isLoggedIn" class="no-blue" ui-sref="app.user-profile">
+                    <ion-item class="menu-item" menu-close nav-clear>
+                        Edit Profile
+                    </ion-item>
+                </a> 
                 <a ng-if="!isLoggedIn" ng-click="loginFromMenu()" class="no-blue">
                     <ion-item class="menu-item" menu-close nav-clear>
                         Login

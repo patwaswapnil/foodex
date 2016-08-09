@@ -257,3 +257,16 @@ app.controller('AppCtrl', ['$scope', '$rootScope', '$ionicModal', '$timeout', '$
         }
     }
 ]);
+app.controller('ProfileCtrl', ['$scope', '$rootScope', '$ionicModal', '$timeout', '$ionicPopup', '$state', '$q', 'LSFactory', '$ionicLoading', 'UserService', '$ionicActionSheet', 'Loader', 'APIFactory', '$cordovaOauth', '$cordovaInAppBrowser', '$http', '$ionicHistory',
+    function ($scope, $rootScope, $ionicModal, $timeout, $ionicPopup, $state, $q, LSFactory, $ionicLoading, UserService, $ionicActionSheet, Loader, APIFactory, $cordovaOauth, $cordovaInAppBrowser, $http, $ionicHistory) {
+        $scope.userInfo = LSFactory.get('authUser');
+        $scope.updateUser = function (data) {
+            Loader.show();
+            APIFactory.updateUser(data).then(function () {
+                Loader.hide();
+            }, function () {
+                Loader.hide();
+            })
+        }
+        }
+]);
