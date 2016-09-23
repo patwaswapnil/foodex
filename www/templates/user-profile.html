@@ -61,20 +61,20 @@
 
       </form>
 <h4 class="content  profile-head double-padding-x">Change Password</h4>
- <form name="changePwdForm" ng-submit="changePassword(userInfo, password)">
+ <form name="changePwdForm" ng-submit="updatePassword(userInfo.id, password)">
           <div class="list">
   <label class="item item-input item-floating-label">
     <span class="input-label fz14"> Password*</span>
-    <input type="password" ng-model="password.pass" name="password" required ng-class="changePwdForm.password.$touched && changePwdForm.password.$invalid ? 'error-border' : ''" placeholder="Enter New Password*">
+    <input type="password" ng-model="password.new_password" name="password" required ng-class="changePwdForm.password.$touched && changePwdForm.password.$invalid ? 'error-border' : ''" placeholder="Enter New Password*">
   </label>
   <label class="item item-input item-floating-label">
     <span class="input-label fz14">Confirm Password*</span>
-    <input type="password" ng-model="password.repass"   name="cpassword" required ng-class="changePwdForm.cpassword.$touched && changePwdForm.cpassword.$invalid ? 'error-border' : ''" placeholder="Confirm New Password*">
+    <input type="password" ng-model="password.password_confirm"   name="cpassword" required ng-class="changePwdForm.cpassword.$touched && changePwdForm.cpassword.$invalid ? 'error-border' : ''" placeholder="Confirm New Password*">
   </label>
  </div>
- <span ng-show="(password.repass != password.pass)" class="validation-error">Passwords do not match.</span> 
+ <span ng-show="(password.password_confirm != password.new_password)" class="validation-error">Passwords do not match.</span> 
  <div class="row">
-  <button class="button button-small mt25 button-block button-balanced foodex-btn foodex-primary" ng-disabled="(changePwdForm.$invalid) || !(password.repass == password.pass)" >Change Password</button>
+  <button class="button button-small mt25 button-block button-balanced foodex-btn foodex-primary" ng-disabled="(changePwdForm.$invalid) || !(password.password_confirm == password.new_password)" >Change Password</button>
 </div> 
  </form>
     </span>

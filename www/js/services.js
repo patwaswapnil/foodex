@@ -118,11 +118,11 @@ angular.module('foodex.services', [])
             return $http(req);
         },
         updateUser : function (data) {
-            var req = {method: 'POST', url: domain+'app/get_user_details/'+data.id, headers: {'Content-Type': 'application/x-www-form-urlencoded'}, data: $httpParamSerializer(data)};
+            var req = {method: 'POST', url: domain+'app/get_user_details/'+data.data.user.id, data};
             return $http(req);
         },
-        changePassword : function (data) {
-            var req = {method: 'POST', url: domain+'app/user_change_password/'+data.id, headers: {'Content-Type': 'application/x-www-form-urlencoded'}, data: $httpParamSerializer(data)};
+        changePassword : function (id, data) {
+            var req = {method: 'POST', url: domain+'app/user_change_password/'+id, data};
             return $http(req);
         },
         searchLocation: function (location) {

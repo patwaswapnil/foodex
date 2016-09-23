@@ -260,10 +260,28 @@ app.controller('AppCtrl', ['$scope', '$rootScope', '$ionicModal', '$timeout', '$
 app.controller('ProfileCtrl', ['$scope', '$rootScope', '$ionicModal', '$timeout', '$ionicPopup', '$state', '$q', 'LSFactory', '$ionicLoading', 'UserService', '$ionicActionSheet', 'Loader', 'APIFactory', '$cordovaOauth', '$cordovaInAppBrowser', '$http', '$ionicHistory',
     function ($scope, $rootScope, $ionicModal, $timeout, $ionicPopup, $state, $q, LSFactory, $ionicLoading, UserService, $ionicActionSheet, Loader, APIFactory, $cordovaOauth, $cordovaInAppBrowser, $http, $ionicHistory) {
         $scope.userInfo = LSFactory.get('authUser');
-        $scope.updateUser = function (data) {
+        $scope.updateUser = function (data) { 
+            var tempObj = {data: {user: data}};
             Loader.show();
-            APIFactory.updateUser(data).then(function () {
+            APIFactory.updateUser(tempObj).then(function (response) {
                 Loader.hide();
+                if(response.data.error == 'success') {
+                    LSFactory.set('authUser', data);
+                    console.log('updated')
+                }
+            }, function () {
+                Loader.hide();
+            })
+        }
+        $scope.updatePassword = function (userID, data) { 
+            console.log(userID);
+            var tempPwd = {data: {user: data}};
+            Loader.show();
+            APIFactory.changePassword(userID, tempPwd).then(function (response) {
+                Loader.hide();
+                if(response.data.error == 'success') {
+                 Loader.toast('Password Updated successfuly')
+                }
             }, function () {
                 Loader.hide();
             })

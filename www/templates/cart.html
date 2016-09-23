@@ -1,41 +1,41 @@
 <ion-view title="Cart" hide-back-button="false">
-  <ion-content class="main-bg bg-css " ng-class="cartItems.length > 0 &&  subTotal >= 200 ? 'has-footer' : ''">
-    <div class="row" ng-show="cartItems.length">
-      <div class="col">
-        <h4 class="">Ordering from {{::shopFrom.name}}</h4>
-      </div>
-    </div>
-    <div class="listing-wrap">
-      <div class=" ">
-        <div class="list cart-page">
-          <div>
-            <span class="item shop-detail shop-icon-wrap cart-padding  flex-container item-border" ng-show="cartItems.length" ng-repeat="cartItem in cartItems track by $index">
+    <ion-content class="main-bg bg-css " ng-class="cartItems.length > 0 &&  subTotal >= 200 ? 'has-footer' : ''">
+        <div class="row" ng-show="cartItems.length">
+            <div class="col">
+                <h4 class="">Ordering from {{::shopFrom.name}}</h4>
+            </div>
+        </div>
+        <div class="listing-wrap">
+            <div class=" ">
+                <div class="list cart-page">
+                    <div>
+                        <span class="item shop-detail shop-icon-wrap cart-padding  flex-container item-border" ng-show="cartItems.length" ng-repeat="cartItem in cartItems track by $index">
                       <div class="row">
                          <div class="col-60 flex-item">
                         <h2 class="fz18"> {{cartItem.name | capitalize:true}} </h2> 
                         <p class="fz16"><span class="draw-inr"></span>{{::cartItem.cost}}/{{::cartItem.unit_type}}</p>
-            <div class=" padding0">
-              <div class="col qty-warp">
-                <p class="fz16"> <span counter value="cartItem.status" ng-click="updateCart(cartItem)" min="1" max="100" step="1"> </span>                  <span>  <span ng-if="cartItem.status > 1">{{cartItem.totalQty}}</span><span ng-if="cartItem.status == 1"> {{cartItem.unit_type}}</span></span>
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="col-20 padding0 flex-item txt-center">
-            <p class="fz16"><span class="draw-inr"></span>{{cartItem.cost * cartItem.status}}</p>
-          </div>
-          <div class="col-20 padding0 flex-item txt-right">
-            <button class="button button-icon button-clear ion-trash-a trash-btn" ng-click="removeFromCart($index)"></button>
-          </div>
-        </div>
-        </span>
-        <span class="item shop-detail shop-icon-wrap cart-padding   item-border" ng-show="!cartItems.length">
+                        <div class=" padding0">
+                            <div class="col qty-warp">
+                                <p class="fz16"> <span counter value="cartItem.status" ng-click="updateCart(cartItem)" min="1" max="100" step="1"> </span> <span>  <span ng-if="cartItem.status > 1">{{cartItem.totalQty}}</span><span ng-if="cartItem.status == 1"> {{cartItem.unit_type}}</span></span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-20 padding0 flex-item txt-center">
+                        <p class="fz16"><span class="draw-inr"></span>{{cartItem.cost * cartItem.status}}</p>
+                    </div>
+                    <div class="col-20 padding0 flex-item txt-right">
+                        <button class="button button-icon button-clear ion-trash-a trash-btn" ng-click="removeFromCart($index)"></button>
+                    </div>
+                </div>
+                </span>
+                <span class="item shop-detail shop-icon-wrap cart-padding   item-border" ng-show="!cartItems.length">
           <div class="empty-cart-wrap">
               <div class="icon-container"><span class="icon ion-android-cart"></span></div>
-      <p>Your Cart is Empty</p>
-    </div>
-    </span>
-    <span class="item shop-detail shop-icon-wrap cart-padding   item-border" ng-show="cartItems.length">
+            <p>Your Cart is Empty</p>
+        </div>
+        </span>
+        <span class="item shop-detail shop-icon-wrap cart-padding   item-border" ng-show="cartItems.length">
            
 <!--             <div class="bar bar-header item-input-inset coupon-bar">
   <label class="item-input-wrapper"> 
@@ -48,69 +48,55 @@
 
 <div class="row" >
   <div class="information-msg foodex-danger fff col" ng-if="availFreeDelivery > 0"><i class="icon ion-ios-information-outline icon-info"></i><p class="fff ml25 fz12">Shop for more <span class="draw-inr"></span>
-    <span class="fwbold">{{availFreeDelivery}}</span> to place THE ORDER</p>
-    </div>
-
-    <!--    <div class="information-msg foodex-primary fff col" ng-if="availFreeDelivery <= 0"><i class="icon ion-ios-information-outline icon-info"></i><p class="fff ml25 fz12">You are eligible to place  <span class="fwbold">THE ORDER</span></p></div> -->
-    </div>
-
-
-    <!-- <div class="row" ng-if="!couponValid">
+        <span class="fwbold">{{availFreeDelivery}}</span> to place THE ORDER</p>
+        </div>
+        <!--    <div class="information-msg foodex-primary fff col" ng-if="availFreeDelivery <= 0"><i class="icon ion-ios-information-outline icon-info"></i><p class="fff ml25 fz12">You are eligible to place  <span class="fwbold">THE ORDER</span></p></div> -->
+        </div>
+        <!-- <div class="row" ng-if="!couponValid">
   <div class="information-msg  foodex-error fff col"><i class="icon ion-ios-information-outline icon-info"></i><p class="fff ml25 fz12">This code is <span class="fwbold">not valid</span></p></div>
 </div> -->
-
-    <div class="row flex-item mt5">
-      <div class="title-cart col-60">
-        <p class="fz16">Subtotal: </p>
-      </div>
-      <div class="amt-cart col-40">
-        <p class="fz16"><span class="draw-inr"></span>{{subTotal}}</p>
-      </div>
-    </div>
-
-
-
-    <div class="row flex-item mt5">
-      <div class="title-cart col-60">
-        <p class="fz16">Delivery Charge: </p>
-      </div>
-      <div class="amt-cart col-40">
-        <p class="fz16"><span class="draw-inr"></span>{{deliveryChar}}</p>
-      </div>
-    </div>
-
-
-    <div class="row flex-item mt5">
-      <div class="title-cart col-60">
-        <p class="fz16">Taxes: </p>
-      </div>
-      <div class="amt-cart col-40">
-        <p class="fz16"><span class="draw-inr"></span>{{taxes}}</p>
-      </div>
-    </div>
-
-
-    <div class="row flex-item mt10">
-      <div class="title-cart col-60">
-        <h2 class="fz18">Total: </h2>
-      </div>
-      <div class="amt-cart col-40">
-        <h2 class="fz18"><span class="draw-inr"></span>{{grandTotal
+        <div class="row flex-item mt5">
+            <div class="title-cart col-60">
+                <p class="fz16">Subtotal: </p>
+            </div>
+            <div class="amt-cart col-40">
+                <p class="fz16"><span class="draw-inr"></span>{{subTotal}}</p>
+            </div>
+        </div>
+        <div class="row flex-item mt5">
+            <div class="title-cart col-60">
+                <p class="fz16">Delivery Charge: </p>
+            </div>
+            <div class="amt-cart col-40">
+                <p class="fz16"><span class="draw-inr"></span>{{deliveryChar}}</p>
+            </div>
+        </div>
+        <div class="row flex-item mt5">
+            <div class="title-cart col-60">
+                <p class="fz16">Taxes: </p>
+            </div>
+            <div class="amt-cart col-40">
+                <p class="fz16"><span class="draw-inr"></span>{{taxes}}</p>
+            </div>
+        </div>
+        <div class="row flex-item mt10">
+            <div class="title-cart col-60">
+                <h2 class="fz18">Total: </h2>
+            </div>
+            <div class="amt-cart col-40">
+                <h2 class="fz18"><span class="draw-inr"></span>{{grandTotal
           < 0 ? 0 : grandTotal}}</h2>
-      </div>
-    </div>
-
-
-
-    </span>
-    </div>
-    </div>
-    </div>
-    </div>
-  </ion-content>
-  <ion-footer-bar align-title="center" class="foodex-btn foodex-primary" ng-if="cartItems.length && subTotal  >= shopFrom.hd_min_val">
-    <a ng-click="cartCheckout(cartItems, shopFrom[0], subTotal, deliveryChar, grandTotal, taxes)">
-      <h1 class="title">Proceed to Checkout</h1>
-    </a>
-  </ion-footer-bar>
+            </div>
+        </div>
+        </span>
+        </div>
+        </div>
+        </div>
+        </div>
+    </ion-content>
+    <ion-footer-bar align-title="center" class="foodex-btn foodex-primary" ng-if="cartItems.length && subTotal  >= shopFrom.hd_min_val">
+        <a ng-click="cartCheckout(cartItems, shopFrom[0], subTotal, deliveryChar, grandTotal, taxes)">
+            <h1 class="title">Proceed to Checkout</h1>
+        </a>
+    </ion-footer-bar>
 </ion-view>

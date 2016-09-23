@@ -109,11 +109,11 @@ console.log($scope.location);
       tempUserObj.name = userInfo.name;
       tempUserObj.email = userInfo.email;
       tempUserObj.contact_no = userInfo.contact_no;
-      tempUserObj.address_line1 = userInfo.address_line1;
-      tempUserObj.address_line2 = userInfo.address_line2;
+      tempUserObj.address_line1 = userInfo.address;
+      tempUserObj.address_line2 = userInfo.add_line_2;
       tempUserObj.landmark = userInfo.landmark;
       tempUserObj.pincode = userInfo.pincode;
-      tempUserObj.comments = userInfo.comments;
+      tempUserObj.comments = userInfo.comments || '';
       tempUserObj.city = userInfo.city; 
       
       
